@@ -12,6 +12,10 @@ you are on the first floor.
 -> coffee_table
 * look at the couch
 -> couch_1
+
+* leave through front door
+-> exit_through_door
+
 + wasup
 
 -> home
