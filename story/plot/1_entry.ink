@@ -16,3 +16,15 @@ GUY: How are things going man?
 * whats going on
     GUY: Nothin.
     -> home
++ go to window
+-> in_bushes_outside_broken_window
+
+
+=== in_bushes_outside_broken_window ===
+
+This window is broken. You might be able to climb inside.
+
+* climb in
+-> home
++ go to door
+-> outside_front_door

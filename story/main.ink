@@ -9,11 +9,10 @@ INCLUDE locations/floor_0.ink
 INCLUDE locations/floor_1.ink
 INCLUDE locations/floor_3.ink
 
-VAR myNumber = 5
-VAR knowledge_of_the_cure = false
+VAR paid_cover = false
 VAR players_name = "Emilia"
-VAR number_of_infected_people = 521
-VAR current_floor = -> floor_0
+VAR beers_drank = 0
+VAR current_floor = -> floor_1
 
 
 -> outside_front_door
@@ -23,6 +22,9 @@ VAR current_floor = -> floor_0
 You are in the house
 
 + wander
+-> current_floor
++ take sip number {beers_drank + 1}
+~ beers_drank = beers_drank + 1
 -> current_floor
 + go to basement
 ~ current_floor = -> floor_0
