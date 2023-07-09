@@ -6,6 +6,7 @@
 
 you hang out in the basement.
 
-+ wasup
+*walk up the stairwell
+->home
 
--> home
+
