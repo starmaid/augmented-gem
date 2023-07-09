@@ -6,6 +6,7 @@ INCLUDE plot/1_entry.ink
 INCLUDE plot/2_mission.ink
 INCLUDE plot/3_exit.ink
 INCLUDE locations/floor_0.ink
+INCLUDE locations/floor_1.ink
 INCLUDE locations/floor_3.ink
 
 VAR myNumber = 5
@@ -25,6 +26,9 @@ You are in the house
 -> current_floor
 + go to basement
 ~ current_floor = -> floor_0
+-> current_floor
++ go to first floor
+~ current_floor = -> floor_1
 -> current_floor
 + go to attic
 ~ current_floor = -> floor_3
