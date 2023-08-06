@@ -30,6 +30,8 @@ public class PlayerMovement : MonoBehaviour
     //public Inventory playerInventory;
     //public SpriteRenderer receivedItemSprite;
 
+    public SignalObject interactSignal;
+
     private void Awake(){
         playerControls = new PlayerControls();  
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
         change = value.Get<Vector2>();
     }
 
+    private void OnInteract()
+    {
+        interactSignal.Raise();
+    }
+
     private void OnTransmute(){
         currentState = PlayerState.transmute;
     }
@@ -83,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("state: " + currentState);
+        //Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
             animator.SetBool("moving", false);

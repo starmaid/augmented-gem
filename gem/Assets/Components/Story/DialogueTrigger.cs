@@ -28,10 +28,10 @@ public class DialogueTrigger : MonoBehaviour
         if (playerInRange && !StoryManager.GetInstance().dialogueIsPlaying) 
         {
             visualCue.SetActive(true);
-            if (InputManager.GetInstance().GetInteractPressed()) 
-            {
-                StoryManager.GetInstance().EnterDialogueMode(knotName, emoteAnimator);
-            }
+            //if (InputManager.GetInstance().GetInteractPressed()) 
+            //{
+            //    StoryManager.GetInstance().EnterDialogueMode(knotName, emoteAnimator);
+            //}
         }
         else 
         {

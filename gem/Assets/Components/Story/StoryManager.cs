@@ -8,6 +8,9 @@ using UnityEngine.EventSystems;
 
 public class StoryManager : MonoBehaviour
 {
+    // https://www.youtube.com/watch?v=raQ3iHhE_Kk
+    // but modified a bit
+
     [Header("Main Ink File")]
     [SerializeField] private TextAsset mainInkAsset;
 
@@ -115,24 +118,20 @@ public class StoryManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void TryContinue()
     {
-        // return right away if dialogue isn't playing
+        print("raised");
+
         if (!dialogueIsPlaying)
         {
             return;
         }
 
-        // handle continuing to the next line in the dialogue when submit is pressed
-        // NOTE: The 'currentStory.currentChoiecs.Count == 0' part was to fix a bug after the Youtube video was made
         if (canContinueToNextLine
-            && currentStory.currentChoices.Count == 0
-            && InputManager.GetInstance().GetSubmitPressed())
+            && currentStory.currentChoices.Count == 0)
         {
             ContinueStory();
         }
-
-
     }
 
     public void EnterDialogueMode(string knotName, Animator emoteAnimator)
@@ -214,11 +213,11 @@ public class StoryManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            if (InputManager.GetInstance().GetSubmitPressed())
-            {
-                dialogueText.maxVisibleCharacters = line.Length;
-                break;
-            }
+            //if (InputManager.GetInstance().GetSubmitPressed())
+            //{
+            //    dialogueText.maxVisibleCharacters = line.Length;
+            //    break;
+            //}
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag)
@@ -387,7 +386,6 @@ public class StoryManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            InputManager.GetInstance().RegisterSubmitPressed(); // this is specific to my InputManager script
             ContinueStory();
         }
     }
