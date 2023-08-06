@@ -91,7 +91,7 @@ public class StoryManager : MonoBehaviour
             index++;
         }
 
-        InitializeAudioInfoDictionary();
+        //InitializeAudioInfoDictionary();
     }
 
     private void InitializeAudioInfoDictionary()
@@ -132,6 +132,24 @@ public class StoryManager : MonoBehaviour
         {
             ContinueStory();
         }
+    }
+
+    public void EnterDialogueMode(string knotName)
+    {
+        print("starting " + knotName);
+        currentStory = new Story(mainInkAsset.text);
+        dialogueIsPlaying = true;
+        dialoguePanel.SetActive(true);
+
+        dialogueVariables.StartListening(currentStory);
+
+        // reset portrait, layout, and speaker
+        displayNameText.text = "???";
+        portraitAnimator.Play("default");
+        layoutAnimator.Play("right");
+
+        currentStory.ChoosePathString(knotName);
+        ContinueStory();
     }
 
     public void EnterDialogueMode(string knotName, Animator emoteAnimator)

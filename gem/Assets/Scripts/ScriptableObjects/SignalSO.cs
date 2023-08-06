@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class SignalObject : ScriptableObject
+public class SignalSO: ScriptableObject
 {
     // https://www.youtube.com/watch?v=Lw3hNA5CkYY
 

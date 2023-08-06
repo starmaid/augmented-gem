@@ -7,7 +7,7 @@ public class SignalListener : MonoBehaviour
 {
     // https://www.youtube.com/watch?v=Lw3hNA5CkYY
 
-    public SignalObject signalObject;
+    public SignalSO signalObject;
     public UnityEvent signalEvent;
 
     public void OnSignalRaised()

@@ -14,7 +14,6 @@ public class DialogueTrigger : MonoBehaviour
     //[SerializeField] private TextAsset inkJSON;
     [SerializeField] private string knotName;
 
-
     private bool playerInRange;
 
     private void Awake() 
@@ -41,7 +40,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider) 
     {
-        if (collider.gameObject.tag.Equals("Player"))
+        if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
         }
@@ -49,7 +48,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider) 
     {
-        if (collider.gameObject.tag.Equals("Player"))
+        if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
         }

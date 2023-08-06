@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     //public Inventory playerInventory;
     //public SpriteRenderer receivedItemSprite;
 
-    public SignalObject interactSignal;
+    public SignalSO interactSignal;
 
     private void Awake(){
         playerControls = new PlayerControls();  
