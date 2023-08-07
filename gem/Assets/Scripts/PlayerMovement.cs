@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
+    //OnXXX functions are called once after the action is activated (through user input)
     private void OnMove(InputValue value){
         change = value.Get<Vector2>();
     }
@@ -89,17 +90,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnPush(){
-        //check if it's an interactable object
-            //raise an interactable signal
-            //change state to interact
-            //if it's pushable
-                //change state to pushable
-                //change animation vector and keep
+
         if(Math.Abs(animator.GetFloat("moveX") + animator.GetFloat("moveY")) == 1 && checkObject() == "pushable"){
             //raise an interactable signal for the object itself
                 animator.SetBool("pushing",true);
-                // animator.SetFloat("moveX", change.x);
-                // animator.SetFloat("moveY", change.y);
                 currentState = PlayerState.push;
                 currentSpeed = slowSpeed;
                 if(animator.GetFloat("moveX") != 0 && animator.GetFloat("moveY") == 0){
@@ -116,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
         String tag = "";
         Vector2 startPos = rayPoint.transform.position;
         Vector2 endPos = startPos + new Vector2(animator.GetFloat("moveX"),animator.GetFloat("moveY")) * rayDistance;
-        // Vector2 change2D = new Vector2 (change.x,change.y);
         RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
         if (hit.collider!=null){
             // Debug.DrawLine(startPos,endPos,Color.red);
@@ -126,17 +119,15 @@ public class PlayerMovement : MonoBehaviour
             if(hit.collider.CompareTag("pushable")){
                 tag = "pushable";
             }
-            Debug.Log("checkObj hits: " + tag + " which is called: " + hit.collider.name);
             return tag;
         }
         else{
-            Debug.Log("miss!");
-            // Debug.DrawLine(startPos,endPos,Color.green);
             return tag;
         }
     }
 
     // Start is called before the first frame update
+    // Will use later
     void Start()
     {
         //animator.SetFloat("moveX", 0);
@@ -146,6 +137,7 @@ public class PlayerMovement : MonoBehaviour
         //has a reference on what the state is before player moved
     }
     
+    //called when this script is Enable/Disable'd
     void OnEnable(){
         playerControls.Enable();
     }
@@ -154,6 +146,8 @@ public class PlayerMovement : MonoBehaviour
         playerControls.Disable();
     }
 
+    //linecast drawn are only for debug purposes
+    //Delete later
     void Update(){
         Vector2 startPos = rayPoint.transform.position;
         Vector2 endPos = startPos + new Vector2(animator.GetFloat("moveX"),animator.GetFloat("moveY")) * rayDistance;
@@ -173,51 +167,42 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
+    // Check PlayerState and determine what to do
     void FixedUpdate()
     {
         // Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
             animator.SetBool("moving", false);
-            return;
         }else if (currentState == PlayerState.transmute){
             if (change != Vector3.zero){
                 animator.SetFloat("moveX", change.x);
                 animator.SetFloat("moveY", change.y);
             }
-            return;
+            TurnGoldCo();
         }else if (currentState == PlayerState.push){
             PushAnimationAndMove();
-            // if(isInteractable() && playerControls.Adventurer.Transmute.WasPressedThisFrame()){
-            //     animator.SetBool("pushing",true);
-            //     currentSpeed = slowSpeed;
-            //     Debug.Log("little shove");
-            // }else{
-            //     playerControls.Adventurer.Transmute.Reset();
-            //     currentSpeed = walkSpeed;
-            //     animator.SetBool("moving", true);
-            // }
-            // return;
         }else{
             UpdateAnimationAndMove();
         }
     }
 
+    //Transmute Coroutine
+    void TurnGoldCo(){
+        //TODO
+    }
+
+    //Handles Push Animation & direction
     void PushAnimationAndMove(){
-        // if (animator.GetFloat("moveX")!=0 || animator.GetFloat("moveY")!=0 )
         if (change != Vector3.zero)
         {
-            // Debug.Log("pushChords:" + System.Math.Abs(pushChange.x) + "," + System.Math.Abs(pushChange.y));
-            // Debug.Log("currentChords:" + System.Math.Abs(change.x) + "," + System.Math.Abs(change.y));
-            if (myAxis != MovementAxis.all){
-                if (myAxis == MovementAxis.horizontal){
-                    myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                }else if(myAxis == MovementAxis.vertical){
-                    myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
-                }
-                MoveCharacter();
-                animator.SetBool("moving", true);   
+            if (myAxis == MovementAxis.horizontal){
+                myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+            }else if(myAxis == MovementAxis.vertical){
+                myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
             }
+            MoveCharacter();
+            animator.SetBool("moving", true);   
         }
         else
         {
@@ -226,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    //Handles Move Animation
     void UpdateAnimationAndMove()
     {
         if (change != Vector3.zero)
