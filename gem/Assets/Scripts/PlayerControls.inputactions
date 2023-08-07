@@ -177,8 +177,30 @@
                 },
                 {
                     "name": "",
+                    "id": "2c68d986-d5b8-4b0e-baf5-537379d7815c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cf032acd-0f05-45e5-a245-4b17e0c2118c",
                     "path": "<Keyboard>/z",
+                    "interactions": "Hold(duration=0.2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Push",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "263b72f0-898c-4dd3-8317-905e21c842f1",
+                    "path": "<Keyboard>/e",
                     "interactions": "Hold(duration=0.2)",
                     "processors": "",
                     "groups": "",

@@ -79,10 +79,6 @@ public class PlayerMovement : MonoBehaviour
         change = value.Get<Vector2>();
     }
 
-    private void OnInteract()
-    {
-        interactSignal.Raise();
-    }
 
     private void OnTransmute(){
         animator.SetBool("moving", false);
@@ -91,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnInteract(){
+        interactSignal.Raise();
         if (checkObject() == "interactable"){
             Debug.Log("interacted!");
         }
