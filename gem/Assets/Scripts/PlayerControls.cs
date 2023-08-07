@@ -53,6 +53,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Push"",
+                    ""type"": ""Button"",
+                    ""id"": ""81114333-fb79-4cd2-affe-ed7dbc141ca7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -125,11 +134,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""42275c40-12f2-4fb8-9ff1-2b489ee6bf8d"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cf032acd-0f05-45e5-a245-4b17e0c2118c"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Push"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -143,6 +163,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Adventurer_Move = m_Adventurer.FindAction("Move", throwIfNotFound: true);
         m_Adventurer_Transmute = m_Adventurer.FindAction("Transmute", throwIfNotFound: true);
         m_Adventurer_Interact = m_Adventurer.FindAction("Interact", throwIfNotFound: true);
+        m_Adventurer_Push = m_Adventurer.FindAction("Push", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -207,6 +228,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Adventurer_Move;
     private readonly InputAction m_Adventurer_Transmute;
     private readonly InputAction m_Adventurer_Interact;
+    private readonly InputAction m_Adventurer_Push;
     public struct AdventurerActions
     {
         private @PlayerControls m_Wrapper;
@@ -214,6 +236,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Adventurer_Move;
         public InputAction @Transmute => m_Wrapper.m_Adventurer_Transmute;
         public InputAction @Interact => m_Wrapper.m_Adventurer_Interact;
+        public InputAction @Push => m_Wrapper.m_Adventurer_Push;
         public InputActionMap Get() { return m_Wrapper.m_Adventurer; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -232,6 +255,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Push.started += instance.OnPush;
+            @Push.performed += instance.OnPush;
+            @Push.canceled += instance.OnPush;
         }
 
         private void UnregisterCallbacks(IAdventurerActions instance)
@@ -245,6 +271,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Push.started -= instance.OnPush;
+            @Push.performed -= instance.OnPush;
+            @Push.canceled -= instance.OnPush;
         }
 
         public void RemoveCallbacks(IAdventurerActions instance)
@@ -267,5 +296,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnTransmute(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPush(InputAction.CallbackContext context);
     }
 }

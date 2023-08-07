@@ -1,28 +1,47 @@
 // using System.Collections;
 // using System.Collections.Generic;
 // using System.Transactions;
+using System;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public enum PlayerState
 {   
     //defines different types of player states
-    walk, // include walk + idel
+    walk, //idle, walk animation
     transmute,
     interact,
+    push,
     stagger
+}
+
+public enum MovementAxis
+{
+    horizontal,
+    vertical,
+    all
 }
 
 public class PlayerMovement : MonoBehaviour
 {
 
     public PlayerState currentState;
-    public float speed;
+    public float walkSpeed;
+    public float slowSpeed;
+    private float currentSpeed;
     private Rigidbody2D myRigidbody;
     private Vector3 change;
     private Animator animator;
     private SpriteRenderer mySpriteRenderer;
     private PlayerControls playerControls; //new input system
+    // private Transform intCollision;
+    private Collider2D myCollider;
+    public GameObject rayPoint;
+    [SerializeField] float rayDistance;
+    private MovementAxis myAxis = MovementAxis.all;
+    
+
     //public FloatValue currentHealth;
     //public SignalSender playerHealthSignal;
     //public VectorValue StartingPosition;
@@ -36,22 +55,21 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         currentState = PlayerState.walk;
         myRigidbody = GetComponent<Rigidbody2D>(); 
+        currentSpeed = walkSpeed;
+        myCollider = GetComponent<Collider2D>();
 
-        // playerControls.Adventurer.Move.performed += ctxt => {
-        //     Vector2 dir = ctxt.ReadValue<Vector2>();
-        //     change = Vector3.zero;
-        //     change.x = dir.x;
-        //     change.y = dir.y;
-        // };
-        // playerControls.Adventurer.Move.canceled += _ =>{
-        //     change = Vector3.zero;
-        // };
         playerControls.Adventurer.Transmute.performed += ctxt => OnTransmute();
         playerControls.Adventurer.Transmute.canceled += _ =>{
             animator.SetBool("transmuting",false);
             currentState = PlayerState.walk;
         };
-        // Debug.Log("ready!");
+        playerControls.Adventurer.Interact.canceled += _ =>{
+            animator.SetBool("pushing",false);
+            currentSpeed = walkSpeed;
+            currentState = PlayerState.walk;
+            myAxis = MovementAxis.all;
+            myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        };
     }
 
     private void OnMove(InputValue value){
@@ -59,7 +77,63 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnTransmute(){
+        animator.SetBool("moving", false);
+        animator.SetBool("transmuting",true);
         currentState = PlayerState.transmute;
+    }
+
+    private void OnInteract(){
+        if (checkObject() == "interactable"){
+            Debug.Log("interacted!");
+        }
+    }
+
+    private void OnPush(){
+        //check if it's an interactable object
+            //raise an interactable signal
+            //change state to interact
+            //if it's pushable
+                //change state to pushable
+                //change animation vector and keep
+        if(Math.Abs(animator.GetFloat("moveX") + animator.GetFloat("moveY")) == 1 && checkObject() == "pushable"){
+            //raise an interactable signal for the object itself
+                animator.SetBool("pushing",true);
+                // animator.SetFloat("moveX", change.x);
+                // animator.SetFloat("moveY", change.y);
+                currentState = PlayerState.push;
+                currentSpeed = slowSpeed;
+                if(animator.GetFloat("moveX") != 0 && animator.GetFloat("moveY") == 0){
+                    myAxis = MovementAxis.horizontal;
+                }else if (animator.GetFloat("moveY") != 0 && animator.GetFloat("moveX") == 0){
+                    myAxis = MovementAxis.vertical;
+                }
+                Debug.Log("pushed!");
+        }
+    }
+
+    // checks if the player can interact with any object. if yes, return its tag. else return empty string
+    private String checkObject(){
+        String tag = "";
+        Vector2 startPos = rayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(animator.GetFloat("moveX"),animator.GetFloat("moveY")) * rayDistance;
+        // Vector2 change2D = new Vector2 (change.x,change.y);
+        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
+        if (hit.collider!=null){
+            // Debug.DrawLine(startPos,endPos,Color.red);
+            if(hit.collider.CompareTag("interactable")){
+                tag = "interactable";
+            }
+            if(hit.collider.CompareTag("pushable")){
+                tag = "pushable";
+            }
+            Debug.Log("checkObj hits: " + tag + " which is called: " + hit.collider.name);
+            return tag;
+        }
+        else{
+            Debug.Log("miss!");
+            // Debug.DrawLine(startPos,endPos,Color.green);
+            return tag;
+        }
     }
 
     // Start is called before the first frame update
@@ -80,10 +154,28 @@ public class PlayerMovement : MonoBehaviour
         playerControls.Disable();
     }
 
+    void Update(){
+        Vector2 startPos = rayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(animator.GetFloat("moveX"),animator.GetFloat("moveY")) * rayDistance;
+        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
+        if (hit.collider!=null){
+            if(hit.collider.CompareTag("interactable")){
+                Debug.DrawLine(startPos,endPos,Color.yellow);
+            }
+            if(hit.collider.CompareTag("pushable")){
+                Debug.DrawLine(startPos,endPos,Color.red);
+            }
+            // Debug.Log("hits: " + hit.collider.name);
+        }
+        else{
+            Debug.DrawLine(startPos,endPos,Color.green);
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("state: " + currentState);
+        // Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
             animator.SetBool("moving", false);
@@ -93,11 +185,44 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetFloat("moveX", change.x);
                 animator.SetFloat("moveY", change.y);
             }
-            animator.SetBool("moving", false);
-            animator.SetBool("transmuting",true);
             return;
+        }else if (currentState == PlayerState.push){
+            PushAnimationAndMove();
+            // if(isInteractable() && playerControls.Adventurer.Transmute.WasPressedThisFrame()){
+            //     animator.SetBool("pushing",true);
+            //     currentSpeed = slowSpeed;
+            //     Debug.Log("little shove");
+            // }else{
+            //     playerControls.Adventurer.Transmute.Reset();
+            //     currentSpeed = walkSpeed;
+            //     animator.SetBool("moving", true);
+            // }
+            // return;
         }else{
             UpdateAnimationAndMove();
+        }
+    }
+
+    void PushAnimationAndMove(){
+        // if (animator.GetFloat("moveX")!=0 || animator.GetFloat("moveY")!=0 )
+        if (change != Vector3.zero)
+        {
+            // Debug.Log("pushChords:" + System.Math.Abs(pushChange.x) + "," + System.Math.Abs(pushChange.y));
+            // Debug.Log("currentChords:" + System.Math.Abs(change.x) + "," + System.Math.Abs(change.y));
+            if (myAxis != MovementAxis.all){
+                if (myAxis == MovementAxis.horizontal){
+                    myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                }else if(myAxis == MovementAxis.vertical){
+                    myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                }
+                MoveCharacter();
+                animator.SetBool("moving", true);   
+            }
+        }
+        else
+        {
+            animator.SetBool("moving", false);
+            return;
         }
     }
 
@@ -109,7 +234,6 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("moveX", change.x);
             animator.SetFloat("moveY", change.y);
             animator.SetBool("moving", true);
-            //once MoveCharacter is triggered it'll go to void MoveCharacter Method
         }
         else
         {
@@ -124,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
         // changeVector = new Vector3(change.x,change.y,0);
         myRigidbody.MovePosition
         (
-            transform.position + 2 * speed * Time.fixedDeltaTime * change
+            transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change
         //make sure framerate drop doesnt affect distance
         );
     }
