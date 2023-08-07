@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
     //public Inventory playerInventory;
     //public SpriteRenderer receivedItemSprite;
 
+    public SignalSO interactSignal;
+
     private void Awake(){
         playerControls = new PlayerControls();  
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -75,6 +77,11 @@ public class PlayerMovement : MonoBehaviour
     //OnXXX functions are called once after the action is activated (through user input)
     private void OnMove(InputValue value){
         change = value.Get<Vector2>();
+    }
+
+    private void OnInteract()
+    {
+        interactSignal.Raise();
     }
 
     private void OnTransmute(){
@@ -170,6 +177,7 @@ public class PlayerMovement : MonoBehaviour
     // Check PlayerState and determine what to do
     void FixedUpdate()
     {
+        //Debug.Log("state: " + currentState);
         // Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
