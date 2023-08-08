@@ -27,8 +27,11 @@ public class TriggerLocation : MonoBehaviour
             {
                 overlapSignal.Raise();
             }
-                
-            StoryManager.GetInstance().EnterDialogueMode(knotName);
+
+            if (knotName != null)
+            {
+                StoryManager.GetInstance().EnterDialogueMode(knotName);
+            }
         }
     }
 

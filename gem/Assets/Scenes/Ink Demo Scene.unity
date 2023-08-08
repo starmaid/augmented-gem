@@ -772,7 +772,7 @@ GameObject:
   - component: {fileID: 900929547}
   - component: {fileID: 900929546}
   - component: {fileID: 900929545}
-  - component: {fileID: 900929544}
+  - component: {fileID: 900929548}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -780,21 +780,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &900929544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900929543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365104bc10bb152499ca9f0bddaf74f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overlapSignal: {fileID: 0}
-  endOverlapSignal: {fileID: 0}
-  knotName: 1_Intro_Welcome
 --- !u!58 &900929545
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -897,6 +882,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900929548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900929543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 272aa68e70b46a949ab935e195d51726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlapSignal: {fileID: 0}
+  endOverlapSignal: {fileID: 0}
+  interactSignal: {fileID: 0}
+  knotName: 1_intro
 --- !u!1 &1024194324
 GameObject:
   m_ObjectHideFlags: 0
