@@ -21,10 +21,18 @@ public class TriggerInteract : MonoBehaviour
 
     public void InteractTrigger()
     {
-        if (playerInRange)
+        if (playerInRange && !StoryManager.GetInstance().dialogueIsPlaying)
         {
-            interactSignal.Raise();
-            StoryManager.GetInstance().EnterDialogueMode(knotName);
+            
+            if (interactSignal != null)
+            {
+                interactSignal.Raise();
+            }
+            if (knotName != null)
+            {
+                print("trying to enter dialogue");
+                StoryManager.GetInstance().EnterDialogueMode(knotName);
+            }
         }
     }
 
@@ -34,8 +42,10 @@ public class TriggerInteract : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
-            overlapSignal.Raise();
-
+            if (overlapSignal != null)
+            {
+                overlapSignal.Raise();
+            }
         }
     }
 
@@ -44,7 +54,10 @@ public class TriggerInteract : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = false;
-            endOverlapSignal.Raise();
+            if (endOverlapSignal != null)
+            {
+                endOverlapSignal.Raise();
+            }
         }
     }
 }

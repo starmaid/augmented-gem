@@ -91,7 +91,7 @@ public class StoryManager : MonoBehaviour
             index++;
         }
 
-        //InitializeAudioInfoDictionary();
+        InitializeAudioInfoDictionary();
     }
 
     private void InitializeAudioInfoDictionary()
@@ -120,12 +120,14 @@ public class StoryManager : MonoBehaviour
 
     public void TryContinue()
     {
-        print("raised");
+        //print("raised contuinue");
 
         if (!dialogueIsPlaying)
         {
             return;
         }
+
+
 
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
@@ -157,15 +159,15 @@ public class StoryManager : MonoBehaviour
         currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-
+    
         dialogueVariables.StartListening(currentStory);
         inkExternalFunctions.Bind(currentStory, emoteAnimator);
-
+    
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
         portraitAnimator.Play("default");
         layoutAnimator.Play("right");
-
+    
         currentStory.ChoosePathString(knotName);
         ContinueStory();
     }
@@ -404,6 +406,7 @@ public class StoryManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
+            print("made choice " + choiceIndex);
             ContinueStory();
         }
     }

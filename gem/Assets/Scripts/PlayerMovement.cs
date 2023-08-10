@@ -2,7 +2,6 @@
 // using System.Collections.Generic;
 // using System.Transactions;
 using System;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -75,8 +74,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //OnXXX functions are called once after the action is activated (through user input)
-    private void OnMove(InputValue value){
-        change = value.Get<Vector2>();
+    private void OnMove(InputValue value)
+    {
+        if (! StoryManager.GetInstance().dialogueIsPlaying)
+        {
+            change = value.Get<Vector2>();
+        }
+        else
+        {
+
+        }
     }
 
 
