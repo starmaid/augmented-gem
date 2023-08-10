@@ -21,14 +21,17 @@ public class TriggerInteract : MonoBehaviour
 
     public void InteractTrigger()
     {
+        print(playerInRange);
         if (playerInRange)
         {
+            
             if (interactSignal != null)
             {
                 interactSignal.Raise();
             }
             if (knotName != null)
             {
+                print("trying to enter dialogue");
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
         }
