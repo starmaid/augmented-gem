@@ -127,6 +127,8 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
+
+
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
@@ -404,6 +406,7 @@ public class StoryManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
+            print("made choice " + choiceIndex);
             ContinueStory();
         }
     }

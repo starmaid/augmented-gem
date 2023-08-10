@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
 
     public SignalSO interactSignal;
 
+    private StoryManager storyManager;
+
     private void Awake(){
         playerControls = new PlayerControls();  
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -53,11 +55,20 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("transmuting",false);
             currentState = PlayerState.walk;
         };
+
         // Debug.Log("ready!");
     }
 
-    private void OnMove(InputValue value){
-        change = value.Get<Vector2>();
+    private void OnMove(InputValue value)
+    {
+        if (! StoryManager.GetInstance().dialogueIsPlaying)
+        {
+            change = value.Get<Vector2>();
+        }
+        else
+        {
+
+        }
     }
 
     private void OnInteract()

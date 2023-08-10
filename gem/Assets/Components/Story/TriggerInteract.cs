@@ -21,8 +21,7 @@ public class TriggerInteract : MonoBehaviour
 
     public void InteractTrigger()
     {
-        print(playerInRange);
-        if (playerInRange)
+        if (playerInRange && !StoryManager.GetInstance().dialogueIsPlaying)
         {
             
             if (interactSignal != null)
