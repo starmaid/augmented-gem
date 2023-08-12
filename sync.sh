@@ -20,6 +20,8 @@ GITDATE=`date +"%y-%m-%d-%H%M"`
 BRANCHNAME="auto/art-$GITDATE"
 
 git checkout main
+git stash
+git stash drop
 git pull
 git checkout -b $BRANCHNAME
 
@@ -33,4 +35,4 @@ rsync -av --include "*/" --include="*.png" --include="*.wav" --exclude="*" $STAR
 git add .
 git commit -m "Auto-update of art assets by $CUSER's computer"
 
-#git push --set-upstream origin $BRANCHNAME
+git push --set-upstream origin $BRANCHNAME
