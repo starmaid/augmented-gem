@@ -13,19 +13,23 @@ public class TriggerInteract : MonoBehaviour
     //[SerializeField] private TextAsset inkJSON;
     [SerializeField] private string knotName;
 
-    private bool playerInRange;
+    // private bool playerInRange;
     private void Awake()
     {
-        playerInRange = false;
+        // playerInRange = false;
     }
 
+    //instead of how its written here, have this func trigger when it hears interactSignal raise from player
     public void InteractTrigger()
     {
-        if (playerInRange && !StoryManager.GetInstance().dialogueIsPlaying)
+        // Debug.Log("entered InteractTrigger(), playerInRange is "+ playerInRange);
+        if (!StoryManager.GetInstance().dialogueIsPlaying)
         {
+            Debug.Log("before testing");
             
             if (interactSignal != null)
             {
+                Debug.Log("interacting!!!");
                 interactSignal.Raise();
             }
             if (knotName != null)
@@ -41,9 +45,10 @@ public class TriggerInteract : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            playerInRange = true;
+            // playerInRange = true;
             if (overlapSignal != null)
             {
+                Debug.Log("overlapping!");
                 overlapSignal.Raise();
             }
         }
@@ -53,9 +58,10 @@ public class TriggerInteract : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            playerInRange = false;
+            // playerInRange = false;
             if (endOverlapSignal != null)
             {
+                 Debug.Log("ending overlap!");
                 endOverlapSignal.Raise();
             }
         }

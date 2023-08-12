@@ -94,9 +94,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnInteract(){
-        interactSignal.Raise();
         if (checkObject() == "interactable"){
-            Debug.Log("interacted!");
+            interactSignal.Raise();
+            currentState = PlayerState.interact;
+            // Debug.Log("interacted!");
         }
     }
 
@@ -167,10 +168,13 @@ public class PlayerMovement : MonoBehaviour
             if(hit.collider.CompareTag("interactable")){
                 Debug.DrawLine(startPos,endPos,Color.yellow);
             }
-            if(hit.collider.CompareTag("pushable")){
+            else if(hit.collider.CompareTag("pushable")){
                 Debug.DrawLine(startPos,endPos,Color.red);
             }
             // Debug.Log("hits: " + hit.collider.name);
+            // else{
+            //     Debug.DrawLine(startPos,endPos,Color.white);
+            // }
         }
         else{
             Debug.DrawLine(startPos,endPos,Color.green);
