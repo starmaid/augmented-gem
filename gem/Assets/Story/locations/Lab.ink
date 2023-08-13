@@ -2,13 +2,13 @@
 
 === Lab_Desk ===
 
-You see a messy desk. 
+You see a messy desk. #portrait:adv_annoyed
 
 * Papers
-    There are many papers scattered about.
+    There are many papers scattered about. #portrait:adv_confused_nogem
     -> Lab_Desk
 * Glassware
-    You see some dirty glassware.
+    You see some dirty glassware. #portrait:adv_worried
     -> Lab_Desk
 + Walk away.
     -> DONE
