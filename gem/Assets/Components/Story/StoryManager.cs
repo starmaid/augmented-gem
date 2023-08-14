@@ -41,6 +41,7 @@ public class StoryManager : MonoBehaviour
     public bool dialogueIsPlaying { get; private set; }
 
     private bool canContinueToNextLine = false;
+    private bool trySkipDialogue = false;
 
     private Coroutine displayLineCoroutine;
 
@@ -127,12 +128,13 @@ public class StoryManager : MonoBehaviour
             return;
         }
 
-
-
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
             ContinueStory();
+        } else
+        {
+            trySkipDialogue = true;
         }
     }
 
@@ -146,7 +148,7 @@ public class StoryManager : MonoBehaviour
         dialogueVariables.StartListening(currentStory);
 
         // reset portrait, layout, and speaker
-        displayNameText.text = "???";
+        //displayNameText.text = "???";
         portraitAnimator.Play("default");
         layoutAnimator.Play("right");
 
@@ -233,11 +235,12 @@ public class StoryManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             // if the submit button is pressed, finish up displaying the line right away
-            //if (InputManager.GetInstance().GetSubmitPressed())
-            //{
-            //    dialogueText.maxVisibleCharacters = line.Length;
-            //    break;
-            //}
+            if (trySkipDialogue)
+            {
+                dialogueText.maxVisibleCharacters = line.Length;
+                trySkipDialogue = false;
+                break;
+            }
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag)
