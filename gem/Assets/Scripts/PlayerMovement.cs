@@ -94,11 +94,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnInteract(){
+        // checkObject() ACTIVATES things. note to self.
+        // this is kind of bad form + oblique
+        // but its fine.
+
         if (checkObject() == "interactable"){
             interactSignal.Raise();
             currentState = PlayerState.interact;
             // Debug.Log("interacted!");
         }
+
+
     }
 
     private void OnPush(){
@@ -127,6 +133,13 @@ public class PlayerMovement : MonoBehaviour
             // Debug.DrawLine(startPos,endPos,Color.red);
             if(hit.collider.CompareTag("interactable")){
                 tag = "interactable";
+
+                TriggerInteract tryTrigger = hit.collider.GetComponent<TriggerInteract>();
+                if (tryTrigger != null)
+                {
+                    tryTrigger.InteractTrigger();
+                }
+                
             }
             if(hit.collider.CompareTag("pushable")){
                 tag = "pushable";

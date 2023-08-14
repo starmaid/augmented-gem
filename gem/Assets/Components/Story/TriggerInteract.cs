@@ -23,7 +23,7 @@ public class TriggerInteract : MonoBehaviour
     public void InteractTrigger()
     {
         // Debug.Log("entered InteractTrigger(), playerInRange is "+ playerInRange);
-        if (playerInRange && !StoryManager.GetInstance().dialogueIsPlaying)
+        if (!StoryManager.GetInstance().dialogueIsPlaying)
         {
             Debug.Log("before testing");
             
@@ -38,6 +38,7 @@ public class TriggerInteract : MonoBehaviour
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
         }
+        print(playerInRange);
     }
 
 
