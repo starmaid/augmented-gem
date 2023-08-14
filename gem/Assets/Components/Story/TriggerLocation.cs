@@ -12,17 +12,17 @@ public class TriggerLocation : MonoBehaviour
     //[SerializeField] private TextAsset inkJSON;
     [SerializeField] private string knotName;
 
-    // private bool playerInRange;
+    private bool playerInRange;
     private void Awake()
     {
-        // playerInRange = false;
+        playerInRange = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            // playerInRange = true;
+            playerInRange = true;
             if (endOverlapSignal != null)
             {
                 overlapSignal.Raise();
@@ -32,6 +32,7 @@ public class TriggerLocation : MonoBehaviour
             {
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
+            print(playerInRange);
         }
     }
 
@@ -39,7 +40,7 @@ public class TriggerLocation : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("Player"))
         {
-            // playerInRange = false;
+            playerInRange = false;
             if (endOverlapSignal != null)
             {
                 endOverlapSignal.Raise();
