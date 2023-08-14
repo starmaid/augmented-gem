@@ -16,10 +16,10 @@ You see a messy desk. #portrait:adv_annoyed
 
 === Lab_Window ===
 
-You notice a windowsill and glass pane looking out towards a wall of rock.
+You notice a windowsill and glass pane looking out towards a wall of rock. #portrait:adv_confused
 
-* Whats this doing here?
-    The window doesn't answer you.
+* Whats this doing here? 
+    The window doesn't answer you. #portrait:gem_angery
     ++ Walk Away.
         -> DONE
 
