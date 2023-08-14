@@ -13,7 +13,7 @@ else
 fi
 
 # relative to repo root
-ARTASSETS="./gem/Assets/Art/"
+ARTASSETS="./gem/Assets/"
 GDRIVE="../gamejam_gdrive/"
 
 GITDATE=`date +"%y-%m-%d-%H%M"`
@@ -36,3 +36,4 @@ git add .
 git commit -m "Auto-update of art assets by $CUSER's computer"
 
 git push --set-upstream origin $BRANCHNAME
+
