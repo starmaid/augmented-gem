@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
     public SignalSO interactSignal;
 
+    private AudioSource myAudioSource;
+
     private void Awake(){
         playerControls = new PlayerControls();  
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>(); 
         currentSpeed = walkSpeed;
         myCollider = GetComponent<Collider2D>();
+        myAudioSource = GetComponent<AudioSource>();
 
         playerControls.Adventurer.Transmute.performed += ctxt => OnTransmute();
         playerControls.Adventurer.Transmute.canceled += _ =>{
@@ -266,6 +269,12 @@ public class PlayerMovement : MonoBehaviour
             transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change
         //make sure framerate drop doesnt affect distance
         );
+        
+    }
+
+    void PlayWalkSound()
+    {
+        myAudioSource.Play();
     }
 
 }
