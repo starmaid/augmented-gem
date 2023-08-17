@@ -112,7 +112,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 675060193, guid: 2c8bc17f847618cfdab3bc8640c043be, type: 3}
+  m_Sprite: {fileID: -1329563581, guid: 6e291e373f026631199ea5fa5966e3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,7 +135,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e1987ac45fdb27488b7d6671d19fdfbc, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -276,13 +276,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b043ecb12103ba4bb2f1a525dcf8892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signalObject: {fileID: 11400000, guid: 7d9fa85b6863b2eebb2d05b533c4d9e7, type: 2}
+  signalObject: {fileID: 11400000, guid: 7afdaf4e5fbf98f84b9d5c1fc3e00801, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3138648031057728495}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: fixState
+        m_MethodName: EndInteract
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

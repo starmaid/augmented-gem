@@ -17,6 +17,7 @@ public class StoryManager : MonoBehaviour
     private Story inkStory;
 
     [Header("Story UI")]
+    [SerializeField] private SignalSO endInteractSignal;
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private GameObject continueIcon;
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -187,6 +188,7 @@ public class StoryManager : MonoBehaviour
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
+        endInteractSignal.Raise();
     }
 
     private void ContinueStory()
