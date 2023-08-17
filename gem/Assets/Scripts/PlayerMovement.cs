@@ -64,26 +64,26 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("transmuting",false);
             currentState = PlayerState.walk;
         };
-        playerControls.Adventurer.Interact.canceled += _ =>{
-            animator.SetBool("pushing",false);
-            currentSpeed = walkSpeed;
-            currentState = PlayerState.walk;
-            myAxis = MovementAxis.all;
-            myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        };
+        // playerControls.Adventurer.Interact.canceled += _ =>{
+        //     animator.SetBool("pushing",false);
+        //     currentSpeed = walkSpeed;
+        //     currentState = PlayerState.walk;
+        //     myAxis = MovementAxis.all;
+        //     myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        // };
     }
 
     //OnXXX functions are called once after the action is activated (through user input)
     private void OnMove(InputValue value)
     {
-        if (! StoryManager.GetInstance().dialogueIsPlaying)
-        {
+        // if (! StoryManager.GetInstance().dialogueIsPlaying)
+        // {
             change = value.Get<Vector2>();
-        }
-        else
-        {
+        // }
+        // else
+        // {
 
-        }
+        // }
     }
 
 
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
         currentState = PlayerState.transmute;
     }
 
-    private void OnInteract(){
+    void OnInteract(){
         // checkObject() ACTIVATES things. note to self.
         // this is kind of bad form + oblique
         // but its fine.
@@ -105,6 +105,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+    }
+
+    public void EndInteract(){
+        animator.SetBool("pushing",false);
+        currentSpeed = walkSpeed;
+        currentState = PlayerState.walk;
+        myAxis = MovementAxis.all;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void OnPush(){
@@ -198,7 +206,6 @@ public class PlayerMovement : MonoBehaviour
     // Check PlayerState and determine what to do
     void FixedUpdate()
     {
-        //Debug.Log("state: " + currentState);
         // Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {

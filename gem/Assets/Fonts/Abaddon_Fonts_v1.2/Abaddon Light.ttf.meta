@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: 82f6d25bc6cb3c5bd921ea90eacb8144
+guid: 4bd128da33e9eb614acc83a30f49dc4b
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 17
+  fontSize: 16
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - DungeonFont
+  - Abaddon Light
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 2
+  fontRenderingMode: 0
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

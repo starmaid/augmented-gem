@@ -38,7 +38,7 @@ public class TriggerInteract : MonoBehaviour
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
         }
-        print(playerInRange);
+        Debug.Log("playerInRange:" + playerInRange);
     }
 
 
