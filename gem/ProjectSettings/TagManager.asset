@@ -52,6 +52,9 @@ TagManager:
   - name: interactable
     uniqueID: 2766559679
     locked: 0
+  - name: GlowSprites
+    uniqueID: 3377760395
+    locked: 0
   - name: wall
     uniqueID: 1186447167
     locked: 0
