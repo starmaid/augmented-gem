@@ -57,6 +57,22 @@ public class GlowComponent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (mySpriteRenderer != null)
+        {
+            if (mySpriteRenderer.sprite != mySprite)
+            {
+                mySprite = mySpriteRenderer.sprite;
+                newSpriteComponent.sprite = mySprite;
+            }
+        }
+        else if (myImage != null)
+        { 
+            if (myImage.sprite != mySprite)
+            {
+                mySprite = myImage.sprite;
+                newImageComponent.sprite = mySprite;
+            }
+        }
+
     }
 }
