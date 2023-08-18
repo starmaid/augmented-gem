@@ -40,14 +40,15 @@ public class PlayerStateManager : MonoBehaviour
     //INPUTS
     public PlayerControls _playerControls; //new input system
 
-    //MOVEMENT
-    // private MovementAxis _myAxis = MovementAxis.all;
+    //INTERACTING OBJECTS
+    private Pushable _pushedObj;
     
     //AUDIO
     private AudioSource _myAudioSource;
     
     //SIGNALS
     public SignalSO InteractSignal;
+    public SignalSO PushSignal;
 
     //GETTERS AND SETTERS
     public PlayerBaseState CurrentState{get{return _currentState;} set{_currentState = value;}}
@@ -67,6 +68,7 @@ public class PlayerStateManager : MonoBehaviour
     public Vector3 Change{get{return _change;} set{_change = value;}}
     public Collider2D MyCollider{get{return _myCollider;} set{_myCollider = value;}}
     // public  MovementAxis MyAxis {get{return _myAxis;} set{_myAxis = value;}}
+    public Pushable PushedObj{get{return _pushedObj;} set{_pushedObj = value;}}
     public AudioSource MyAudioSource{get{return _myAudioSource;} set{_myAudioSource = value;}}
 
     // Start is called before the first frame update
@@ -149,6 +151,7 @@ public class PlayerStateManager : MonoBehaviour
             }
             if(hit.collider.CompareTag("pushable")){
                 tag = "pushable";
+                _pushedObj = hit.collider.GetComponent<Pushable>();
             }
             return tag;
         }

@@ -22,7 +22,7 @@ public abstract class PlayerBaseState
         // Debug.Log("exiting: " + _context.CurrentState);
         newState.EnterState();
         _context.CurrentState = newState;
-        Debug.Log("entering: " + _context.CurrentState);
+        // Debug.Log("entering: " + _context.CurrentState);
     }
 
 }

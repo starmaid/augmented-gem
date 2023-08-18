@@ -13,6 +13,9 @@ public class PlayerPushState : PlayerBaseState
     }
 
     private MoveAxis _myAxis;
+
+    // private Pushable _pushedObj;
+
     public PlayerPushState(PlayerStateManager context, PlayerStateFactory states) : base(context, states)
     {
     }
@@ -27,6 +30,7 @@ public class PlayerPushState : PlayerBaseState
 
     public override void EnterState()
     {
+        // _pushedObj = _context.PushedObj.GetComponent<Pushable>();
         if(_context.MyAnimator.GetFloat("moveX") != 0 && _context.MyAnimator.GetFloat("moveY") == 0){
             _myAxis = MoveAxis.horizontal;
         }else if (_context.MyAnimator.GetFloat("moveY") != 0 && _context.MyAnimator.GetFloat("moveX") == 0){
@@ -34,7 +38,6 @@ public class PlayerPushState : PlayerBaseState
         }
         _context.MyAnimator.SetBool("pushing",true);
         _context.CurrentSpeed = _context.SlowSpeed;
-
     }
 
     public override void ExitState()
@@ -43,6 +46,7 @@ public class PlayerPushState : PlayerBaseState
         _context.CurrentSpeed = _context.WalkSpeed;
         _myAxis = MoveAxis.all;
         _context.MyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        _context.PushedObj.MyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     public override void FixedUpdateState()
@@ -52,16 +56,19 @@ public class PlayerPushState : PlayerBaseState
         {
             if (_myAxis == MoveAxis.horizontal){
                  _context.MyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                 _context.PushedObj.MyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
             }else if(_myAxis == MoveAxis.vertical){
                 _context.MyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                _context.PushedObj.MyRigidBody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+
             }
             _context.MoveCharacter();
+            _context.PushedObj.MoveObj(_context.CurrentSpeed, _context.Change);
             _context.MyAnimator.SetBool("moving", true);   
         }
         else
         {
             _context.MyAnimator.SetBool("moving", false);
-            // return;
         }
         CheckSwitchState();
     }
