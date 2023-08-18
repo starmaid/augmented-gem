@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//DEPRECATED. use PlayerStateManager instead
 public enum PlayerState
 {   
     //defines different types of player states
@@ -67,13 +68,13 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("transmuting",false);
             currentState = PlayerState.walk;
         };
-        // playerControls.Adventurer.Interact.canceled += _ =>{
-        //     animator.SetBool("pushing",false);
-        //     currentSpeed = walkSpeed;
-        //     currentState = PlayerState.walk;
-        //     myAxis = MovementAxis.all;
-        //     myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        // };
+        playerControls.Adventurer.Push.canceled += _ =>{
+            animator.SetBool("pushing",false);
+            currentSpeed = walkSpeed;
+            currentState = PlayerState.walk;
+            myAxis = MovementAxis.all;
+            myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        };
     }
 
     //OnXXX functions are called once after the action is activated (through user input)
@@ -91,9 +92,12 @@ public class PlayerMovement : MonoBehaviour
 
 
     private void OnTransmute(){
-        animator.SetBool("moving", false);
-        animator.SetBool("transmuting",true);
-        currentState = PlayerState.transmute;
+        if (currentState == PlayerState.walk || currentState == PlayerState.transmute){
+            Debug.Log("we're in hackers");
+            animator.SetBool("moving", false);
+            animator.SetBool("transmuting",true);
+            currentState = PlayerState.transmute;
+        }
     }
 
     void OnInteract(){
@@ -209,7 +213,7 @@ public class PlayerMovement : MonoBehaviour
     // Check PlayerState and determine what to do
     void FixedUpdate()
     {
-        // Debug.Log("state: " + currentState);
+        Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
             animator.SetBool("moving", false);
@@ -251,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Handles Move Animation
-    void UpdateAnimationAndMove()
+    public void UpdateAnimationAndMove()
     {
         if (change != Vector3.zero)
         {
@@ -281,7 +285,9 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayWalkSound()
     {
-        myAudioSource.Play();
+        if (myAudioSource != null){
+            myAudioSource.Play();
+        }
     }
 
 }
