@@ -17,7 +17,6 @@ public class PlayerInteractState : PlayerBaseState
 
     public override void EnterState()
     {
-        _context.InteractSignal.Raise();
         _context.MyAnimator.SetBool("moving", false);
     }
 

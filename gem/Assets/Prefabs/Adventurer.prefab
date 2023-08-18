@@ -44,9 +44,9 @@ GameObject:
   - component: {fileID: 3088793664944912333}
   - component: {fileID: 8597412193352805235}
   - component: {fileID: 1603981745020494065}
-  - component: {fileID: 3138648031057728495}
   - component: {fileID: 5086456985038723414}
   - component: {fileID: 7338107951443676206}
+  - component: {fileID: 3322285920812306341}
   m_Layer: 2
   m_Name: Adventurer
   m_TagString: Player
@@ -69,7 +69,7 @@ Transform:
   - {fileID: 6890563357448919922}
   - {fileID: 929502999562543571}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &127654469800451815
 SpriteRenderer:
@@ -201,24 +201,6 @@ MonoBehaviour:
   m_DefaultActionMap: Adventurer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3138648031057728495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7686102325522762273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b5f5eb573a2f007bf9fd51a290f593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  walkSpeed: 2
-  slowSpeed: 0.5
-  rayPoint: {fileID: 4982024713482734625}
-  rayDistance: 1
-  interactSignal: {fileID: 11400000, guid: 380316a99f33be246bb0885227f42397, type: 2}
 --- !u!61 &5086456985038723414
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -280,18 +262,35 @@ MonoBehaviour:
   signalEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3138648031057728495}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: EndInteract
-        m_Mode: 1
+      - m_Target: {fileID: 3322285920812306341}
+        m_TargetAssemblyTypeName: PlayerStateManager, Assembly-CSharp
+        m_MethodName: set_IsInteractEnd
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3322285920812306341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686102325522762273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54ee1c163396ecf688465e2a495caee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walkSpeed: 2
+  _slowSpeed: 0.5
+  _rayPoint: {fileID: 4982024713482734625}
+  _rayDistance: 1
+  InteractSignal: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
 --- !u!1 &7725327110493347131
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,5 +366,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0

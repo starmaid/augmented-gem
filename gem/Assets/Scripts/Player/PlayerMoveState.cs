@@ -14,10 +14,13 @@ public class PlayerMoveState : PlayerBaseState
         // check if transmute is pressed
         if (_context.IsTransmutingPressed)
             SwitchState(_states.Transmute());
-        else if (_context.IsInteractingPressed && _context.CheckObject() == "interactable")
+        else if (_context.IsInteractingPressed && _context.CheckObject() == "interactable"){
             SwitchState(_states.Interact());
-        else if (_context.IsPushingPressed && _context.CheckObject() == "pushable")
+        }
+        else if (_context.IsPushingPressed && _context.CheckObject() == "pushable"){
             SwitchState(_states.Push());
+
+        }
     }
 
     public override void EnterState()

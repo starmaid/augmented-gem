@@ -18,8 +18,8 @@ public abstract class PlayerBaseState
     public abstract void CheckSwitchState();
 
     protected void SwitchState(PlayerBaseState newState){
-        ExitState();
         // Debug.Log("exiting: " + _context.CurrentState);
+        ExitState();
         newState.EnterState();
         _context.CurrentState = newState;
         // Debug.Log("entering: " + _context.CurrentState);

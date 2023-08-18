@@ -48,8 +48,6 @@ public class PlayerStateManager : MonoBehaviour
     
     //SIGNALS
     public SignalSO InteractSignal;
-    public SignalSO PushSignal;
-
     //GETTERS AND SETTERS
     public PlayerBaseState CurrentState{get{return _currentState;} set{_currentState = value;}}
     public PlayerStateFactory States{get{return _states;}}
@@ -93,10 +91,10 @@ public class PlayerStateManager : MonoBehaviour
         _playerControls.Adventurer.Transmute.canceled += ctxt => Transmute(ctxt);
         _playerControls.Adventurer.Push.performed += ctxt => Push(ctxt);
         _playerControls.Adventurer.Push.canceled += ctxt => Push(ctxt);
-        _playerControls.Adventurer.Push.performed += ctxt => Interact(ctxt);
-        _playerControls.Adventurer.Push.canceled += ctxt => Interact(ctxt);
-        _playerControls.Adventurer.Push.performed += ctxt => Stagger(ctxt);
-        _playerControls.Adventurer.Push.canceled += ctxt => Stagger(ctxt);
+        _playerControls.Adventurer.Interact.performed += ctxt => Interact(ctxt);
+        _playerControls.Adventurer.Interact.canceled += ctxt => Interact(ctxt);
+        // _playerControls.Adventurer.Stagger.performed += ctxt => Stagger(ctxt);
+        // _playerControls.Adventurer.Stagger.canceled += ctxt => Stagger(ctxt);
     }
 
 
@@ -105,7 +103,26 @@ public class PlayerStateManager : MonoBehaviour
     {
         _currentState.FixedUpdateState();   
     }
-
+    void Update(){
+        Vector2 startPos = _rayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"),_animator.GetFloat("moveY")) * _rayDistance;
+        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
+        if (hit.collider!=null){
+            if(hit.collider.CompareTag("interactable")){
+                Debug.DrawLine(startPos,endPos,Color.yellow);
+            }
+            else if(hit.collider.CompareTag("pushable")){
+                Debug.DrawLine(startPos,endPos,Color.red);
+            }
+            // Debug.Log("hits: " + hit.collider.name);
+            // else{
+            //     Debug.DrawLine(startPos,endPos,Color.white);
+            // }
+        }
+        else{
+            Debug.DrawLine(startPos,endPos,Color.green);
+        }
+    }
     //ACTIONS
     private void Move(InputAction.CallbackContext context)
     {
@@ -119,12 +136,15 @@ public class PlayerStateManager : MonoBehaviour
     }
 
     void Interact(InputAction.CallbackContext context){
-        _isInteractingPressed = context.ReadValueAsButton() && CheckObject() == "interactable";
+        _isInteractingPressed = context.ReadValueAsButton();
+        if (_isInteractingPressed && CheckObject() == "interactable") {
+            InteractSignal.Raise();
+        }
+
     }
 
     private void Push(InputAction.CallbackContext context){
         _isPushingPressed = context.ReadValueAsButton();
-        // Debug.Log("updated Push Context: " + _isPushingPressed);
     }
 
     private void Stagger(InputAction.CallbackContext context){
@@ -147,7 +167,6 @@ public class PlayerStateManager : MonoBehaviour
                 {
                     tryTrigger.InteractTrigger();
                 }
-                
             }
             if(hit.collider.CompareTag("pushable")){
                 tag = "pushable";
