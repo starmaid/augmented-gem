@@ -15,6 +15,22 @@
                 "y": 466.66666666666663
             }
         },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/13_dining_hall/13_dining_hall.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 487.99999999999994,
+                "y": 470.66666666666663
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/14_kitchen/14_kitchen.tmx": {
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 395,
+                "y": 301
+            }
+        },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/2_spooky_hallway/2_spooky_hallway.tmx": {
             "scale": 0.5,
             "selectedLayer": 1,
@@ -46,6 +62,22 @@
                 "x": 746.942500760572,
                 "y": 718.4666869485853
             }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx": {
+            "scale": 0.45652777777777775,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 720.657134164892,
+                "y": 720.6571341648921
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 672,
+                "y": 562
+            }
         }
     },
     "last.imagePath": "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/1_office",
@@ -57,6 +89,12 @@
     ],
     "project": "1_office.tiled-project",
     "recentFiles": [
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/5_spooky_lab/5_spooky_lab.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/4_south_hall/4_south_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/2_spooky_hallway/2_spooky_hallway.tmx",
+        "1_office.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
