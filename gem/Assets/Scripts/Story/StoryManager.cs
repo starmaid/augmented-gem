@@ -58,6 +58,7 @@ public class StoryManager : MonoBehaviour
 
     private void Awake()
     {
+        currentStory = new Story(mainInkAsset.text);
         if (instance != null)
         {
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
@@ -142,7 +143,7 @@ public class StoryManager : MonoBehaviour
     public void EnterDialogueMode(string knotName)
     {
         print("starting " + knotName);
-        currentStory = new Story(mainInkAsset.text);
+        // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
@@ -150,8 +151,8 @@ public class StoryManager : MonoBehaviour
 
         // reset portrait, layout, and speaker
         //displayNameText.text = "???";
-        portraitAnimator.Play("default");
-        layoutAnimator.Play("right");
+        // portraitAnimator.Play("default");
+        layoutAnimator.Play("none");
 
         currentStory.ChoosePathString(knotName);
         ContinueStory();
@@ -159,7 +160,7 @@ public class StoryManager : MonoBehaviour
 
     public void EnterDialogueMode(string knotName, Animator emoteAnimator)
     {
-        currentStory = new Story(mainInkAsset.text);
+        // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
     
@@ -168,8 +169,8 @@ public class StoryManager : MonoBehaviour
     
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
-        portraitAnimator.Play("default");
-        layoutAnimator.Play("right");
+        // portraitAnimator.Play("default");
+        layoutAnimator.Play("none");
     
         currentStory.ChoosePathString(knotName);
         ContinueStory();
@@ -353,7 +354,12 @@ public class StoryManager : MonoBehaviour
                     displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
-                    portraitAnimator.Play(tagValue);
+                    if (tagValue == "none"){
+                        layoutAnimator.Play(tagValue);
+                    }else{
+                        layoutAnimator.Play("right"); //does this part run if theres no portrait tags?
+                        portraitAnimator.Play(tagValue);  
+                    }
                     break;
                 case LAYOUT_TAG:
                     layoutAnimator.Play(tagValue);

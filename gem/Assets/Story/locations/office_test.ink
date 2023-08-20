@@ -98,8 +98,8 @@ The Adventurer watches as the dull gray shape turns gilded, and glittering in th
 {
 - not has_dagger:
    {stopping:
-   - "I'm glad you are admiring me, but I would love to get out of here first. Would you please go find a dagger?"
-   - "..."
+   - "I'm glad you are admiring me, but I would love to get out of here first. Would you please go find a dagger?" #portrait:gem_neutral
+   - "..." #portrait:gem_angry
    }
 - has_dagger:
     {stopping:
@@ -107,15 +107,15 @@ The Adventurer watches as the dull gray shape turns gilded, and glittering in th
         It's a bit unflattering how you tumble to the ground, but you'd feel more indignant if it didn't mean a step towards freedom. #portrait:none
         //sfx: clink
         They pick you up.
-        “...How're we gonna open the door anyway?” #portrait:adv_curious
+        “...How're we gonna open the door anyway?” #portrait:adv_confused
         “Transmutation, wanderer. I-- I mean WE, are going to make a key.” #portrait:gem_excited
-        “Like.. out of wood or something? That's gonna take a while.” #portrait:adv_frown
+        “Like.. out of wood or something? That's gonna take a while.” #portrait:adv_confused
         “No! Didn't you hear me?” #portrait:gem_angry
-        “I did-- but I don't know how to do magic, and ah.. you don't have hands,” #portrait:adv_frown
+        “I did-- but I don't know how to do magic, and ah.. you don't have hands,” #portrait:adv_confused
         “It’s alchemy, not magic!?” #portrait:gem_angry
-        “I don’t know anything about that either!” #portrait:adv_frown
+        “I don’t know anything about that either!” #portrait:adv_confused
         *“...Why are you even here, then?” #portrait:gem_neutral
-        	The Adventurer looks away.
+        	The Adventurer looks away.  #portrait:adv_annoyed
         	"..."
         	“--let's just get out of here,” #portrait:adv_annoyed
         	“Fine, I'll just show you. Bring me to those bottles.” #portrait:gem_neutral
