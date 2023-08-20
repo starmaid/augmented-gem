@@ -98,7 +98,7 @@ The Adventurer watches as the dull gray shape turns gilded, and glittering in th
 {
 - not has_dagger:
    {stopping:
-   - "I'm glad you are admiring me, but I would love to get out of here first. Would you please go find a dagger?" #portrait:gem_neutral
+   - "I'm glad you are admiring me, but I would love to get out of here first. Would you please go find a dagger?"#portrait:gem_neutral
    - "..." #portrait:gem_angry
    }
 - has_dagger:
