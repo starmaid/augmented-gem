@@ -18,7 +18,6 @@ public class PanelManager : MonoBehaviour
         playerInput = player.GetComponent<PlayerInput>();
         playerInput.actions.FindActionMap("Transitional").Enable();
         gameStarted = true;
-        Debug.Log("please say sike");
 
         playerInput.actions["Pause"].performed += ctxt => {
             Debug.Log("attempting to tpause");
