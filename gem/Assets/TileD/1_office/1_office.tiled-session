@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/3_tut_puzzle_room/3_tut_puzzle_room.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
@@ -19,8 +19,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 487.99999999999994,
-                "y": 470.66666666666663
+                "x": 486.66666666666663,
+                "y": 469.3333333333333
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/14_kitchen/14_kitchen.tmx": {
@@ -29,6 +29,14 @@
             "viewCenter": {
                 "x": 395,
                 "y": 301
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/15_cellar/15_cellar.tmx": {
+            "scale": 1,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 419,
+                "y": 561
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/2_spooky_hallway/2_spooky_hallway.tmx": {
@@ -43,8 +51,8 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 407.99999999999994,
-                "y": 454.66666666666663
+                "x": 406.66666666666663,
+                "y": 453.3333333333333
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/4_south_hall/4_south_hall.tmx": {
@@ -78,6 +86,10 @@
                 "x": 672,
                 "y": 562
             }
+        },
+        "Temporary Tiles 1.tsx": {
+            "scaleInDock": 0.4,
+            "scaleInEditor": 1
         }
     },
     "last.imagePath": "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/1_office",
@@ -86,9 +98,15 @@
     "map.tileHeight": 48,
     "map.tileWidth": 48,
     "openFiles": [
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/3_tut_puzzle_room/3_tut_puzzle_room.tmx"
     ],
     "project": "1_office.tiled-project",
     "recentFiles": [
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/3_tut_puzzle_room/3_tut_puzzle_room.tmx",
+        "Temporary Tiles 1.tsx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/13_dining_hall/13_dining_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/14_kitchen/14_kitchen.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/15_cellar/15_cellar.tmx",
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx",
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx",
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/5_spooky_lab/5_spooky_lab.tmx",
