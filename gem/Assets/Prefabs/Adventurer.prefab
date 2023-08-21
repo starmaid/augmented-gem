@@ -44,9 +44,10 @@ GameObject:
   - component: {fileID: 3088793664944912333}
   - component: {fileID: 8597412193352805235}
   - component: {fileID: 1603981745020494065}
-  - component: {fileID: 3138648031057728495}
   - component: {fileID: 5086456985038723414}
   - component: {fileID: 7338107951443676206}
+  - component: {fileID: 3322285920812306341}
+  - component: {fileID: 2325543898489714062}
   m_Layer: 2
   m_Name: Adventurer
   m_TagString: Player
@@ -69,7 +70,7 @@ Transform:
   - {fileID: 6890563357448919922}
   - {fileID: 929502999562543571}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &127654469800451815
 SpriteRenderer:
@@ -112,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 675060193, guid: 2c8bc17f847618cfdab3bc8640c043be, type: 3}
+  m_Sprite: {fileID: -1329563581, guid: 6e291e373f026631199ea5fa5966e3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,7 +136,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: e1987ac45fdb27488b7d6671d19fdfbc, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -201,24 +202,6 @@ MonoBehaviour:
   m_DefaultActionMap: Adventurer
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3138648031057728495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7686102325522762273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56b5f5eb573a2f007bf9fd51a290f593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  walkSpeed: 2
-  slowSpeed: 0.5
-  rayPoint: {fileID: 4982024713482734625}
-  rayDistance: 1
-  interactSignal: {fileID: 11400000, guid: 380316a99f33be246bb0885227f42397, type: 2}
 --- !u!61 &5086456985038723414
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -276,22 +259,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b043ecb12103ba4bb2f1a525dcf8892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  signalObject: {fileID: 11400000, guid: 7d9fa85b6863b2eebb2d05b533c4d9e7, type: 2}
+  signalObject: {fileID: 11400000, guid: 7afdaf4e5fbf98f84b9d5c1fc3e00801, type: 2}
   signalEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3138648031057728495}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: fixState
-        m_Mode: 1
+      - m_Target: {fileID: 3322285920812306341}
+        m_TargetAssemblyTypeName: PlayerStateManager, Assembly-CSharp
+        m_MethodName: set_IsInteractEnd
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3322285920812306341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686102325522762273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54ee1c163396ecf688465e2a495caee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _walkSpeed: 2
+  _slowSpeed: 0.5
+  _rayPoint: {fileID: 4982024713482734625}
+  _rayDistance: 1
+  InteractSignal: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
+--- !u!82 &2325543898489714062
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7686102325522762273}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 923f757b90f4c4147be9995219f3ba72, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7725327110493347131
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,5 +463,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0

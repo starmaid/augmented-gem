@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//DEPRECATED. use PlayerStateManager instead
 public enum PlayerState
 {   
     //defines different types of player states
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     public SignalSO interactSignal;
 
+    private AudioSource myAudioSource;
+
     private void Awake(){
         playerControls = new PlayerControls();  
         mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -58,13 +61,14 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>(); 
         currentSpeed = walkSpeed;
         myCollider = GetComponent<Collider2D>();
+        myAudioSource = GetComponent<AudioSource>();
 
         playerControls.Adventurer.Transmute.performed += ctxt => OnTransmute();
         playerControls.Adventurer.Transmute.canceled += _ =>{
             animator.SetBool("transmuting",false);
             currentState = PlayerState.walk;
         };
-        playerControls.Adventurer.Interact.canceled += _ =>{
+        playerControls.Adventurer.Push.canceled += _ =>{
             animator.SetBool("pushing",false);
             currentSpeed = walkSpeed;
             currentState = PlayerState.walk;
@@ -76,24 +80,27 @@ public class PlayerMovement : MonoBehaviour
     //OnXXX functions are called once after the action is activated (through user input)
     private void OnMove(InputValue value)
     {
-        if (! StoryManager.GetInstance().dialogueIsPlaying)
-        {
+        // if (! StoryManager.GetInstance().dialogueIsPlaying)
+        // {
             change = value.Get<Vector2>();
-        }
-        else
-        {
+        // }
+        // else
+        // {
 
-        }
+        // }
     }
 
 
     private void OnTransmute(){
-        animator.SetBool("moving", false);
-        animator.SetBool("transmuting",true);
-        currentState = PlayerState.transmute;
+        if (currentState == PlayerState.walk || currentState == PlayerState.transmute){
+            Debug.Log("we're in hackers");
+            animator.SetBool("moving", false);
+            animator.SetBool("transmuting",true);
+            currentState = PlayerState.transmute;
+        }
     }
 
-    private void OnInteract(){
+    void OnInteract(){
         // checkObject() ACTIVATES things. note to self.
         // this is kind of bad form + oblique
         // but its fine.
@@ -105,6 +112,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
+    }
+
+    public void EndInteract(){
+        animator.SetBool("pushing",false);
+        currentSpeed = walkSpeed;
+        currentState = PlayerState.walk;
+        myAxis = MovementAxis.all;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void OnPush(){
@@ -198,8 +213,7 @@ public class PlayerMovement : MonoBehaviour
     // Check PlayerState and determine what to do
     void FixedUpdate()
     {
-        //Debug.Log("state: " + currentState);
-        // Debug.Log("state: " + currentState);
+        Debug.Log("state: " + currentState);
         if (currentState == PlayerState.interact)
         {
             animator.SetBool("moving", false);
@@ -241,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     //Handles Move Animation
-    void UpdateAnimationAndMove()
+    public void UpdateAnimationAndMove()
     {
         if (change != Vector3.zero)
         {
@@ -266,6 +280,14 @@ public class PlayerMovement : MonoBehaviour
             transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change
         //make sure framerate drop doesnt affect distance
         );
+        
+    }
+
+    void PlayWalkSound()
+    {
+        if (myAudioSource != null){
+            myAudioSource.Play();
+        }
     }
 
 }

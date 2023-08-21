@@ -23,12 +23,12 @@ public class TriggerLocation : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
-            if (endOverlapSignal != null)
+            if (overlapSignal != null)
             {
                 overlapSignal.Raise();
             }
 
-            if (knotName != null)
+            if (knotName != null && knotName != "")
             {
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }

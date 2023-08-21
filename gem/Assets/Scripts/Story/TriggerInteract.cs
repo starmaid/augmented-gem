@@ -25,7 +25,7 @@ public class TriggerInteract : MonoBehaviour
         // Debug.Log("entered InteractTrigger(), playerInRange is "+ playerInRange);
         if (!StoryManager.GetInstance().dialogueIsPlaying)
         {
-            Debug.Log("before testing");
+            // Debug.Log("before testing");
             
             if (interactSignal != null)
             {
@@ -38,7 +38,7 @@ public class TriggerInteract : MonoBehaviour
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
         }
-        print(playerInRange);
+        // Debug.Log("playerInRange:" + playerInRange);
     }
 
 
@@ -49,7 +49,7 @@ public class TriggerInteract : MonoBehaviour
             playerInRange = true;
             if (overlapSignal != null)
             {
-                Debug.Log("overlapping! " + knotName);
+                // Debug.Log("overlapping! " + knotName);
                 overlapSignal.Raise();
             }
         }
@@ -62,7 +62,7 @@ public class TriggerInteract : MonoBehaviour
             playerInRange = false;
             if (endOverlapSignal != null)
             {
-                 Debug.Log("ending overlap!");
+                //  Debug.Log("ending overlap!");
                 endOverlapSignal.Raise();
             }
         }
