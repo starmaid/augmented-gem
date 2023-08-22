@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 2
   _slowSpeed: 0.5
+  StartingPosition: {fileID: 11400000, guid: cf0e20e6f9cef9e7694df39d2940d7ba, type: 2}
   _rayPoint: {fileID: 4982024713482734625}
   _rayDistance: 1
   InteractSignal: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
