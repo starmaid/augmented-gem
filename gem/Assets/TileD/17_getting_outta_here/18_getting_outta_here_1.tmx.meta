@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: beac0a671be2cb148a7162f6dc132301
+guid: 78f8256935b47c5408bab32dddd3afba
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -10,9 +10,7 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: 1fa25d03934ea624a82bf2fcee6f0873, type: 3}
   missingFiles: []
   errors: []
-  warnings:
-  - Pixels Per Unit mismatch between map (100) and tileset '../1_office/Temporary
-    Tiles 1.tsx' (48)
+  warnings: []
   missingSortingLayers: []
   missingLayers: []
   missingTags: []

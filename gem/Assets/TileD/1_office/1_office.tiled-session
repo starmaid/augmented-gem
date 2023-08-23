@@ -3,81 +3,122 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/Tilesets/Katos_tiles_1.tsx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "1_office.tmx": {
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 516,
-                "y": 466.66666666666663
+                "x": 506.66666666666663,
+                "y": 517.3333333333333
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/12_east_hall/12_east_hall.tmx": {
+            "scale": 0.4,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 700,
+                "y": 897.5
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/13_dining_hall/13_dining_hall.tmx": {
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 487.99999999999994,
-                "y": 470.66666666666663
+                "x": 483.99999999999994,
+                "y": 520
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/14_kitchen/14_kitchen.tmx": {
-            "scale": 1,
-            "selectedLayer": 3,
+            "scale": 0.75,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 395,
-                "y": 301
+                "x": 439.99999999999994,
+                "y": 298.66666666666663
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/15_cellar/15_cellar.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 520,
+                "y": 510.66666666666663
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/17_getting_outta_here/18_getting_outta_here_1.tmx": {
+            "scale": 0.45652777777777775,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 718.4666869485853,
+                "y": 944.0827502281716
+            }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/18_getting_outta_here/18_getting_outta_here_1.tmx": {
+            "scale": 0.45652777777777775,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 716.2762397322787,
+                "y": 1047.0337693945849
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/2_spooky_hallway/2_spooky_hallway.tmx": {
             "scale": 0.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 962,
-                "y": 884
+                "x": 838,
+                "y": 764
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/3_tut_puzzle_room/3_tut_puzzle_room.tmx": {
-            "scale": 0.75,
+            "scale": 0.8613,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 407.99999999999994,
-                "y": 454.66666666666663
+                "x": 402.8793683966098,
+                "y": 327.41205154998266
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/4_south_hall/4_south_hall.tmx": {
-            "scale": 0.41562499999999997,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 729.0225563909775,
-                "y": 719.3984962406016
+                "x": 718,
+                "y": 672
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/5_spooky_lab/5_spooky_lab.tmx": {
             "scale": 0.45652777777777775,
-            "selectedLayer": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 746.942500760572,
-                "y": 718.4666869485853
+                "x": 742.5616063279587,
+                "y": 714.085792515972
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx": {
             "scale": 0.45652777777777775,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 720.657134164892,
-                "y": 720.6571341648921
+                "x": 711.8953452996653,
+                "y": 714.085792515972
             }
         },
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx": {
             "scale": 0.5,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 672,
-                "y": 562
+                "x": 658,
+                "y": 548
             }
+        },
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/Tilesets/Katos_tiles_1.tsx": {
+            "scaleInDock": 0.4,
+            "scaleInEditor": 1
+        },
+        "Temporary Tiles 1.tsx": {
+            "scaleInDock": 0.4,
+            "scaleInEditor": 1
         }
     },
     "last.imagePath": "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/1_office",
@@ -86,15 +127,23 @@
     "map.tileHeight": 48,
     "map.tileWidth": 48,
     "openFiles": [
+        "Temporary Tiles 1.tsx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/Tilesets/Katos_tiles_1.tsx"
     ],
     "project": "1_office.tiled-project",
     "recentFiles": [
-        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx",
-        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx",
-        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/5_spooky_lab/5_spooky_lab.tmx",
-        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/4_south_hall/4_south_hall.tmx",
+        "Temporary Tiles 1.tsx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/Tilesets/Katos_tiles_1.tsx",
+        "1_office.tmx",
         "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/2_spooky_hallway/2_spooky_hallway.tmx",
-        "1_office.tmx"
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/3_tut_puzzle_room/3_tut_puzzle_room.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/4_south_hall/4_south_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/5_spooky_lab/5_spooky_lab.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/8_west_hall/8_west_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/9_bedroom/9_bedroom.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/12_east_hall/12_east_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/13_dining_hall/13_dining_hall.tmx",
+        "C:/Users/glaci/Desktop/Unity stuff ig/augmented-gem/gem/Assets/TileD/14_kitchen/14_kitchen.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
