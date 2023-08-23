@@ -149,8 +149,14 @@ The adventurer collects the gem.
     "See, I told you how reliable I can be. Now, just follow my lead..." ->END
 }
 
-
-
+=== knot_kato ===
+aaaaaaaaaaaaaaaaa #portrait:gem_angry
+* option one 
+    the lion goes aaaaaa back
+-> DONE
+* option two
+    the lion stares at you in confusion
+-> DONE
 
 
 
