@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using SuperTiled2Unity.Editor;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
