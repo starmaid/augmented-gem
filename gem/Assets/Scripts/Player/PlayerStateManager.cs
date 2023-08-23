@@ -25,6 +25,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] float _walkSpeed;
     [SerializeField] float _slowSpeed;
     private float _currentSpeed;
+    public VectorValue StartingPosition;
 
     //ANIMATION
     private Animator _animator;
@@ -82,6 +83,7 @@ public class PlayerStateManager : MonoBehaviour
         _currentSpeed = _walkSpeed;
         _myCollider = GetComponent<Collider2D>();
         _myAudioSource = GetComponent<AudioSource>();
+        transform.position = StartingPosition.initialValue;
     }
 
     void Start(){
