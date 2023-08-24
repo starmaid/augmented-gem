@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overlapSignal: {fileID: 11400000, guid: a2d380a4f8c08b0b3ae054192c4c1439, type: 2}
   endOverlapSignal: {fileID: 11400000, guid: 2def20a354c0aa2b4b5418a6e268f71b, type: 2}
-  interactSignal: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
+  interactSignal: {fileID: 0}
   knotName: Lab_Desk
 --- !u!82 &4661250642064670157
 AudioSource:

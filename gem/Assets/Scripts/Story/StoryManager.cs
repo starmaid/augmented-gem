@@ -4,6 +4,8 @@ using UnityEngine;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
+
 
 
 public class StoryManager : MonoBehaviour
@@ -55,6 +57,11 @@ public class StoryManager : MonoBehaviour
 
     private StoryVariables dialogueVariables;
     private InkExternalFunctions inkExternalFunctions;
+
+    string currentLayout;
+    string currentPortrait;
+
+    int stateNameHash;
 
     private void Awake()
     {
@@ -123,20 +130,22 @@ public class StoryManager : MonoBehaviour
 
     public void TryContinue()
     {
-        //print("raised contuinue");
+        print("raised contuinue");
 
         if (!dialogueIsPlaying)
         {
             return;
         }
 
+        if (!canContinueToNextLine)
+        {
+            trySkipDialogue = true;
+        }
+
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
             ContinueStory();
-        } else
-        {
-            trySkipDialogue = true;
         }
     }
 
@@ -145,14 +154,15 @@ public class StoryManager : MonoBehaviour
         print("starting " + knotName);
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
+        trySkipDialogue = false;
         dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
 
         // reset portrait, layout, and speaker
         //displayNameText.text = "???";
-        // portraitAnimator.Play("default");
-        layoutAnimator.Play("none");
+        portraitAnimator.Play("default");
+        //layoutAnimator.Play("none");
 
         currentStory.ChoosePathString(knotName);
         ContinueStory();
@@ -160,8 +170,12 @@ public class StoryManager : MonoBehaviour
 
     public void EnterDialogueMode(string knotName, Animator emoteAnimator)
     {
+        // this overload is currently unused. It allows you to make a character
+        // like jump or something on screen when it talks.
+
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
+        trySkipDialogue = false;
         dialoguePanel.SetActive(true);
     
         dialogueVariables.StartListening(currentStory);
@@ -170,7 +184,7 @@ public class StoryManager : MonoBehaviour
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
         // portraitAnimator.Play("default");
-        layoutAnimator.Play("none");
+        //layoutAnimator.Play("none");
     
         currentStory.ChoosePathString(knotName);
         ContinueStory();
@@ -213,6 +227,7 @@ public class StoryManager : MonoBehaviour
                 // handle tags
                 HandleTags(currentStory.currentTags);
                 displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
+                
             }
         }
         else
@@ -314,10 +329,10 @@ public class StoryManager : MonoBehaviour
             else
             {
                 // sound clip
-                int randomIndex = Random.Range(0, dialogueTypingSoundClips.Length);
+                int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
                 soundClip = dialogueTypingSoundClips[randomIndex];
                 // pitch
-                audioSource.pitch = Random.Range(minPitch, maxPitch);
+                audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             }
 
             // play sound
@@ -354,12 +369,26 @@ public class StoryManager : MonoBehaviour
                     displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
-                    if (tagValue == "none"){
-                        layoutAnimator.Play(tagValue);
-                    }else{
-                        layoutAnimator.Play("right"); //does this part run if theres no portrait tags?
-                        portraitAnimator.Play(tagValue);  
+                    // this saves users from having to use the layout tag:
+                    // they can just pass "portrait:none" and it will work.
+
+                    if (tagValue.Equals("none"))
+                    {
+                        // user wants no portrait to be visible.
+                        currentLayout = "none";
+                        currentPortrait = "default";
+                    } else
+                    {
+                        // use the "right" layout, show a portrait from the tag
+                        currentLayout = "right";
+                        currentPortrait = tagValue;
                     }
+
+                    layoutAnimator.Play(currentLayout);
+                    portraitAnimator.Play(currentPortrait);
+
+                    print("played " + currentLayout);
+
                     break;
                 case LAYOUT_TAG:
                     layoutAnimator.Play(tagValue);
@@ -418,6 +447,8 @@ public class StoryManager : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             print("made choice " + choiceIndex);
+            // discard the continue
+            String answer = currentStory.Continue();
             ContinueStory();
         }
     }

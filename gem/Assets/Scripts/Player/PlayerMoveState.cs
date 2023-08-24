@@ -15,9 +15,14 @@ public class PlayerMoveState : PlayerBaseState
         if (_context.IsTransmutingPressed)
             SwitchState(_states.Transmute());
         else if (_context.IsInteractingPressed && _context.CheckObject() == "interactable"){
+            // if we press interact, we need to call the interact method of our context
+            _context._interactObj.InteractTrigger();
+            
+        } else if (StoryManager.GetInstance().dialogueIsPlaying) {
+            // if we step on a story tile, lets just go straight into interact state
             SwitchState(_states.Interact());
-        }
-        else if (_context.IsPushingPressed && _context.CheckObject() == "pushable"){
+
+        } else if (_context.IsPushingPressed && _context.CheckObject() == "pushable"){
             SwitchState(_states.Push());
 
         }

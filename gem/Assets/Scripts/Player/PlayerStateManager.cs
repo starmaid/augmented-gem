@@ -42,7 +42,8 @@ public class PlayerStateManager : MonoBehaviour
 
     //INTERACTING OBJECTS
     private Pushable _pushedObj;
-    
+    public TriggerInteract _interactObj;
+
     //AUDIO
     private AudioSource _myAudioSource;
     
@@ -137,10 +138,45 @@ public class PlayerStateManager : MonoBehaviour
 
     void Interact(InputAction.CallbackContext context){
         _isInteractingPressed = context.ReadValueAsButton();
-        if (_isInteractingPressed && CheckObject() == "interactable") {
-            InteractSignal.Raise();
-        }
 
+        // only call on key DOWN
+        if (_isInteractingPressed)
+        {
+            // When walking around, this should check the object to see if we can do something
+            // Usually enter dialogue mode
+            InteractSignal.Raise();
+            
+
+        }
+        
+    }
+
+    //CHECKS IF THE ADV CAN INTERACT WITH A NEAREST ITEM
+    public String CheckObject()
+    {
+        String tag = "";
+        Vector2 startPos = _rayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"), _animator.GetFloat("moveY")) * _rayDistance;
+        RaycastHit2D hit = Physics2D.Linecast(startPos, endPos, 1 << LayerMask.NameToLayer("Default"));
+        if (hit.collider != null)
+        {
+            // Debug.DrawLine(startPos,endPos,Color.red);
+            if (hit.collider.CompareTag("interactable"))
+            {
+                tag = "interactable";
+                _interactObj = hit.collider.GetComponent<TriggerInteract>();
+            }
+            if (hit.collider.CompareTag("pushable"))
+            {
+                tag = "pushable";
+                _pushedObj = hit.collider.GetComponent<Pushable>();
+            }
+            return tag;
+        }
+        else
+        {
+            return tag;
+        }
     }
 
     private void Push(InputAction.CallbackContext context){
@@ -151,33 +187,7 @@ public class PlayerStateManager : MonoBehaviour
         //TODO
     }
 
-    //CHECKS IF THE ADV CAN INTERACT WITH A NEAREST ITEM
-    public String CheckObject(){
-        String tag = "";
-        Vector2 startPos = _rayPoint.transform.position;
-        Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"),_animator.GetFloat("moveY")) * _rayDistance;
-        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
-        if (hit.collider!=null){
-            // Debug.DrawLine(startPos,endPos,Color.red);
-            if(hit.collider.CompareTag("interactable")){
-                tag = "interactable";
-
-                TriggerInteract tryTrigger = hit.collider.GetComponent<TriggerInteract>();
-                if (tryTrigger != null)
-                {
-                    tryTrigger.InteractTrigger();
-                }
-            }
-            if(hit.collider.CompareTag("pushable")){
-                tag = "pushable";
-                _pushedObj = hit.collider.GetComponent<Pushable>();
-            }
-            return tag;
-        }
-        else{
-            return tag;
-        }
-    }
+    
 
     //ENABLES AND DISABLES PLAYERCONTROLS
     void OnEnable(){

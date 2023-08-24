@@ -19,6 +19,8 @@ public class TriggerInteract : MonoBehaviour
         playerInRange = false;
     }
 
+    public bool GetPlayerInRange() { return playerInRange; }
+
     //instead of how its written here, have this func trigger when it hears interactSignal raise from player
     public void InteractTrigger()
     {
