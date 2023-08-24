@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^﻿","\n",["done",{"#f":5,"#n":"g-0"}],null],"done",{"global decl":["ev",0,{"VAR=":"friendship"},{"list":{"inventory.torch":1}},{"VAR=":"inventory"},"str","^Lab","/str",{"VAR=":"w_current_level"},0,{"VAR=":"w_secrets_found"},"/ev","end",null],"#f":1}],"listDefs":{"inventory":{"torch":1,"sword":2,"cool_rock":3,"ancient_scroll":4}}}
