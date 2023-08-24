@@ -21,33 +21,42 @@ public class Pushable : MonoBehaviour
         // IsPushed = false;
     }
 
-    // void OnCollisionStay2D(Collision2D other)
-    // {
-    //     Rigidbody2D pusher = other.gameObject.GetComponent<Rigidbody2D>();
-    //     if (_isPushed){
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        Debug.Log(this.name + ": pushable touched sth");
+        if (other.gameObject.tag != "Player"){
+            Debug.Log("pushable touched definitely not player");
+        }
+        // Rigidbody2D pusher = other.gameObject.GetComponent<Rigidbody2D>();
+        // if (_isPushed){
 
-    //     }
-    //     // PlayerBaseState hm = context.CurrentState;
-    //     // if (other.gameObject.tag == "Player" && context.CurrentState == PlayerPushState)
-    //     // {
-    //         // Debug.Log("lets roll");
-    //         // Vector3 diff = pusher.transform.position - transform.position;
-    //         // _myRigidbody.MovePosition
-    //         // (
-    //         //     transform.position + 
-    //         // //make sure framerate drop doesnt affect distance
-    //         // );
-    //     // }
+        // }
+        // // PlayerBaseState hm = context.CurrentState;
+        // // if (other.gameObject.tag == "Player" && context.CurrentState == PlayerPushState)
+        // // {
+        //     // Debug.Log("lets roll");
+        //     // Vector3 diff = pusher.transform.position - transform.position;
+        //     // _myRigidbody.MovePosition
+        //     // (
+        //     //     transform.position + 
+        //     // //make sure framerate drop doesnt affect distance
+        //     // );
+        // // }
 
-    //     _isPushed = true;
-    // }
+        // _isPushed = true;
+    }
 
     public void MoveObj(float currentSpeed, Vector3 change){
         // if (IsPushed){
-            _myRigidbody.MovePosition
-            (
-                transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change
+            // _myRigidbody.MovePosition
+            // (
+            //     transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change
+            // );
+            _myRigidbody.MovePosition(
+               transform.position + 2 * currentSpeed * Time.fixedDeltaTime * change  
             );
+
+        Debug.Log("did it teehee");
         // }
     }
     
