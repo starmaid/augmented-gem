@@ -448,7 +448,7 @@ public class StoryManager : MonoBehaviour
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             print("made choice " + choiceIndex);
             // discard the continue
-            String answer = currentStory.Continue();
+            // String answer = currentStory.Continue();
             ContinueStory();
         }
     }

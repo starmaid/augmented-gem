@@ -39,12 +39,17 @@ public class PlayerMoveState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        UpdateAnimationAndMove();
-        CheckSwitchState();    
+        // if (_context.IsActive){
+            UpdateAnimationAndMove();
+            CheckSwitchState();  
+        // }else{
+        //     _context.MyAnimator.SetBool("sit",true);
+        // }
     }
 
     public void UpdateAnimationAndMove()
-    {
+    { 
+
         if (_context.Change != Vector3.zero)
         {
             _context.MoveCharacter();

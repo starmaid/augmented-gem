@@ -751,6 +751,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Gem",
+            "id": "5ec478aa-5ca5-48fd-b92f-5279fdf25e4e",
+            "actions": [
+                {
+                    "name": "Wiggle",
+                    "type": "Button",
+                    "id": "2936115b-cf07-4c7b-bc04-311bc425fe86",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold(duration=0.2)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cce72d57-6bde-4b12-afe5-c6bd07b87f04",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Wiggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
