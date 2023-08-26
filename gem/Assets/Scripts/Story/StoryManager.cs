@@ -115,15 +115,17 @@ public class StoryManager : MonoBehaviour
 
     private void CallSignalFromInk(string signalName)
     {
-        Debug.Log("Searching for " + signalName);
+        //Debug.Log("Searching for " + signalName);
         foreach (SignalSO inkSignal in inkCallableSignals)
         {
             if (signalName.Equals(inkSignal.name))
             {
-                Debug.Log("Raising");
+                //Debug.Log("Raising");
                 inkSignal.Raise();
+                return;
             }
         }
+        Debug.LogError("Signal " + signalName + " not found.");
     }
 
     private void InitializeAudioInfoDictionary()
