@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,6 +51,11 @@ public class PlayerStateManager : MonoBehaviour
     
     //SIGNALS
     public SignalSO InteractSignal;
+
+    //HIGHLIGHTS
+    private SpriteSelectComponent _spriteSelectComponent;
+
+
     //GETTERS AND SETTERS
     public PlayerBaseState CurrentState{get{return _currentState;} set{_currentState = value;}}
     public PlayerStateFactory States{get{return _states;}}
@@ -117,6 +123,24 @@ public class PlayerStateManager : MonoBehaviour
             else if(hit.collider.CompareTag("pushable")){
                 Debug.DrawLine(startPos,endPos,Color.red);
             }
+
+            // sorry this is backwards but we have to check if the new highlight
+            // is different from the old highlighted
+            // not-null component and a null new hit component will still not equal
+            // so this will still disable
+            if (_spriteSelectComponent != null && !_spriteSelectComponent.Equals(hit.collider.gameObject.GetComponent<SpriteSelectComponent>())) {
+                _spriteSelectComponent.tryDisable();
+            }
+            
+            // try to get the component
+            _spriteSelectComponent = hit.collider.gameObject.GetComponent<SpriteSelectComponent>();
+
+            // highlight it
+            if (_spriteSelectComponent != null) 
+            {
+                _spriteSelectComponent.tryEnable();
+            }
+
             // Debug.Log("hits: " + hit.collider.name);
             // else{
             //     Debug.DrawLine(startPos,endPos,Color.white);
@@ -124,6 +148,14 @@ public class PlayerStateManager : MonoBehaviour
         }
         else{
             Debug.DrawLine(startPos,endPos,Color.green);
+
+            // if we have something loaded, but we didnt hit anything this update
+            // disable and remove it.
+            if (_spriteSelectComponent != null)
+            {
+                _spriteSelectComponent.tryDisable();
+                _spriteSelectComponent = null;
+            }
         }
     }
     //ACTIONS
