@@ -144,10 +144,16 @@ public class StoryManager : MonoBehaviour
         // waits for a period of time
         // then tries to continue. skips to end of text first.
         // remember, only works if there isnt a choice or something.
-        print("Starting gotonext");
+        
+        // if you wanted, you could put a delay here to let the text finish typing
+
+        // this line will finish typing
         trySkipDialogue = true;
+
+        // this will wait
         yield return new WaitForSeconds(delayTime);
-        print("trying to continue");
+        
+        // this line will take you to the next one        
         TryContinue();
     }
 
