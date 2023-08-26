@@ -38,6 +38,8 @@ public class StoryManager : MonoBehaviour
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
 
+    // list of signals you can call from ink
+    // you call them by name
     [Header("Callable Signals")]
     [SerializeField] private List<SignalSO> inkCallableSignals;
 
@@ -80,6 +82,8 @@ public class StoryManager : MonoBehaviour
         currentAudioInfo = defaultAudioInfo;
 
         // register listener
+        // in the main ink file, you need this line:
+        // EXTERNAL callSignal(signalName)
         currentStory.BindExternalFunction("callSignal", (string signalName) =>
         {
             CallSignalFromInk(signalName);
@@ -122,9 +126,11 @@ public class StoryManager : MonoBehaviour
             {
                 //Debug.Log("Raising");
                 inkSignal.Raise();
+                // end now, dont keep searching.
                 return;
             }
         }
+        // if we never raised one, we didnt find it.
         Debug.LogError("Signal " + signalName + " not found.");
     }
 
