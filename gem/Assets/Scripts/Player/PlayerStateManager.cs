@@ -30,6 +30,7 @@ public class PlayerStateManager : MonoBehaviour
     //ANIMATION
     private Animator _animator;
     private SpriteRenderer _mySpriteRenderer;
+    // private bool _isActive;
 
     //PHYSICS & COLLISIONS
     private Rigidbody2D _myRigidbody;
@@ -64,6 +65,7 @@ public class PlayerStateManager : MonoBehaviour
     public float CurrentSpeed{get{return _currentSpeed;} set{ _currentSpeed = value;}}
     public Animator MyAnimator{get{return _animator;}}
     public SpriteRenderer MySpriteRenderer{get{return _mySpriteRenderer;}}
+    // public bool IsActive {get{return _isActive;} set{_isActive = value;}}
     public Rigidbody2D MyRigidBody{get{return _myRigidbody;}}
     public Vector3 Change{get{return _change;} set{_change = value;}}
     public Collider2D MyCollider{get{return _myCollider;} set{_myCollider = value;}}
@@ -80,6 +82,7 @@ public class PlayerStateManager : MonoBehaviour
         _states = new PlayerStateFactory(this);
         _currentState = _states.Move();//creates interact state and pass it in thru factory
         _currentState.EnterState(); //passing in context
+        // _isActive = true;
         _myRigidbody = GetComponent<Rigidbody2D>(); 
         _currentSpeed = _walkSpeed;
         _myCollider = GetComponent<Collider2D>();
@@ -214,5 +217,26 @@ public class PlayerStateManager : MonoBehaviour
         if (_myAudioSource != null){
             _myAudioSource.Play();
         }
+    }
+
+    public void SwitchToGemMode(){
+        // SeizeAdvControl();
+        _playerControls.Gem.Enable();
+        // _currentState = _states.GemWiggle();
+        // playerInput.actions.FindActionMap("Transitional").Enable();
+    }
+
+    public void SwitchToAdvMode(){
+        _playerControls.Gem.Disable();
+        ReturnAdvControl();
+        // _currentState = _states.Move();
+    }
+
+    public void SeizeAdvControl(){
+        _playerControls.Adventurer.Disable();
+    }
+
+    public void ReturnAdvControl(){
+        _playerControls.Adventurer.Enable();
     }
 }

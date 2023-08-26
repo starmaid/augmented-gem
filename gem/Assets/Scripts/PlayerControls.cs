@@ -773,6 +773,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gem"",
+            ""id"": ""5ec478aa-5ca5-48fd-b92f-5279fdf25e4e"",
+            ""actions"": [
+                {
+                    ""name"": ""Wiggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""2936115b-cf07-4c7b-bc04-311bc425fe86"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""cce72d57-6bde-4b12-afe5-c6bd07b87f04"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Wiggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -799,6 +827,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        // Gem
+        m_Gem = asset.FindActionMap("Gem", throwIfNotFound: true);
+        m_Gem_Wiggle = m_Gem.FindAction("Wiggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1098,6 +1129,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Gem
+    private readonly InputActionMap m_Gem;
+    private List<IGemActions> m_GemActionsCallbackInterfaces = new List<IGemActions>();
+    private readonly InputAction m_Gem_Wiggle;
+    public struct GemActions
+    {
+        private @PlayerControls m_Wrapper;
+        public GemActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Wiggle => m_Wrapper.m_Gem_Wiggle;
+        public InputActionMap Get() { return m_Wrapper.m_Gem; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GemActions set) { return set.Get(); }
+        public void AddCallbacks(IGemActions instance)
+        {
+            if (instance == null || m_Wrapper.m_GemActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GemActionsCallbackInterfaces.Add(instance);
+            @Wiggle.started += instance.OnWiggle;
+            @Wiggle.performed += instance.OnWiggle;
+            @Wiggle.canceled += instance.OnWiggle;
+        }
+
+        private void UnregisterCallbacks(IGemActions instance)
+        {
+            @Wiggle.started -= instance.OnWiggle;
+            @Wiggle.performed -= instance.OnWiggle;
+            @Wiggle.canceled -= instance.OnWiggle;
+        }
+
+        public void RemoveCallbacks(IGemActions instance)
+        {
+            if (m_Wrapper.m_GemActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGemActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GemActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GemActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GemActions @Gem => new GemActions(this);
     public interface ITransitionalActions
     {
         void OnPause(InputAction.CallbackContext context);
@@ -1122,5 +1199,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+    }
+    public interface IGemActions
+    {
+        void OnWiggle(InputAction.CallbackContext context);
     }
 }
