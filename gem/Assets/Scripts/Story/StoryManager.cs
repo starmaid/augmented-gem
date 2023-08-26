@@ -38,6 +38,9 @@ public class StoryManager : MonoBehaviour
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
 
+    [Header("Callable Signals")]
+    [SerializeField] private List<SignalSO> inkCallableSignals;
+
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
 
@@ -75,6 +78,12 @@ public class StoryManager : MonoBehaviour
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
+
+        // register listener
+        currentStory.BindExternalFunction("callSignal", (string signalName) =>
+        {
+            CallSignalFromInk(signalName);
+        });
     }
 
     public static StoryManager GetInstance()
@@ -100,6 +109,21 @@ public class StoryManager : MonoBehaviour
         }
 
         InitializeAudioInfoDictionary();
+
+        
+    }
+
+    private void CallSignalFromInk(string signalName)
+    {
+        Debug.Log("Searching for " + signalName);
+        foreach (SignalSO inkSignal in inkCallableSignals)
+        {
+            if (signalName.Equals(inkSignal.name))
+            {
+                Debug.Log("Raising");
+                inkSignal.Raise();
+            }
+        }
     }
 
     private void InitializeAudioInfoDictionary()

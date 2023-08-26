@@ -5,6 +5,7 @@ INCLUDE locations/Lab.ink
 // main.ink
 // contains global variables
 
+EXTERNAL callSignal(signalName)
 
 
 // character attributes
