@@ -40,7 +40,7 @@ public class StoryVariables
             VariablesToStory(globalVariablesStory);
             // NOTE: eventually, you'd want to replace this with an actual save/load method
             // rather than using PlayerPrefs.
-            PlayerPrefs.SetString(saveVariablesKey, globalVariablesStory.state.ToJson());
+            // PlayerPrefs.SetString(saveVariablesKey, globalVariablesStory.state.ToJson());
         }
     }
 

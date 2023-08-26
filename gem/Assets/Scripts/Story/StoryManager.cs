@@ -5,8 +5,8 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
-
-
+using UnityEngine.Rendering;
+using System.IO;
 
 public class StoryManager : MonoBehaviour
 {
@@ -15,8 +15,6 @@ public class StoryManager : MonoBehaviour
 
     [Header("Main Ink File")]
     [SerializeField] private TextAsset mainInkAsset;
-
-    private Story inkStory;
 
     [Header("Story UI")]
     [SerializeField] private SignalSO endInteractSignal;
@@ -468,7 +466,72 @@ public class StoryManager : MonoBehaviour
     // Depending on your game, you may want to save variable state in other places.
     public void OnApplicationQuit()
     {
+        // disabling this because we are using files and manual saves.
+        //dialogueVariables.SaveVariables();
+        SaveFile();
+    }
+
+    public List<string> EnumerateSaves()
+    {
+        // function to get list of save files
+        // to then display them in a menu or something
+        // im realizing i should just focus on making one save file work
+        // so this is UNFINISHED!!!
+
+        List<string> results = new List<string>();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            // webgl doesnt support saves well
+            // and if we update the game also loses all saves
+            // easier to just say download the game.
+            results.Add("***Save data is not supported on web. Please consider downloading the game!");
+            return results;
+        }
+        
+
+        string path = Application.persistentDataPath;
+
+        DirectoryInfo dir = new DirectoryInfo(path);
+        FileInfo[] info = dir.GetFiles("*.json");
+
+        foreach (FileInfo f in info)
+        {
+            print("Found: " + f.Name);
+            results.Add(f.Name);
+        }
+
+        return results;
+
+    }
+
+    public void SaveFile()
+    {
+        // load any unity variables back into ink
         dialogueVariables.SaveVariables();
+
+        // windows + windows editor
+        // %userprofile%\AppData\LocalLow\<companyname>\<productname>
+        // linux
+        // $HOME/.config/unity3d
+        // as i make these updates, i have changed the companyname to
+        // Fragile Ebro Studio
+        string path = Application.persistentDataPath + "/savedata.json";
+
+        string storystate = currentStory.state.ToJson();
+
+        // write to json file
+        File.WriteAllText(path, storystate);
+
+    }
+
+    public void LoadFile()
+    {
+        string path = Application.persistentDataPath + "/savedata.json";
+
+        string storystate = File.ReadAllText(path);
+
+        currentStory.state.LoadJson(storystate);
     }
 
 }
