@@ -88,6 +88,11 @@ public class StoryManager : MonoBehaviour
         {
             CallSignalFromInk(signalName);
         });
+
+        currentStory.BindExternalFunction("goToNext", (int delayTime) =>
+        {
+            StartCoroutine(GoToNext(delayTime));
+        });
     }
 
     public static StoryManager GetInstance()
@@ -132,6 +137,18 @@ public class StoryManager : MonoBehaviour
         }
         // if we never raised one, we didnt find it.
         Debug.LogError("Signal " + signalName + " not found.");
+    }
+
+    private IEnumerator GoToNext(int delayTime)
+    {
+        // waits for a period of time
+        // then tries to continue. skips to end of text first.
+        // remember, only works if there isnt a choice or something.
+        print("Starting gotonext");
+        trySkipDialogue = true;
+        yield return new WaitForSeconds(delayTime);
+        print("trying to continue");
+        TryContinue();
     }
 
     private void InitializeAudioInfoDictionary()

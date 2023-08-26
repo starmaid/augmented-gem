@@ -6,7 +6,7 @@ INCLUDE locations/Lab.ink
 // contains global variables
 
 EXTERNAL callSignal(signalName)
-
+EXTERNAL goToNext(delayTime)
 
 // character attributes
 VAR c_vitality = 100
