@@ -276,6 +276,18 @@ PrefabInstance:
       propertyPath: mainInkAsset
       value: 
       objectReference: {fileID: 4900000, guid: cd45600096cefb44a9c866ea6d99b842, type: 3}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: audioInfos.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: inkCallableSignals.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: inkCallableSignals.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 58e8c85a28df3ba40b8768ff582e1d5a, type: 2}
     - target: {fileID: 49962507229378006, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_Name
       value: Scene_Essentials
