@@ -40,8 +40,7 @@ public class StoryManager : MonoBehaviour
 
     // list of signals you can call from ink
     // you call them by name
-    [Header("Callable Signals")]
-    [SerializeField] private List<SignalSO> inkCallableSignals;
+    private List<SignalSO> inkCallableSignals = new List<SignalSO> { };
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -80,6 +79,19 @@ public class StoryManager : MonoBehaviour
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
+
+        // find and load all signals we could call from ink
+        // this path is relative to the Assets/Resources folder
+        UnityEngine.Object[] loadedResources = Resources.LoadAll("Signals", typeof(SignalSO));
+
+        foreach (UnityEngine.Object obj in loadedResources)
+        {
+            if (obj is SignalSO)
+            {
+                inkCallableSignals.Add( (SignalSO) obj );
+                print(obj.name + " loaded to be called from ink");
+            }
+        }
 
         // register listener
         // in the main ink file, you need this line:
@@ -125,11 +137,12 @@ public class StoryManager : MonoBehaviour
     private void CallSignalFromInk(string signalName)
     {
         //Debug.Log("Searching for " + signalName);
+
         foreach (SignalSO inkSignal in inkCallableSignals)
         {
             if (signalName.Equals(inkSignal.name))
             {
-                //Debug.Log("Raising");
+                Debug.Log("Raising " + signalName);
                 inkSignal.Raise();
                 // end now, dont keep searching.
                 return;
