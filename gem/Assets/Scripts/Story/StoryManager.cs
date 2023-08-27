@@ -47,6 +47,10 @@ public class StoryManager : MonoBehaviour
     [SerializeField] public SignalSO pauseCutsceneSignal;
     private bool pausedByCutscene;
     private string prePausedLine;
+    
+    // list of signals you can call from ink
+    // you call them by name
+    private List<SignalSO> inkCallableSignals = new List<SignalSO> { };
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -94,6 +98,32 @@ public class StoryManager : MonoBehaviour
         currentStory.BindExternalFunction("pauseForCutscene", () =>
         {
             pauseAndHideStory();
+        });    
+        
+        // find and load all signals we could call from ink
+        // this path is relative to the Assets/Resources folder
+        UnityEngine.Object[] loadedResources = Resources.LoadAll("Signals", typeof(SignalSO));
+
+        foreach (UnityEngine.Object obj in loadedResources)
+        {
+            if (obj is SignalSO)
+            {
+                inkCallableSignals.Add( (SignalSO) obj );
+                print(obj.name + " loaded to be called from ink");
+            }
+        }
+
+        // register listener
+        // in the main ink file, you need this line:
+        // EXTERNAL callSignal(signalName)
+        currentStory.BindExternalFunction("callSignal", (string signalName) =>
+        {
+            CallSignalFromInk(signalName);
+        });
+
+        currentStory.BindExternalFunction("goToNext", (int delayTime) =>
+        {
+            StartCoroutine(GoToNext(delayTime));
         });
     }
 
@@ -120,6 +150,44 @@ public class StoryManager : MonoBehaviour
         }
 
         InitializeAudioInfoDictionary();
+
+        
+    }
+
+    private void CallSignalFromInk(string signalName)
+    {
+        //Debug.Log("Searching for " + signalName);
+
+        foreach (SignalSO inkSignal in inkCallableSignals)
+        {
+            if (signalName.Equals(inkSignal.name))
+            {
+                Debug.Log("Raising " + signalName);
+                inkSignal.Raise();
+                // end now, dont keep searching.
+                return;
+            }
+        }
+        // if we never raised one, we didnt find it.
+        Debug.LogError("Signal " + signalName + " not found.");
+    }
+
+    private IEnumerator GoToNext(int delayTime)
+    {
+        // waits for a period of time
+        // then tries to continue. skips to end of text first.
+        // remember, only works if there isnt a choice or something.
+        
+        // if you wanted, you could put a delay here to let the text finish typing
+
+        // this line will finish typing
+        trySkipDialogue = true;
+
+        // this will wait
+        yield return new WaitForSeconds(delayTime);
+        
+        // this line will take you to the next one        
+        TryContinue();
     }
 
     private void InitializeAudioInfoDictionary()
