@@ -1,9 +1,11 @@
 ===1_begin_cutscene_1===
 //#CUTSCENE: Fade to black.
-You have been dormant for so long. #portrait:none
+You have been dormant for so long. #portrait:none #speed:0.1
 You cannot remember how long you have been down here...
-A year? A decade? A century?
+A <u>year</u>? A <b>decade</b>? A <i>century</i>?
 // ->DONE
+
+~pauseForCutscene()
 
 // ===1_begin_cutscene_2===
 //#CUTSCENE: black screen fades to the study

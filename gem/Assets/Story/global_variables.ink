@@ -4,6 +4,9 @@ INCLUDE sections/mansion_2.ink
 INCLUDE sections/mansion_3.ink
 INCLUDE sections/library.ink
 
+
+EXTERNAL pauseForCutscene()
+
 // main.ink
 // contains global variables
 VAR friendship = 0
