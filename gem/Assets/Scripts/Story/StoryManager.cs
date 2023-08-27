@@ -7,10 +7,13 @@ using UnityEngine.EventSystems;
 using System;
 using UnityEngine.Rendering;
 using System.IO;
+using SuperTiled2Unity;
+using System.Linq.Expressions;
 
 public class StoryManager : MonoBehaviour
 {
     // https://www.youtube.com/watch?v=raQ3iHhE_Kk
+    // https://www.youtube.com/watch?v=KSRpcftVyKg&list=PL3viUl9h9k78KsDxXoAzgQ1yRjhm7p8kl&index=1
     // but modified a bit
 
     [Header("Main Ink File")]
@@ -23,7 +26,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
-    [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private float defaultTypingSpeed = 0.04f;
+    private float typingSpeed;
     private Animator layoutAnimator;
 
     [Header("Choices UI")]
@@ -37,6 +41,12 @@ public class StoryManager : MonoBehaviour
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
+
+    [Header("Cutscenes")]
+    [SerializeField] public SignalSO resumeCutsceneSignal;
+    [SerializeField] public SignalSO pauseCutsceneSignal;
+    private bool pausedByCutscene;
+    private string prePausedLine;
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -52,6 +62,7 @@ public class StoryManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
     private const string AUDIO_TAG = "audio";
+    private const string SPEED_TAG = "speed";
 
     private StoryVariables dialogueVariables;
     private InkExternalFunctions inkExternalFunctions;
@@ -70,11 +81,20 @@ public class StoryManager : MonoBehaviour
         }
         instance = this;
 
+        typingSpeed = defaultTypingSpeed;
+
         dialogueVariables = new StoryVariables(mainInkAsset);
         inkExternalFunctions = new InkExternalFunctions();
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
+
+        pausedByCutscene = false;
+
+        currentStory.BindExternalFunction("pauseForCutscene", () =>
+        {
+            pauseAndHideStory();
+        });
     }
 
     public static StoryManager GetInstance()
@@ -130,10 +150,9 @@ public class StoryManager : MonoBehaviour
     {
         print("raised contuinue");
 
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
+        if (pausedByCutscene) { return; }
+
+        if (!dialogueIsPlaying) { return; }
 
         if (!canContinueToNextLine)
         {
@@ -143,8 +162,45 @@ public class StoryManager : MonoBehaviour
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
+            print("actually continue");
             ContinueStory();
         }
+    }
+
+    // this is called from inside ink to pause the story
+    // and allow an animation to play.
+    public void pauseAndHideStory()
+    {
+        print("pause and hide");
+        // hide panels
+        SoftExitDialogueMode();
+
+        // stop accepting input
+        pausedByCutscene = true;
+
+        // trigger sequence
+        if (resumeCutsceneSignal != null)
+        {
+            resumeCutsceneSignal.Raise();
+        }
+
+        print("done pausing and hiding");
+    }
+
+    // this function is called by a signal from the timeline
+    // which resumes the story where it was last.
+    public void resumeAndShowStory()
+    {
+        // accept input again
+        pausedByCutscene = false;
+
+        // pause the animation
+        if (pauseCutsceneSignal != null)
+        {
+            pauseCutsceneSignal.Raise();
+        }
+
+        SoftEnterDialogueMode();
     }
 
     public void EnterDialogueMode(string knotName)
@@ -188,6 +244,24 @@ public class StoryManager : MonoBehaviour
         ContinueStory();
     }
 
+    // can only call this AFTER A SOFT EXIT
+    private void SoftEnterDialogueMode()
+    {
+        dialogueIsPlaying = true;
+        trySkipDialogue = false;
+        dialoguePanel.SetActive(true);
+        layoutAnimator.Play(currentLayout);
+        portraitAnimator.Play(currentPortrait);
+        TryContinue();
+    }
+
+    private void SoftExitDialogueMode()
+    {
+        dialogueIsPlaying = false;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
+    }
+
     private IEnumerator ExitDialogueMode()
     {
         yield return new WaitForSeconds(0.2f);
@@ -213,7 +287,25 @@ public class StoryManager : MonoBehaviour
             {
                 StopCoroutine(displayLineCoroutine);
             }
-            string nextLine = currentStory.Continue();
+
+            string nextLine;
+
+            if (prePausedLine !=  null)
+            {
+                nextLine = prePausedLine;
+                prePausedLine = null;
+            } else
+            {
+                nextLine = currentStory.Continue();
+            }
+
+            // if paused, just return and wait for the next time to continue.
+            if (pausedByCutscene)
+            {
+                prePausedLine = nextLine;
+                return;
+            }
+
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
             {
@@ -222,6 +314,8 @@ public class StoryManager : MonoBehaviour
             // otherwise, handle the normal case for continuing the story
             else
             {
+                // return speed to default, if it needs to change it will inside handletags
+                typingSpeed = defaultTypingSpeed;
                 // handle tags
                 HandleTags(currentStory.currentTags);
                 displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
@@ -393,6 +487,13 @@ public class StoryManager : MonoBehaviour
                     break;
                 case AUDIO_TAG:
                     SetCurrentAudioInfo(tagValue);
+                    break;
+                case SPEED_TAG:
+                    // set the speed temporarily to a different value
+                    try {
+                        typingSpeed = tagValue.ToFloat();
+                    } catch (Exception e) { print(e.Message); }
+                    
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
