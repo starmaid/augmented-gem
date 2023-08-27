@@ -348,7 +348,7 @@ public class StoryManager : MonoBehaviour
 
     private void ContinueStory()
     {
-        if (currentStory.canContinue)
+        if (prePausedLine != null || currentStory.canContinue)
         {
             // set text for the current dialogue line
             if (displayLineCoroutine != null)
