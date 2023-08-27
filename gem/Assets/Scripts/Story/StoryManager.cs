@@ -367,6 +367,11 @@ public class StoryManager : MonoBehaviour
                 nextLine = currentStory.Continue();
             }
 
+            // return speed to default, if it needs to change it will inside handletags
+            typingSpeed = defaultTypingSpeed;
+            // handle tags
+            HandleTags(currentStory.currentTags);
+
             // if paused, just return and wait for the next time to continue.
             if (pausedByCutscene)
             {
@@ -382,12 +387,7 @@ public class StoryManager : MonoBehaviour
             // otherwise, handle the normal case for continuing the story
             else
             {
-                // return speed to default, if it needs to change it will inside handletags
-                typingSpeed = defaultTypingSpeed;
-                // handle tags
-                HandleTags(currentStory.currentTags);
                 displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
-                
             }
         }
         else
