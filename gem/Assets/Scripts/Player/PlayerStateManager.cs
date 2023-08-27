@@ -41,6 +41,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] float _rayDistance;
 
     //INPUTS
+    private PlayerInput _playerInput;
     public PlayerControls _playerControls; //new input system
 
     //INTERACTING OBJECTS
@@ -82,6 +83,7 @@ public class PlayerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        _playerInput = GetComponent<PlayerInput>();
         _playerControls = new PlayerControls();  
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -110,10 +112,15 @@ public class PlayerStateManager : MonoBehaviour
     }
 
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        _currentState.FixedUpdateState();   
+        if(_playerControls.Adventurer.enabled){
+            _currentState.FixedUpdateState();   
+        }else if (_playerControls.Gem.enabled){
+            // Debug.Log("it gem time and it gemed all over the place");   
+        }
     }
     void Update(){
         Vector2 startPos = _rayPoint.transform.position;
@@ -164,6 +171,7 @@ public class PlayerStateManager : MonoBehaviour
     //ACTIONS
     private void Move(InputAction.CallbackContext context)
     {
+        Debug.Log("moving still on");
         _change = context.ReadValue<Vector2>();
         
     }
@@ -253,9 +261,14 @@ public class PlayerStateManager : MonoBehaviour
 
     public void SwitchToGemMode(){
         // SeizeAdvControl();
+        // _playerInput.actions.FindActionMap("Gem").Enable();
+        // _playerInput.actions.FindActionMap("Adventurer").Disable();
+        _playerControls.Adventurer.Disable();
         _playerControls.Gem.Enable();
+        _playerInput.SwitchCurrentActionMap("Gem");
+        Debug.Log("SwtichedToGemMode is ran. active actionmaps: " + _playerInput.currentActionMap);
         // _currentState = _states.GemWiggle();
-        // playerInput.actions.FindActionMap("Transitional").Enable();
+        
     }
 
     public void SwitchToAdvMode(){

@@ -3,32 +3,37 @@
 You have been dormant for so long. #portrait:none #speed:0.1
 You cannot remember how long you have been down here...
 A <u>year</u>? A <b>decade</b>? A <i>century</i>?
-// ->DONE
-
-~pauseForCutscene()
-
-// ===1_begin_cutscene_2===
-//#CUTSCENE: black screen fades to the study
 Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that nothing has even had the chance to decompose for you to estimate with.
 Maybe besides your memories. Your patience. Your CHARITABILITY.
 You are so. Goddamn. Bored.
 \-\-and there's nothing you can do about it, besides wait.
 ...until...
+~pauseForCutscene()
+
+//#CUTSCENE: black screen fades to the study
 //#SFX: rumbling sound
 “Hm..?” #portrait:gem_statue_neutral
 //#SFX: CRASH
 Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that was there. #portrait:none
 “Oh? Finally!” #portrait:gem_statue_excited
+~pauseForCutscene()
+
 //#SFX: shuffling. The adventurer is sitting on the floor, distressed.
 "Ow..." #portrait:adv_worried_nogem
 “Huh... where am I?” #portrait:adv_confused_nogem
 “Oh, oh no! I have to get back up there!” #portrait:adv_worried_nogem
-"I better get their attention..."  #portrait:gem_statue_worried
-// ->DONE
+~pauseForCutscene()
 
-// ===1_begin_cutscene_3===
+"I better get their attention..."  #portrait:gem_statue_worried
+(wiggle bitch wiggle)
+// ~callSignal(WiggleMode)
+->DONE
+
+===1_begin_cutscene_2===
 //#PLAYER: When the player press any move keys or act keys, the gem wiggles instead, giving off a little shimmer.
 "...!" #portrait:adv_neutral_nogem
+
+~pauseForCutscene()
 //#CUTSCENE: The adventurer approaches the Gem, and touches it.
 This is it! Your way out... Better think twice how you should approach this. #portrait:none
 	+   Greet them in a friendly manner, you can't scare them away! 
@@ -36,38 +41,30 @@ This is it! Your way out... Better think twice how you should approach this. #po
 	+   Be clear and precise. This might be your only opportunity.
     	“Listen closely, Adventurer…” #portrait:gem_statue_neutral
     	“If you want a chance to get out of here, do NOT let go!”
-	// +	test!#portrait:none
-
 - ...Ah!!!! Who's there?” #portrait:adv_worried_nogem
-// ->DONE
 
-// ===1_begin_cutscene_4===
+~pauseForCutscene()
 //#CUTSCENE: The adventurer backs away a few steps, walks around the office, tries to exit the door (SFX: locked door) and then sits down defeatedly.
 “Wait- don't move! Listen to me!”  #portrait:gem_statue_angry
 “Don't hurt me! I didn't stealing anything from you!” #portrait:adv_worried_nogem
 	+   \(The statue can't talk back, Dulbert...\)  #portrait:gem_statue_angry
 	+   \(If there's no contact, I can't talk to them...\)  #portrait:gem_statue_angry
 	+   \(Humans are SO. STUPID.\)  #portrait:gem_statue_angry
-// ->DONE
 
-// ===1_begin_cutscene_5===
+~pauseForCutscene()
 //#CUTSCENE: Fade to black.
 - You think you blew your chance. #portrait:none
 ...
-// ->DONE
-
-// ===1_begin_cutscene_6===
-//CUTSCENE: wait like. a few seconds?
+//Wait like. a few seconds?
 "..." #portrait:adv_curious_nogem
 // ->DONE
 
-// ===1_begin_cutscene_7===
-//#CUTSCENE: Fade from black.
+~pauseForCutscene()
 "...hello? Are you still there?" #portrait:adv_neutral_nogem
 	+ \(Damn it. I need to get their attention again.\)
-// ->DONE
 
-// ===1_begin_cutscene_8===
+~pauseForCutscene()
+
 //PLAYER: wiggle time
 //CUTSCENE: the guy notices and approaches the gem.
 - The Adventurer hesitates, then walks back over-- good! --And pokes you. It’ll do. #portrait:none
@@ -120,7 +117,6 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	“It wasn't being used for much. Fine, there might be a dagger on that shelf\-\-that way--” #portrait:gem_statue_neutral
     	[MOVE using WASD or ARROW KEYS] #portrait:none
     	[INTERACT using E or Z]
-
 -    
 ->DONE
 
