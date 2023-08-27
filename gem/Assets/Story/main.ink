@@ -23,3 +23,12 @@ LIST inventory = (torch), sword, cool_rock, ancient_scroll
 VAR w_current_level = "Lab"
 VAR w_secrets_found = 0
 
+=== basic_game_saved ===
+Would you like to save the game?
++ Yes
+    ~callSignal("SaveGameSignal")
+    Game Saved.
+    -> DONE
++ No
+    Okay nevermind then.
+    -> DONE
