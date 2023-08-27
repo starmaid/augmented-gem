@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,10 +64,6 @@ PrefabInstance:
       propertyPath: knotName
       value: basic_game_saved
       objectReference: {fileID: 0}
-    - target: {fileID: 4433216257099633258, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: interactSignal
-      value: 
-      objectReference: {fileID: 11400000, guid: c7d9036e022008848a9e4e6aab9fca21, type: 2}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0.28866667

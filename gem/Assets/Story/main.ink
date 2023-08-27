@@ -24,5 +24,11 @@ VAR w_current_level = "Lab"
 VAR w_secrets_found = 0
 
 === basic_game_saved ===
-game saved.
--> DONE
+Would you like to save the game?
++ Yes
+    ~callSignal("SaveGameSignal")
+    Game Saved.
+    -> DONE
++ No
+    Okay nevermind then.
+    -> DONE
