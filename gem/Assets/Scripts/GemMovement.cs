@@ -7,15 +7,19 @@ using UnityEngine.InputSystem;
 public class GemMovement : MonoBehaviour
 {
     private Animator _animator;
-    public PlayerControls _playerControls;
+    // public PlayerControls _playerControls;
+    public PlayerInput _playerInput;
+    public GameObject player;
 
 
     // Start is called before the first frame update
     void Awake()
     {
-        _playerControls = new PlayerControls(); 
-        _playerControls.Gem.Wiggle.performed += ctxt => Wiggle(ctxt);
-        _playerControls.Gem.Wiggle.canceled += ctxt => Wiggle(ctxt);
+        // _playerControls = player.GetComponent<PlayerControls>();
+        _animator = GetComponent<Animator>();
+        _playerInput = player.GetComponent<PlayerInput>();
+        _playerInput.actions["Wiggle"].performed += ctxt => Wiggle(ctxt);
+        _playerInput.actions["Wiggle"].canceled += ctxt => Wiggle(ctxt);
     }
 
     private void Wiggle(InputAction.CallbackContext context)

@@ -759,19 +759,19 @@
                 {
                     "name": "Wiggle",
                     "type": "Button",
-                    "id": "2936115b-cf07-4c7b-bc04-311bc425fe86",
+                    "id": "da0276ac-6e2d-4d58-a4c3-8abf9ab1e9fb",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "cce72d57-6bde-4b12-afe5-c6bd07b87f04",
+                    "id": "b4d250b1-659f-4640-96f6-cf8605025dc1",
                     "path": "<Keyboard>/z",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.2)",
                     "processors": "",
                     "groups": "",
                     "action": "Wiggle",

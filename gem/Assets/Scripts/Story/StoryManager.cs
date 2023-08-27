@@ -367,17 +367,18 @@ public class StoryManager : MonoBehaviour
                 nextLine = currentStory.Continue();
             }
 
-            // return speed to default, if it needs to change it will inside handletags
-            typingSpeed = defaultTypingSpeed;
-            // handle tags
-            HandleTags(currentStory.currentTags);
-
             // if paused, just return and wait for the next time to continue.
             if (pausedByCutscene)
             {
                 prePausedLine = nextLine;
                 return;
             }
+
+            // return speed to default, if it needs to change it will inside handletags
+            typingSpeed = defaultTypingSpeed;
+            // handle tags
+            HandleTags(currentStory.currentTags);
+
 
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
