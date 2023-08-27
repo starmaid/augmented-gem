@@ -1896,6 +1896,7 @@ GameObject:
   - component: {fileID: 3809422520117121764}
   - component: {fileID: 10663711845535141}
   - component: {fileID: 3677390367980126325}
+  - component: {fileID: 8688716141262999838}
   m_Layer: 0
   m_Name: StoryManager
   m_TagString: Untagged
@@ -4114,5 +4115,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4660234532614511084, guid: 7ff7711bdfbd3bc3fb9e4505fb17c1c5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8688716141262999838}
   m_SourcePrefab: {fileID: 100100000, guid: 7ff7711bdfbd3bc3fb9e4505fb17c1c5, type: 3}
+--- !u!114 &8688716141262999838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4833074444329637503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b043ecb12103ba4bb2f1a525dcf8892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalObject: {fileID: 11400000, guid: c7d9036e022008848a9e4e6aab9fca21, type: 2}
+  signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 10663711845535141}
+        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
+        m_MethodName: SaveFile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -23,3 +23,6 @@ LIST inventory = (torch), sword, cool_rock, ancient_scroll
 VAR w_current_level = "Lab"
 VAR w_secrets_found = 0
 
+=== basic_game_saved ===
+game saved.
+-> DONE
