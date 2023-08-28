@@ -10,6 +10,7 @@ public class GemMovement : MonoBehaviour
     // public PlayerControls _playerControls;
     public PlayerInput _playerInput;
     public GameObject player;
+    public SignalSO GetNoticedSignal;
 
 
     // Start is called before the first frame update
@@ -26,14 +27,21 @@ public class GemMovement : MonoBehaviour
     {
         if(context.ReadValueAsButton()){
             _animator.SetBool("moving",true);
+            GetNoticed();
+            Debug.Log("Getting noticed...1");
         }else{
             _animator.SetBool("moving",false);
         }
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+    private IEnumerator GetNoticed()
+    {
+        Debug.Log("Getting noticed...2");
+        if(GetNoticedSignal != null){
+            GetNoticedSignal.Raise();
+            // StoryManager.pauseAndHideStory();
+            Debug.Log("FOUND YOU !");
+        }
+        yield return new WaitForSeconds(3f); //amount of seconds to wait
+    }
 }
