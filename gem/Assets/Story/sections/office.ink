@@ -1,19 +1,18 @@
 ===1_begin_cutscene_1===
 //#CUTSCENE: Fade to black.
-You have been dormant for so long. #portrait:none #speed:0.1
+You have been dormant for so long. #portrait:none 
 You cannot remember how long you have been down here...
-A <u>year</u>? A <b>decade</b>? A <i>century</i>?
-Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that nothing has even had the chance to decompose for you to estimate with.
+A year? A decade? A <i>century</i>?
+Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that there's no decomposition for you to estimate with.
 Maybe besides your memories. Your patience. Your CHARITABILITY.
-You are so. Goddamn. Bored.
+You are so. Goddamn. Bored. #speed:0.1
 \-\-and there's nothing you can do about it, besides wait.
 ...until...
-~pauseForCutscene()
-
-//#CUTSCENE: black screen fades to the study
 //#SFX: rumbling sound
 “Hm..?” #portrait:gem_statue_neutral
+~pauseForCutscene()
 //#SFX: CRASH
+//#CUTSCENE: black screen fades to the study
 Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that was there. #portrait:none
 “Oh? Finally!” #portrait:gem_statue_excited
 ~pauseForCutscene()
@@ -24,8 +23,8 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 “Oh, oh no! I have to get back up there!” #portrait:adv_worried_nogem
 ~pauseForCutscene()
 
-"I better get their attention..."  #portrait:gem_statue_worried
-(wiggle bitch wiggle)
+"I better get their attention while they're still here..."  #portrait:gem_statue_worried
+(wiggle bitch wiggle. press z to wiggle)
 // ~callSignal(WiggleMode)
 ->DONE
 
