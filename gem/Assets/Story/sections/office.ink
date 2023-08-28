@@ -33,7 +33,8 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 "...!" #portrait:adv_neutral_nogem
 
 ~pauseForCutscene()
-//#CUTSCENE: The adventurer approaches the Gem, and touches it.
+//#CUTSCENE: The adventurer approaches the Gem, and touches it. 
+//this section does not show : (
 This is it! Your way out... Better think twice how you should approach this. #portrait:none
 	+   Greet them in a friendly manner, you can't scare them away! 
     	"Fine evening, Adventurer! How can I help you?" #portrait:gem_statue_excited
@@ -49,10 +50,9 @@ This is it! Your way out... Better think twice how you should approach this. #po
 	+   \(The statue can't talk back, Dulbert...\)  #portrait:gem_statue_angry
 	+   \(If there's no contact, I can't talk to them...\)  #portrait:gem_statue_angry
 	+   \(Humans are SO. STUPID.\)  #portrait:gem_statue_angry
-
-~pauseForCutscene()
 //#CUTSCENE: Fade to black.
-- You think you blew your chance. #portrait:none
+- ~pauseForCutscene()
+  You think you blew your chance. #portrait:none
 ...
 //Wait like. a few seconds?
 "..." #portrait:adv_curious_nogem

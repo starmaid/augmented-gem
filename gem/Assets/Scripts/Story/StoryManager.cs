@@ -218,9 +218,13 @@ public class StoryManager : MonoBehaviour
     {
         print("raised contuinue");
 
-        if (pausedByCutscene) { return; }
+        if (pausedByCutscene) { 
+            Debug.Log("pausedByCutscene. Return");
+            return; }
 
-        if (!dialogueIsPlaying) { return; }
+        if (!dialogueIsPlaying) { 
+            Debug.Log("!dialogueIsPlaying. Return");
+            return; }
 
         if (!canContinueToNextLine)
         {
@@ -239,7 +243,6 @@ public class StoryManager : MonoBehaviour
     // and allow an animation to play.
     public void pauseAndHideStory()
     {
-        print("pause and hide");
         // hide panels
         SoftExitDialogueMode();
 
@@ -252,7 +255,7 @@ public class StoryManager : MonoBehaviour
             resumeCutsceneSignal.Raise();
         }
 
-        print("done pausing and hiding");
+        print("paused and hid story");
     }
 
     // this function is called by a signal from the timeline
@@ -268,6 +271,7 @@ public class StoryManager : MonoBehaviour
             pauseCutsceneSignal.Raise();
         }
 
+        print("resumed and play story");
         SoftEnterDialogueMode();
     }
 
