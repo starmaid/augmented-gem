@@ -17,6 +17,7 @@ public class SignalListener : MonoBehaviour
 
     private void OnEnable()
     {
+        // // Debug.Log("registering: " + this.gameObject.name + " to " + signalObject.name);
         signalObject.RegisterListener(this);
     }
 

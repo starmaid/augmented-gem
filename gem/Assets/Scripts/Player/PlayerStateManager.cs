@@ -171,7 +171,7 @@ public class PlayerStateManager : MonoBehaviour
     //ACTIONS
     private void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("moving still on");
+        // Debug.Log("moving still on");
         _change = context.ReadValue<Vector2>();
         
     }

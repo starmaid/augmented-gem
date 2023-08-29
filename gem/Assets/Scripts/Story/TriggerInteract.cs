@@ -69,4 +69,10 @@ public class TriggerInteract : MonoBehaviour
             }
         }
     }
+
+    public void GetPickedUp(){
+        if(playerInRange){
+            
+        }
+    }
 }
