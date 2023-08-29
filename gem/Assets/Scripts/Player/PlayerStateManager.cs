@@ -273,7 +273,9 @@ public class PlayerStateManager : MonoBehaviour
 
     public void SwitchToAdvMode(){
         _playerControls.Gem.Disable();
-        ReturnAdvControl();
+        _playerControls.Adventurer.Enable();
+        _playerInput.SwitchCurrentActionMap("Adventurer");
+        Debug.Log("SwtichedToGemMode is ran. active actionmaps: " + _playerInput.currentActionMap);
         // _currentState = _states.Move();
     }
 

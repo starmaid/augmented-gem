@@ -11,11 +11,13 @@ public class GemMovement : MonoBehaviour
     public PlayerInput _playerInput;
     public GameObject player;
     public SignalSO GetNoticedSignal;
+    private bool isNoticed;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        isNoticed = false;
         // _playerControls = player.GetComponent<PlayerControls>();
         _animator = GetComponent<Animator>();
         _playerInput = player.GetComponent<PlayerInput>();
@@ -27,8 +29,9 @@ public class GemMovement : MonoBehaviour
     {
         if(context.ReadValueAsButton()){
             _animator.SetBool("moving",true);
-            GetNoticed();
-            Debug.Log("Getting noticed...1");
+            if (!isNoticed){
+                StartCoroutine(GetNoticed());
+            }
         }else{
             _animator.SetBool("moving",false);
         }
@@ -36,12 +39,12 @@ public class GemMovement : MonoBehaviour
 
     private IEnumerator GetNoticed()
     {
-        Debug.Log("Getting noticed...2");
+        isNoticed = true;
+        yield return new WaitForSeconds(5f); //amount of seconds to wait
         if(GetNoticedSignal != null){
             GetNoticedSignal.Raise();
             // StoryManager.pauseAndHideStory();
             Debug.Log("FOUND YOU !");
         }
-        yield return new WaitForSeconds(3f); //amount of seconds to wait
     }
 }

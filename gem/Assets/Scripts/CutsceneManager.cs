@@ -12,13 +12,18 @@ public class CutsceneManager : MonoBehaviour
     // Start is called before the first frame update
     public void Pause()
     {
-        Debug.Log("attempted pause");
-        director.playableGraph.GetRootPlayable(0).SetSpeed(0);
+        if(director.playableGraph.IsValid()){
+            Debug.Log("attempted pause");
+            director.playableGraph.GetRootPlayable(0).SetSpeed(0);
+        }
+
     }
 
     // Update is called once per frame
     public void Resume()
     {
-        director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+        if(director.playableGraph.IsValid()){
+            director.playableGraph.GetRootPlayable(0).SetSpeed(1);            
+        }
     }
 }

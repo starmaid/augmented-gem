@@ -33,7 +33,8 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 "...!" #portrait:adv_neutral_nogem
 
 ~pauseForCutscene()
-//#CUTSCENE: The adventurer approaches the Gem, and touches it.
+//#CUTSCENE: The adventurer approaches the Gem, and touches it. 
+//this section does not show : (
 This is it! Your way out... Better think twice how you should approach this. #portrait:none
 	+   Greet them in a friendly manner, you can't scare them away! 
     	"Fine evening, Adventurer! How can I help you?" #portrait:gem_statue_excited
@@ -49,10 +50,9 @@ This is it! Your way out... Better think twice how you should approach this. #po
 	+   \(The statue can't talk back, Dulbert...\)  #portrait:gem_statue_angry
 	+   \(If there's no contact, I can't talk to them...\)  #portrait:gem_statue_angry
 	+   \(Humans are SO. STUPID.\)  #portrait:gem_statue_angry
-
-~pauseForCutscene()
 //#CUTSCENE: Fade to black.
-- You think you blew your chance. #portrait:none
+- ~pauseForCutscene()
+  You think you blew your chance. #portrait:none
 ...
 //Wait like. a few seconds?
 "..." #portrait:adv_curious_nogem
@@ -145,10 +145,8 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 {
 - not has_dagger:
    {stopping:
-   - "I'm so glad you enjoy admiring me, but I would love to get out of here first. Would you please hurry up?
-    	#portrait:gem_angry
-   - "..."
-  	#portrait:gem_angry
+   - "I'm so glad you enjoy admiring me, but I would love to get out of here first. Would you please hurry up? #portrait:gem_angry
+   - "..." #portrait:gem_angry
    }
 - has_dagger:
 	{stopping:
@@ -159,11 +157,12 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	“...How're we gonna open the door anyway?” #portrait:adv_curious
     	“Transmutation, adventurer. I am-- I mean WE, are going to make a key.” #portrait:gem_excited
     	“Like.. out of wood or something? That's gonna take a while.” #portrait:adv_frown
-    	“No! Don't be ridiculous. Do you think the Great Alchemist would have her door locked with a wooden key? Gold! Only Gold would do. And we're going to dabble with some alchemy to create gold. Didn't you hear me?” #portrait:gem_angry
+    	“No! Don't be ridiculous. Do you think the Great Alchemist would have her door locked with a wooden key?"  #portrait:gem_angry
+		"Gold! Only Gold would do. And we're going to dabble with some alchemy to create gold. Didn't you hear me?” #portrait:gem_angry
     	“I did-- but I don't know how to do magic, and ah.. you don't have hands,” #portrait:adv_frown
     	“It’s alchemy, not magic!? The DISRESPECT...” #portrait:gem_angry
     	“Well, I don’t know anything about either of those!” #portrait:adv_frown
-    	*  [ “Did you hit your head? Why are you even here then??" ] #portrait:gem_angry
+    	*  [ “Why are you even here then??" ]
         	//should there be a better explanation from the adv?
          	“Did you hit your head? Why are you even here, if not to seek the Great Alchemist? ” #portrait:gem_angry
    		 The Adventurer looks away, unreadable. #portrait:none
@@ -171,7 +170,8 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
    		 “--just tell me how to get out of here,” #portrait:adv_annoyed
    		 “Fine, I'll show you how. Bring me to those bottles.” #portrait:gem_neutral
         	-> 1_collect_gem
-    	*   "Urgh... Fine, good thing my schedule's open all day... Let me explain." #portrait:gem_neutral
+    	*   ["Urgh... Fine, let me explain." ]
+			"Urgh... Fine, good thing my schedule's open all day... Let me explain." #portrait:gem_neutral
         	~ friendship += 1
         	"Transmutation is the science of transforming a pure material from one to another. I am a conduit for such processes."
         	"See, telepathy is just one of my many skills! I can also transform the most useless material into gold... Which is what we'll be doing now. Is that clear?" #portrait:gem_excited
@@ -194,16 +194,12 @@ The adventurer collects the gem. #portrait:none
 {
 - not has_dagger:
 	{cycle:
-	- (There's nothing there! Stop snooping around...)
-    	#portrait:gem_angry
-	- (This human is not very bright...)
-    	#portrait:gem_angry
-	- (ARGHHH!!!!!!)
-    	#portrait:gem_angry
+	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
+	- (This human is not very bright...) #portrait:gem_angry
+	- (ARGHHH!!!!!!) #portrait:gem_angry
 	}
 - not has_gem:
-	(if you don't come get me first, those things will not mean anything to you!)
- 	#portrait:gem_angry
+	(if you don't come get me first, those things will not mean anything to you!) #portrait:gem_angry
 - has_gem:
 	{stopping:
     	-
