@@ -77,11 +77,7 @@
         }
     ],
     "m_GroupDatas": [],
-    "m_StickyNoteDatas": [
-        {
-            "m_Id": "ca458248dfed4347b6f3be21be5dd0b2"
-        }
-    ],
+    "m_StickyNoteDatas": [],
     "m_Edges": [
         {
             "m_OutputSlot": {
@@ -338,8 +334,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 78.0,
-            "y": -24.0
+            "x": 1061.0,
+            "y": -61.0000114440918
         },
         "m_Blocks": [
             {
@@ -355,8 +351,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 138.0,
-            "y": 252.0
+            "x": 1061.0,
+            "y": 174.99998474121095
         },
         "m_Blocks": [
             {
@@ -1870,10 +1866,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -52.0,
-            "y": 209.0,
-            "width": 130.0,
-            "height": 118.0
+            "x": -57.00004577636719,
+            "y": 164.99998474121095,
+            "width": 130.00003051757813,
+            "height": 118.00004577636719
         }
     },
     "m_Slots": [
@@ -2082,26 +2078,6 @@
         "g": 0.5,
         "b": 0.5,
         "a": 1.0
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.StickyNoteData",
-    "m_ObjectId": "ca458248dfed4347b6f3be21be5dd0b2",
-    "m_Title": "for UI you have to export this",
-    "m_Content": "https://forum.unity.com/threads/shader-graph-ui-image-shader-does-not-work.1202461/",
-    "m_TextSize": 0,
-    "m_Theme": 0,
-    "m_Position": {
-        "serializedVersion": "2",
-        "x": 23.0,
-        "y": 447.0,
-        "width": 517.0,
-        "height": 100.0
-    },
-    "m_Group": {
-        "m_Id": ""
     }
 }
 
