@@ -78,6 +78,23 @@ public class StoryManager : MonoBehaviour
 
     private void Awake()
     {
+
+        // if (instance == null)
+        // {
+        //     instance = this;
+        // }else if (instance != null)
+        // {
+        //     Debug.LogWarning("Found more than one Dialogue Manager in the scene");
+        // }else if(instance != this)
+        // {
+        //     // If the instance reference has already been set, and this is not the
+        //     // the instance reference, destroy this game object.
+        //     Destroy(gameObject);
+        // }
+
+        // Do not destroy this object, when we load a new scene.
+        // DontDestroyOnLoad(gameObject);
+
         currentStory = new Story(mainInkAsset.text);
         if (instance != null)
         {
@@ -702,6 +719,7 @@ public class StoryManager : MonoBehaviour
 
         // write to json file
         File.WriteAllText(path, storystate);
+        Debug.Log("Saved file!");
 
     }
 
@@ -712,6 +730,7 @@ public class StoryManager : MonoBehaviour
         string storystate = File.ReadAllText(path);
 
         currentStory.state.LoadJson(storystate);
+        Debug.Log("Loaded file!");
     }
 
 }

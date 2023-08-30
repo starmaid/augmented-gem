@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00cf776bbe610fcfc94afd6427857096, type: 3}
   m_Name: UnlockedOfficeDoor
   m_EditorClassIdentifier: 
-  boolValue: 0
+  initialValue: 1
+  defaultValue: 0

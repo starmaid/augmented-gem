@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class BooleanSO : ScriptableObject
+public class BooleanSO : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]
-    private bool boolValue;
-    public bool BoolValue
+    public bool initialValue;
+    public bool defaultValue;
+
+    public void OnAfterDeserialize()
     {
-        get { return boolValue; }
-        set { boolValue = value; }
+        initialValue=defaultValue;
+    }
+
+    public void OnBeforeSerialize()
+    {
     }
     
 }

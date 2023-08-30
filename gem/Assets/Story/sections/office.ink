@@ -129,6 +129,9 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 
 ===1_shelf===
 {stopping:
+	-
+	FOR the sake of convenience, here's the key #portrait:none //DEBUG
+	~has_key = true
     -
     The Adventurer picks up an ornate dagger from the dusty shelf. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
