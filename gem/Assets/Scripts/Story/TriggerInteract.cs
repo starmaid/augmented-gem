@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TriggerInteract : MonoBehaviour
 {
+    [Header("General")]
+    [SerializeField] public bool isEnabled = true;
+
     [Header("Signals")]
     [SerializeField] public SignalSO overlapSignal;
     [SerializeField] public SignalSO endOverlapSignal;
@@ -24,6 +27,8 @@ public class TriggerInteract : MonoBehaviour
     //instead of how its written here, have this func trigger when it hears interactSignal raise from player
     public void InteractTrigger()
     {
+        if (!isEnabled) { return; }
+
         // Debug.Log("entered InteractTrigger(), playerInRange is "+ playerInRange);
         if (!StoryManager.GetInstance().dialogueIsPlaying)
         {
@@ -46,6 +51,8 @@ public class TriggerInteract : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        if (!isEnabled) { return; }
+
         if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
@@ -59,6 +66,8 @@ public class TriggerInteract : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collider)
     {
+        if (!isEnabled) { return; }
+
         if (collider.gameObject.CompareTag("Player"))
         {
             playerInRange = false;

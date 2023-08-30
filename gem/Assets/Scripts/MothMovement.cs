@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RatMovement: MonoBehaviour
+public class MothMovement: MonoBehaviour
 {
     [SerializeField] public List<Sprite> texFrames;
     private int tex_index = 0;
@@ -19,6 +19,9 @@ public class RatMovement: MonoBehaviour
     private float moveSpeed;
     private bool isMoving;
 
+    private float yOffset;
+    private float xOffset;
+
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidBody2d;
 
@@ -29,16 +32,25 @@ public class RatMovement: MonoBehaviour
         rigidBody2d = GetComponent<Rigidbody2D>();
         isMoving = false;
         flipTimer = 2;
-        moveSpeed = 1.5f;
-        isEnabled = true;
         animTimer = 0;
+        moveSpeed = 1.5f;
+        xOffset = 0;
+        yOffset = 0;
+        isEnabled = true;
     }
 
-    public void transmute()
+    public IEnumerator transmute()
     {
         rigidBody2d.velocity = Vector3.zero;
         isEnabled = false;
         spriteRenderer.material = goldMaterial;
+
+        rigidBody2d.velocity = new Vector3(0,-8f,0);
+
+        yield return new WaitForSeconds(0.4f);
+
+        rigidBody2d.velocity = Vector3.zero;
+
         GetComponent<TriggerInteract>().isEnabled = true;
     }
 
@@ -58,7 +70,7 @@ public class RatMovement: MonoBehaviour
     {
         //if (isEnabled && Time.time > 5)
         //{
-        //    transmute();
+        //    StartCoroutine(transmute());
         //}
 
         if (isEnabled)
@@ -71,6 +83,9 @@ public class RatMovement: MonoBehaviour
                 spriteRenderer.sprite = getNextTex();
             }
 
+            xOffset = Mathf.Sin(Time.time * 10) * 2f;
+            yOffset = Mathf.Sin(Time.time * 6) * 2f;
+
             if (isMoving)
             {
                 moveTimer -= Time.deltaTime;
@@ -81,17 +96,20 @@ public class RatMovement: MonoBehaviour
                     flipTimer = 0.5f + Random.value * 4;
                 }
 
-                //transform.position += moveDirection * moveSpeed * Time.deltaTime;
-                //rigidBody2d.velocity = Vector3.zero;
-                rigidBody2d.velocity = moveDirection * moveSpeed;
+                transform.position += moveDirection * moveSpeed * Time.deltaTime;
             }
             else
             {
                 rigidBody2d.velocity = Vector3.zero;
                 flipTimer -= Time.deltaTime;
-                if (Random.value > 0.997)
+
+                if (xOffset > 0)
                 {
-                    spriteRenderer.flipX = !spriteRenderer.flipX;
+                    spriteRenderer.flipX = true;
+                }
+                else
+                {
+                    spriteRenderer.flipX = false;
                 }
 
                 if (flipTimer < 0)
@@ -103,14 +121,15 @@ public class RatMovement: MonoBehaviour
                     moveDirection = new Vector3(Mathf.Cos(moveDirectionAngle), Mathf.Sin(moveDirectionAngle), 0);
                     if (Mathf.Cos(moveDirectionAngle) > 0)
                     {
-                        spriteRenderer.flipX = false;
+                        spriteRenderer.flipX = true;
                     }
                     else
                     {
-                        spriteRenderer.flipX = true;
+                        spriteRenderer.flipX = false;
                     }
                 }
             }
+            transform.position += new Vector3(xOffset, yOffset, 0) * Time.deltaTime;
         }
     }
 }
