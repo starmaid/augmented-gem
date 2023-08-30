@@ -82,8 +82,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f382b495071dc14f82525cf92a3a152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMaterial: {fileID: 0}
+  newMaterial: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
   highlightScale: 0
+  doesntHaveAnimator: 1
 --- !u!212 &5392257110162784237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -180,9 +181,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.32930923, y: -0.90029943}
+      - {x: -0.23128462, y: -0.93279374}
+      - {x: -0.037430704, y: 0.37797713}
+      - {x: 0.119060636, y: 0.33716238}
   m_UseDelaunayMesh: 0
 --- !u!50 &4647390556831011121
 Rigidbody2D:

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 532513051090961017}
   - component: {fileID: 7427333389283211198}
   - component: {fileID: 8209059817140320164}
+  - component: {fileID: 4208492571288411204}
   - component: {fileID: 5392257110162784237}
   - component: {fileID: 5320392357533634649}
   - component: {fileID: 4647390556831011121}
@@ -69,6 +70,21 @@ MonoBehaviour:
   endOverlapSignal: {fileID: 11400000, guid: 2def20a354c0aa2b4b5418a6e268f71b, type: 2}
   interactSignal: {fileID: 0}
   knotName: 
+--- !u!114 &4208492571288411204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670793019573008004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f382b495071dc14f82525cf92a3a152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newMaterial: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
+  highlightScale: 0
+  doesntHaveAnimator: 1
 --- !u!212 &5392257110162784237
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -165,9 +181,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 0.96595335, y: -0.06207502}
+      - {x: -0.93559086, y: -0.16394973}
+      - {x: -0.9761741, y: -0.50634617}
+      - {x: 0.98977906, y: -0.4655313}
   m_UseDelaunayMesh: 0
 --- !u!50 &4647390556831011121
 Rigidbody2D:

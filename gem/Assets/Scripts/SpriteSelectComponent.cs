@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class SpriteSelectComponent : MonoBehaviour
 {
-    public Material newMaterial;
-    public float highlightScale = 0.2f;
-    [Range(0.1f, 1f)]
+    [SerializeField] public Material newMaterial;
+
+    [Range(0f, 1f)]
+    [SerializeField] public float highlightScale = 0.2f;
+    
+
+    [SerializeField] public bool doesntHaveAnimator = false;
 
     private bool highlightEnabled;
 
@@ -81,6 +85,13 @@ public class SpriteSelectComponent : MonoBehaviour
             timer += Time.deltaTime * 5;
             newScale = highlightScale * Mathf.Sin(timer);
             newObject.transform.localScale = Vector3.one + Vector3.one * highlightScale + (Vector3.one * newScale);
+        }
+
+        if (newObject != null && doesntHaveAnimator)
+        { 
+            mySprite = mySpriteRenderer.sprite;
+            newSpriteComponent.sprite = mySprite;
+            newSpriteComponent.flipX = mySpriteRenderer.flipX;
         }
 
     }

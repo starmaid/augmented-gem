@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2973006873429411442}
   - component: {fileID: 2729310571260170580}
   - component: {fileID: 7757597093786821479}
+  - component: {fileID: 4981186524361121513}
   - component: {fileID: 3767998986532767068}
   - component: {fileID: 5535957968154223980}
   - component: {fileID: 4828595936382870815}
@@ -69,6 +70,21 @@ MonoBehaviour:
   endOverlapSignal: {fileID: 11400000, guid: 2def20a354c0aa2b4b5418a6e268f71b, type: 2}
   interactSignal: {fileID: 0}
   knotName: 
+--- !u!114 &4981186524361121513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5432859949516486173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f382b495071dc14f82525cf92a3a152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newMaterial: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
+  highlightScale: 0
+  doesntHaveAnimator: 1
 --- !u!212 &3767998986532767068
 SpriteRenderer:
   m_ObjectHideFlags: 0
