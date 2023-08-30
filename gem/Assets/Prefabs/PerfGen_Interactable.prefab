@@ -287,4 +287,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newMaterial: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-  highlightScale: 0.2
+  highlightScale: 0.05
