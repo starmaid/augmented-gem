@@ -34,12 +34,13 @@ public class SnakeMovement: MonoBehaviour
         animTimer = 0;
     }
 
-    public void transmute()
+    public IEnumerator transmute()
     {
         rigidBody2d.velocity = Vector3.zero;
         isEnabled = false;
         spriteRenderer.material = goldMaterial;
         GetComponent<TriggerInteract>().isEnabled = true;
+        yield return new WaitForSeconds(0f);
     }
 
     private Sprite getNextTex()
