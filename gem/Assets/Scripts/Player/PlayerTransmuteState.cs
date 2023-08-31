@@ -28,13 +28,18 @@ public class PlayerTransmuteState : PlayerBaseState
 
     public override void FixedUpdateState()
     {
-        _context.MyAnimator.SetFloat("moveX", _context.Change.x);
-        _context.MyAnimator.SetFloat("moveY", _context.Change.y);
+        if (_context.Change != Vector3.zero){
+            _context.MyAnimator.SetFloat("moveX", _context.Change.x);
+            _context.MyAnimator.SetFloat("moveY", _context.Change.y);
+        }
         HandleTransmute();
         CheckSwitchState();
     }
 
     public void HandleTransmute(){
-        Debug.Log("Imagine I'm transmuting right now oooo");
+        if (_context.CheckObject() == "transmutable"){
+            _context.BeastObj.StartCoroutine(_context.BeastObj.transmute()); //if it aint monobehavior it dont let me start coroutine. pretty bs
+            // Debug.Log("Transmuting!" + _context.BeastObj);
+        }
     }
 }

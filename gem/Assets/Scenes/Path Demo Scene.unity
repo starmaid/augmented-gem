@@ -337,6 +337,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beast_Snake
       objectReference: {fileID: 0}
+    - target: {fileID: 1670793019573008004, guid: e9373812aa03e0e419e84ef82d1629c1, type: 3}
+      propertyPath: m_TagString
+      value: transmutable
+      objectReference: {fileID: 0}
     - target: {fileID: 5320392357533634649, guid: e9373812aa03e0e419e84ef82d1629c1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 4
@@ -372,6 +376,10 @@ PrefabInstance:
     - target: {fileID: 5320392357533634649, guid: e9373812aa03e0e419e84ef82d1629c1, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[3].y
       value: -0.4399516
+      objectReference: {fileID: 0}
+    - target: {fileID: 8209059817140320164, guid: e9373812aa03e0e419e84ef82d1629c1, type: 3}
+      propertyPath: isEnabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -705,6 +713,10 @@ PrefabInstance:
     - target: {fileID: 1861641281320648996, guid: 8331fb3a06222ff45925cf7b6fb0c40d, type: 3}
       propertyPath: m_Name
       value: PerfGen_StepTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861641281320648996, guid: 8331fb3a06222ff45925cf7b6fb0c40d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3241872273160302741, guid: 8331fb3a06222ff45925cf7b6fb0c40d, type: 3}
       propertyPath: knotName
@@ -1103,7 +1115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257387926297215818, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 58.01
       objectReference: {fileID: 0}
     - target: {fileID: 4257387926297215818, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1111,7 +1123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257387926297215818, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 54.004997
       objectReference: {fileID: 0}
     - target: {fileID: 4257387926297215818, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1131,7 +1143,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607284738901576455, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 55.01
       objectReference: {fileID: 0}
     - target: {fileID: 5607284738901576455, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1139,7 +1151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5607284738901576455, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 52.504997
       objectReference: {fileID: 0}
     - target: {fileID: 5607284738901576455, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1179,7 +1191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059998415429089398, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 58.01
       objectReference: {fileID: 0}
     - target: {fileID: 6059998415429089398, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1187,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6059998415429089398, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 54.004997
       objectReference: {fileID: 0}
     - target: {fileID: 6059998415429089398, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1223,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6845816119237107691, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 350
       objectReference: {fileID: 0}
     - target: {fileID: 6845816119237107691, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1231,7 +1243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6845816119237107691, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6845816119237107691, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1465,7 +1477,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1670793019573008004, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
       propertyPath: m_Name
-      value: Triangle (1)
+      value: Beast_Moth
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1526,7 +1538,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5432859949516486173, guid: 9eca1a27cc4a3c74a82cabf63d2f29a4, type: 3}
       propertyPath: m_Name
-      value: Triangle
+      value: Beast_Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 5432859949516486173, guid: 9eca1a27cc4a3c74a82cabf63d2f29a4, type: 3}
+      propertyPath: m_TagString
+      value: transmutable
+      objectReference: {fileID: 0}
+    - target: {fileID: 7757597093786821479, guid: 9eca1a27cc4a3c74a82cabf63d2f29a4, type: 3}
+      propertyPath: isEnabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

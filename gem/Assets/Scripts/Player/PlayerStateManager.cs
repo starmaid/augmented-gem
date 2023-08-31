@@ -46,6 +46,7 @@ public class PlayerStateManager : MonoBehaviour
 
     //INTERACTING OBJECTS
     private Pushable _pushedObj;
+    private IBeast _beast;
     public TriggerInteract _interactObj;
 
     //AUDIO
@@ -78,6 +79,8 @@ public class PlayerStateManager : MonoBehaviour
     public Collider2D MyCollider{get{return _myCollider;} set{_myCollider = value;}}
     // public  MovementAxis MyAxis {get{return _myAxis;} set{_myAxis = value;}}
     public Pushable PushedObj{get{return _pushedObj;} set{_pushedObj = value;}}
+    public IBeast BeastObj{get{return _beast;} set{_beast = value;}}
+
     public AudioSource MyAudioSource{get{return _myAudioSource;} set{_myAudioSource = value;}}
 
     // Start is called before the first frame update
@@ -171,7 +174,7 @@ public class PlayerStateManager : MonoBehaviour
     //ACTIONS
     private void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("moving still on");
+        // Debug.Log("moving still on");
         _change = context.ReadValue<Vector2>();
         
     }
@@ -215,6 +218,11 @@ public class PlayerStateManager : MonoBehaviour
             {
                 tag = "pushable";
                 _pushedObj = hit.collider.GetComponent<Pushable>();
+            }
+            if (hit.collider.CompareTag("transmutable")){
+                tag = "transmutable";
+                _beast = hit.collider.GetComponent<IBeast>();
+                // Debug.Log("check this beast!" + (_beast!=null));
             }
             return tag;
         }
