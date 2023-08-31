@@ -138,6 +138,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 	// sfx: shuffle of “item acquired but im lowkey about it also I'm tucking it away”
 	[Open menu using ESC key. Select the dagger from inventory, and then USE in front of the alchemist statue.]
 	~ has_dagger = true
+	~ callSignal("ItemRetrieved")
     -
     It's just an empty shelf.  #portrait:none
 }
@@ -157,6 +158,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	It's a bit unflattering how you tumble to the ground, but you'd feel more indignant if it didn't mean a step towards freedom. #portrait:none
     	//sfx: clink
     	They pick you up.
+		~ callSignal("ItemRetrieved")
     	“...How're we gonna open the door anyway?” #portrait:adv_curious
     	“Transmutation, adventurer. I am-- I mean WE, are going to make a key.” #portrait:gem_excited
     	“Like.. out of wood or something? That's gonna take a while.” #portrait:adv_frown
