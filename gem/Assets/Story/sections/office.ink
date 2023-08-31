@@ -156,7 +156,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 	{stopping:
     	-
     	It's a bit unflattering how you tumble to the ground, but you'd feel more indignant if it didn't mean a step towards freedom. #portrait:none
-    	//sfx: clink
+    	~ callSignal("BreakStatue")
     	They pick you up.
 		~ callSignal("ItemRetrieved")
     	“...How're we gonna open the door anyway?” #portrait:adv_curious
