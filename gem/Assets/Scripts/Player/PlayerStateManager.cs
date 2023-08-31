@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Ink.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,10 +26,12 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] float _walkSpeed;
     [SerializeField] float _slowSpeed;
     private float _currentSpeed;
+    public VectorValue StartingPosition;
 
     //ANIMATION
     private Animator _animator;
     private SpriteRenderer _mySpriteRenderer;
+    // private bool _isActive;
 
     //PHYSICS & COLLISIONS
     private Rigidbody2D _myRigidbody;
@@ -38,16 +41,23 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] float _rayDistance;
 
     //INPUTS
+    private PlayerInput _playerInput;
     public PlayerControls _playerControls; //new input system
 
     //INTERACTING OBJECTS
     private Pushable _pushedObj;
-    
+    public TriggerInteract _interactObj;
+
     //AUDIO
     private AudioSource _myAudioSource;
     
     //SIGNALS
     public SignalSO InteractSignal;
+
+    //HIGHLIGHTS
+    private SpriteSelectComponent _spriteSelectComponent;
+
+
     //GETTERS AND SETTERS
     public PlayerBaseState CurrentState{get{return _currentState;} set{_currentState = value;}}
     public PlayerStateFactory States{get{return _states;}}
@@ -62,6 +72,7 @@ public class PlayerStateManager : MonoBehaviour
     public float CurrentSpeed{get{return _currentSpeed;} set{ _currentSpeed = value;}}
     public Animator MyAnimator{get{return _animator;}}
     public SpriteRenderer MySpriteRenderer{get{return _mySpriteRenderer;}}
+    // public bool IsActive {get{return _isActive;} set{_isActive = value;}}
     public Rigidbody2D MyRigidBody{get{return _myRigidbody;}}
     public Vector3 Change{get{return _change;} set{_change = value;}}
     public Collider2D MyCollider{get{return _myCollider;} set{_myCollider = value;}}
@@ -72,16 +83,19 @@ public class PlayerStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        _playerInput = GetComponent<PlayerInput>();
         _playerControls = new PlayerControls();  
         _mySpriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
         _states = new PlayerStateFactory(this);
         _currentState = _states.Move();//creates interact state and pass it in thru factory
         _currentState.EnterState(); //passing in context
+        // _isActive = true;
         _myRigidbody = GetComponent<Rigidbody2D>(); 
         _currentSpeed = _walkSpeed;
         _myCollider = GetComponent<Collider2D>();
         _myAudioSource = GetComponent<AudioSource>();
+        transform.position = StartingPosition.initialValue;
     }
 
     void Start(){
@@ -98,10 +112,15 @@ public class PlayerStateManager : MonoBehaviour
     }
 
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        _currentState.FixedUpdateState();   
+        if(_playerControls.Adventurer.enabled){
+            _currentState.FixedUpdateState();   
+        }else if (_playerControls.Gem.enabled){
+            // Debug.Log("it gem time and it gemed all over the place");   
+        }
     }
     void Update(){
         Vector2 startPos = _rayPoint.transform.position;
@@ -114,6 +133,24 @@ public class PlayerStateManager : MonoBehaviour
             else if(hit.collider.CompareTag("pushable")){
                 Debug.DrawLine(startPos,endPos,Color.red);
             }
+
+            // sorry this is backwards but we have to check if the new highlight
+            // is different from the old highlighted
+            // not-null component and a null new hit component will still not equal
+            // so this will still disable
+            if (_spriteSelectComponent != null && !_spriteSelectComponent.Equals(hit.collider.gameObject.GetComponent<SpriteSelectComponent>())) {
+                _spriteSelectComponent.tryDisable();
+            }
+            
+            // try to get the component
+            _spriteSelectComponent = hit.collider.gameObject.GetComponent<SpriteSelectComponent>();
+
+            // highlight it
+            if (_spriteSelectComponent != null) 
+            {
+                _spriteSelectComponent.tryEnable();
+            }
+
             // Debug.Log("hits: " + hit.collider.name);
             // else{
             //     Debug.DrawLine(startPos,endPos,Color.white);
@@ -121,11 +158,20 @@ public class PlayerStateManager : MonoBehaviour
         }
         else{
             Debug.DrawLine(startPos,endPos,Color.green);
+
+            // if we have something loaded, but we didnt hit anything this update
+            // disable and remove it.
+            if (_spriteSelectComponent != null)
+            {
+                _spriteSelectComponent.tryDisable();
+                _spriteSelectComponent = null;
+            }
         }
     }
     //ACTIONS
     private void Move(InputAction.CallbackContext context)
     {
+        // Debug.Log("moving still on");
         _change = context.ReadValue<Vector2>();
         
     }
@@ -137,10 +183,45 @@ public class PlayerStateManager : MonoBehaviour
 
     void Interact(InputAction.CallbackContext context){
         _isInteractingPressed = context.ReadValueAsButton();
-        if (_isInteractingPressed && CheckObject() == "interactable") {
-            InteractSignal.Raise();
-        }
 
+        // only call on key DOWN
+        if (_isInteractingPressed)
+        {
+            // When walking around, this should check the object to see if we can do something
+            // Usually enter dialogue mode
+            InteractSignal.Raise();
+            
+
+        }
+        
+    }
+
+    //CHECKS IF THE ADV CAN INTERACT WITH A NEAREST ITEM
+    public String CheckObject()
+    {
+        String tag = "";
+        Vector2 startPos = _rayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"), _animator.GetFloat("moveY")) * _rayDistance;
+        RaycastHit2D hit = Physics2D.Linecast(startPos, endPos, 1 << LayerMask.NameToLayer("Default"));
+        if (hit.collider != null)
+        {
+            // Debug.DrawLine(startPos,endPos,Color.red);
+            if (hit.collider.CompareTag("interactable"))
+            {
+                tag = "interactable";
+                _interactObj = hit.collider.GetComponent<TriggerInteract>();
+            }
+            if (hit.collider.CompareTag("pushable"))
+            {
+                tag = "pushable";
+                _pushedObj = hit.collider.GetComponent<Pushable>();
+            }
+            return tag;
+        }
+        else
+        {
+            return tag;
+        }
     }
 
     private void Push(InputAction.CallbackContext context){
@@ -151,33 +232,7 @@ public class PlayerStateManager : MonoBehaviour
         //TODO
     }
 
-    //CHECKS IF THE ADV CAN INTERACT WITH A NEAREST ITEM
-    public String CheckObject(){
-        String tag = "";
-        Vector2 startPos = _rayPoint.transform.position;
-        Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"),_animator.GetFloat("moveY")) * _rayDistance;
-        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
-        if (hit.collider!=null){
-            // Debug.DrawLine(startPos,endPos,Color.red);
-            if(hit.collider.CompareTag("interactable")){
-                tag = "interactable";
-
-                TriggerInteract tryTrigger = hit.collider.GetComponent<TriggerInteract>();
-                if (tryTrigger != null)
-                {
-                    tryTrigger.InteractTrigger();
-                }
-            }
-            if(hit.collider.CompareTag("pushable")){
-                tag = "pushable";
-                _pushedObj = hit.collider.GetComponent<Pushable>();
-            }
-            return tag;
-        }
-        else{
-            return tag;
-        }
-    }
+    
 
     //ENABLES AND DISABLES PLAYERCONTROLS
     void OnEnable(){
@@ -202,5 +257,33 @@ public class PlayerStateManager : MonoBehaviour
         if (_myAudioSource != null){
             _myAudioSource.Play();
         }
+    }
+
+    public void SwitchToGemMode(){
+        // SeizeAdvControl();
+        // _playerInput.actions.FindActionMap("Gem").Enable();
+        // _playerInput.actions.FindActionMap("Adventurer").Disable();
+        _playerControls.Adventurer.Disable();
+        _playerControls.Gem.Enable();
+        _playerInput.SwitchCurrentActionMap("Gem");
+        Debug.Log("SwtichedToGemMode is ran. active actionmaps: " + _playerInput.currentActionMap);
+        // _currentState = _states.GemWiggle();
+        
+    }
+
+    public void SwitchToAdvMode(){
+        _playerControls.Gem.Disable();
+        _playerControls.Adventurer.Enable();
+        _playerInput.SwitchCurrentActionMap("Adventurer");
+        Debug.Log("SwtichedToGemMode is ran. active actionmaps: " + _playerInput.currentActionMap);
+        // _currentState = _states.Move();
+    }
+
+    public void SeizeAdvControl(){
+        _playerControls.Adventurer.Disable();
+    }
+
+    public void ReturnAdvControl(){
+        _playerControls.Adventurer.Enable();
     }
 }

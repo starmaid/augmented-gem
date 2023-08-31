@@ -130,6 +130,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-5037079839300496859
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: adv_smile_nogem
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 379df22a2430869659ca98f17047f802, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-4930684209008659524
 AnimatorState:
   serializedVersion: 6
@@ -250,28 +276,34 @@ AnimatorStateMachine:
     m_Position: {x: 720, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9115248842905439365}
-    m_Position: {x: 755, y: 425, z: 0}
+    m_Position: {x: 50, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 57591727094337994}
-    m_Position: {x: 790, y: 490, z: 0}
+    m_Position: {x: 260, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3250244922021968122}
-    m_Position: {x: 825, y: 555, z: 0}
+    m_Position: {x: 50, y: 510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -414884215491438172}
-    m_Position: {x: 860, y: 620, z: 0}
+    m_Position: {x: 260, y: 510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1672603465873786236}
-    m_Position: {x: 895, y: 685, z: 0}
+    m_Position: {x: 930, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6582830333211317232}
-    m_Position: {x: 930, y: 750, z: 0}
+    m_Position: {x: 930, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3255020030598871547}
-    m_Position: {x: 965, y: 815, z: 0}
+    m_Position: {x: 930, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8808313138137153995}
-    m_Position: {x: 1000, y: 880, z: 0}
+    m_Position: {x: 930, y: 360, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8585684427485237771}
+    m_Position: {x: 965, y: 425, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5037079839300496859}
+    m_Position: {x: 1000, y: 490, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -793,6 +825,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: a808238a5866f4e46a37397294efcb40, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &8585684427485237771
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: adv_smile
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 7fe5524905bc790c995a8d77cece7200, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

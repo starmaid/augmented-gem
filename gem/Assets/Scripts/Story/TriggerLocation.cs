@@ -13,14 +13,17 @@ public class TriggerLocation : MonoBehaviour
     [SerializeField] private string knotName;
 
     private bool playerInRange;
+
+    private bool alreadyCalled;
     private void Awake()
     {
         playerInRange = false;
+        alreadyCalled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (collider.gameObject.CompareTag("Player") && !alreadyCalled)
         {
             playerInRange = true;
             if (overlapSignal != null)
@@ -33,6 +36,7 @@ public class TriggerLocation : MonoBehaviour
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
             }
             print(playerInRange);
+            alreadyCalled = true;
         }
     }
 

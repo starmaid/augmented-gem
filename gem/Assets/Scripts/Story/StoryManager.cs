@@ -4,17 +4,20 @@ using UnityEngine;
 using Ink.Runtime;
 using TMPro;
 using UnityEngine.EventSystems;
-
+using System;
+using UnityEngine.Rendering;
+using System.IO;
+using SuperTiled2Unity;
+using System.Linq.Expressions;
 
 public class StoryManager : MonoBehaviour
 {
     // https://www.youtube.com/watch?v=raQ3iHhE_Kk
+    // https://www.youtube.com/watch?v=KSRpcftVyKg&list=PL3viUl9h9k78KsDxXoAzgQ1yRjhm7p8kl&index=1
     // but modified a bit
 
     [Header("Main Ink File")]
     [SerializeField] private TextAsset mainInkAsset;
-
-    private Story inkStory;
 
     [Header("Story UI")]
     [SerializeField] private SignalSO endInteractSignal;
@@ -23,7 +26,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
-    [SerializeField] private float typingSpeed = 0.04f;
+    [SerializeField] private float defaultTypingSpeed = 0.04f;
+    private float typingSpeed;
     private Animator layoutAnimator;
 
     [Header("Choices UI")]
@@ -37,6 +41,16 @@ public class StoryManager : MonoBehaviour
     private DialogueAudioInfoSO currentAudioInfo;
     private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
     private AudioSource audioSource;
+
+    [Header("Cutscenes")]
+    [SerializeField] public SignalSO resumeCutsceneSignal;
+    [SerializeField] public SignalSO pauseCutsceneSignal;
+    private bool pausedByCutscene;
+    private string prePausedLine;
+    
+    // list of signals you can call from ink
+    // you call them by name
+    private List<SignalSO> inkCallableSignals = new List<SignalSO> { };
 
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
@@ -52,12 +66,35 @@ public class StoryManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
     private const string AUDIO_TAG = "audio";
+    private const string SPEED_TAG = "speed";
 
     private StoryVariables dialogueVariables;
     private InkExternalFunctions inkExternalFunctions;
 
+    string currentLayout;
+    string currentPortrait;
+
+    int stateNameHash;
+
     private void Awake()
     {
+
+        // if (instance == null)
+        // {
+        //     instance = this;
+        // }else if (instance != null)
+        // {
+        //     Debug.LogWarning("Found more than one Dialogue Manager in the scene");
+        // }else if(instance != this)
+        // {
+        //     // If the instance reference has already been set, and this is not the
+        //     // the instance reference, destroy this game object.
+        //     Destroy(gameObject);
+        // }
+
+        // Do not destroy this object, when we load a new scene.
+        // DontDestroyOnLoad(gameObject);
+
         currentStory = new Story(mainInkAsset.text);
         if (instance != null)
         {
@@ -65,11 +102,46 @@ public class StoryManager : MonoBehaviour
         }
         instance = this;
 
+        typingSpeed = defaultTypingSpeed;
+
         dialogueVariables = new StoryVariables(mainInkAsset);
         inkExternalFunctions = new InkExternalFunctions();
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
         currentAudioInfo = defaultAudioInfo;
+
+        pausedByCutscene = false;
+
+        currentStory.BindExternalFunction("pauseForCutscene", () =>
+        {
+            pauseAndHideStory();
+        });    
+        
+        // find and load all signals we could call from ink
+        // this path is relative to the Assets/Resources folder
+        UnityEngine.Object[] loadedResources = Resources.LoadAll("Signals", typeof(SignalSO));
+
+        foreach (UnityEngine.Object obj in loadedResources)
+        {
+            if (obj is SignalSO)
+            {
+                inkCallableSignals.Add( (SignalSO) obj );
+                print(obj.name + " loaded to be called from ink");
+            }
+        }
+
+        // register listener
+        // in the main ink file, you need this line:
+        // EXTERNAL callSignal(signalName)
+        currentStory.BindExternalFunction("callSignal", (string signalName) =>
+        {
+            CallSignalFromInk(signalName);
+        });
+
+        currentStory.BindExternalFunction("goToNext", (int delayTime) =>
+        {
+            StartCoroutine(GoToNext(delayTime));
+        });
     }
 
     public static StoryManager GetInstance()
@@ -95,6 +167,44 @@ public class StoryManager : MonoBehaviour
         }
 
         InitializeAudioInfoDictionary();
+
+        
+    }
+
+    private void CallSignalFromInk(string signalName)
+    {
+        //Debug.Log("Searching for " + signalName);
+
+        foreach (SignalSO inkSignal in inkCallableSignals)
+        {
+            if (signalName.Equals(inkSignal.name))
+            {
+                Debug.Log("Raising " + signalName);
+                inkSignal.Raise();
+                // end now, dont keep searching.
+                return;
+            }
+        }
+        // if we never raised one, we didnt find it.
+        Debug.LogError("Signal " + signalName + " not found.");
+    }
+
+    private IEnumerator GoToNext(int delayTime)
+    {
+        // waits for a period of time
+        // then tries to continue. skips to end of text first.
+        // remember, only works if there isnt a choice or something.
+        
+        // if you wanted, you could put a delay here to let the text finish typing
+
+        // this line will finish typing
+        trySkipDialogue = true;
+
+        // this will wait
+        yield return new WaitForSeconds(delayTime);
+        
+        // this line will take you to the next one        
+        TryContinue();
     }
 
     private void InitializeAudioInfoDictionary()
@@ -123,21 +233,67 @@ public class StoryManager : MonoBehaviour
 
     public void TryContinue()
     {
-        //print("raised contuinue");
+        print("raised contuinue");
 
-        if (!dialogueIsPlaying)
+        if (pausedByCutscene) { 
+            Debug.Log("pausedByCutscene. Return");
+            return; }
+
+        if (!dialogueIsPlaying) { 
+            Debug.Log("!dialogueIsPlaying. Return");
+            return; }
+
+        if (!canContinueToNextLine)
         {
-            return;
+            trySkipDialogue = true;
         }
 
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
+            print("actually continue");
             ContinueStory();
-        } else
-        {
-            trySkipDialogue = true;
         }
+    }
+
+    // this is called from inside ink to pause the story
+    // and allow an animation to play.
+    public void pauseAndHideStory()
+    {
+        // hide panels
+        SoftExitDialogueMode();
+
+        // stop accepting input
+        pausedByCutscene = true;
+
+        // trigger sequence
+        if (resumeCutsceneSignal != null)
+        {
+            resumeCutsceneSignal.Raise();
+        }
+
+        print("paused and hid story");
+    }
+
+    // this function is called by a signal from the timeline
+    // which resumes the story where it was last.
+    public void resumeAndShowStory()
+    {
+        if (pausedByCutscene == false)
+        {
+            throw new Exception("resume called while dialogue is not paused");
+        }
+        // accept input again
+        pausedByCutscene = false;
+
+        // pause the animation
+        if (pauseCutsceneSignal != null)
+        {
+            pauseCutsceneSignal.Raise();
+        }
+
+        print("resumed and play story");
+        SoftEnterDialogueMode();
     }
 
     public void EnterDialogueMode(string knotName)
@@ -145,14 +301,15 @@ public class StoryManager : MonoBehaviour
         print("starting " + knotName);
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
+        trySkipDialogue = false;
         dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
 
         // reset portrait, layout, and speaker
         //displayNameText.text = "???";
-        // portraitAnimator.Play("default");
-        layoutAnimator.Play("none");
+        portraitAnimator.Play("default");
+        //layoutAnimator.Play("none");
 
         currentStory.ChoosePathString(knotName);
         ContinueStory();
@@ -160,8 +317,12 @@ public class StoryManager : MonoBehaviour
 
     public void EnterDialogueMode(string knotName, Animator emoteAnimator)
     {
+        // this overload is currently unused. It allows you to make a character
+        // like jump or something on screen when it talks.
+
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
+        trySkipDialogue = false;
         dialoguePanel.SetActive(true);
     
         dialogueVariables.StartListening(currentStory);
@@ -170,10 +331,28 @@ public class StoryManager : MonoBehaviour
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
         // portraitAnimator.Play("default");
-        layoutAnimator.Play("none");
+        //layoutAnimator.Play("none");
     
         currentStory.ChoosePathString(knotName);
         ContinueStory();
+    }
+
+    // can only call this AFTER A SOFT EXIT
+    private void SoftEnterDialogueMode()
+    {
+        dialogueIsPlaying = true;
+        trySkipDialogue = false;
+        dialoguePanel.SetActive(true);
+        layoutAnimator.Play(currentLayout);
+        portraitAnimator.Play(currentPortrait);
+        TryContinue();
+    }
+
+    private void SoftExitDialogueMode()
+    {
+        dialogueIsPlaying = false;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
     }
 
     private IEnumerator ExitDialogueMode()
@@ -186,6 +365,8 @@ public class StoryManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        pausedByCutscene = false;
+        prePausedLine = null;
 
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
@@ -194,14 +375,38 @@ public class StoryManager : MonoBehaviour
 
     private void ContinueStory()
     {
-        if (currentStory.canContinue)
+        if (prePausedLine != null || currentStory.canContinue)
         {
             // set text for the current dialogue line
             if (displayLineCoroutine != null)
             {
                 StopCoroutine(displayLineCoroutine);
             }
-            string nextLine = currentStory.Continue();
+
+            string nextLine;
+
+            if (prePausedLine !=  null)
+            {
+                nextLine = prePausedLine;
+                prePausedLine = null;
+            } else
+            {
+                nextLine = currentStory.Continue();
+            }
+
+            // if paused, just return and wait for the next time to continue.
+            if (pausedByCutscene)
+            {
+                prePausedLine = nextLine;
+                return;
+            }
+
+            // return speed to default, if it needs to change it will inside handletags
+            typingSpeed = defaultTypingSpeed;
+            // handle tags
+            HandleTags(currentStory.currentTags);
+
+
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
             {
@@ -210,8 +415,6 @@ public class StoryManager : MonoBehaviour
             // otherwise, handle the normal case for continuing the story
             else
             {
-                // handle tags
-                HandleTags(currentStory.currentTags);
                 displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
             }
         }
@@ -314,10 +517,10 @@ public class StoryManager : MonoBehaviour
             else
             {
                 // sound clip
-                int randomIndex = Random.Range(0, dialogueTypingSoundClips.Length);
+                int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
                 soundClip = dialogueTypingSoundClips[randomIndex];
                 // pitch
-                audioSource.pitch = Random.Range(minPitch, maxPitch);
+                audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
             }
 
             // play sound
@@ -354,18 +557,39 @@ public class StoryManager : MonoBehaviour
                     displayNameText.text = tagValue;
                     break;
                 case PORTRAIT_TAG:
-                    if (tagValue == "none"){
-                        layoutAnimator.Play(tagValue);
-                    }else{
-                        layoutAnimator.Play("right"); //does this part run if theres no portrait tags?
-                        portraitAnimator.Play(tagValue);  
+                    // this saves users from having to use the layout tag:
+                    // they can just pass "portrait:none" and it will work.
+
+                    if (tagValue.Equals("none"))
+                    {
+                        // user wants no portrait to be visible.
+                        currentLayout = "none";
+                        currentPortrait = "default";
+                    } else
+                    {
+                        // use the "right" layout, show a portrait from the tag
+                        currentLayout = "right";
+                        currentPortrait = tagValue;
                     }
+
+                    layoutAnimator.Play(currentLayout);
+                    portraitAnimator.Play(currentPortrait);
+
+                    print("played " + currentLayout);
+
                     break;
                 case LAYOUT_TAG:
                     layoutAnimator.Play(tagValue);
                     break;
                 case AUDIO_TAG:
                     SetCurrentAudioInfo(tagValue);
+                    break;
+                case SPEED_TAG:
+                    // set the speed temporarily to a different value
+                    try {
+                        typingSpeed = tagValue.ToFloat();
+                    } catch (Exception e) { print(e.Message); }
+                    
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
@@ -418,6 +642,8 @@ public class StoryManager : MonoBehaviour
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
             print("made choice " + choiceIndex);
+            // discard the continue
+            // String answer = currentStory.Continue();
             ContinueStory();
         }
     }
@@ -437,7 +663,74 @@ public class StoryManager : MonoBehaviour
     // Depending on your game, you may want to save variable state in other places.
     public void OnApplicationQuit()
     {
+        // disabling this because we are using files and manual saves.
+        //dialogueVariables.SaveVariables();
+        SaveFile();
+    }
+
+    public List<string> EnumerateSaves()
+    {
+        // function to get list of save files
+        // to then display them in a menu or something
+        // im realizing i should just focus on making one save file work
+        // so this is UNFINISHED!!!
+
+        List<string> results = new List<string>();
+
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            // webgl doesnt support saves well
+            // and if we update the game also loses all saves
+            // easier to just say download the game.
+            results.Add("***Save data is not supported on web. Please consider downloading the game!");
+            return results;
+        }
+        
+
+        string path = Application.persistentDataPath;
+
+        DirectoryInfo dir = new DirectoryInfo(path);
+        FileInfo[] info = dir.GetFiles("*.json");
+
+        foreach (FileInfo f in info)
+        {
+            print("Found: " + f.Name);
+            results.Add(f.Name);
+        }
+
+        return results;
+
+    }
+
+    public void SaveFile()
+    {
+        // load any unity variables back into ink
         dialogueVariables.SaveVariables();
+
+        // windows + windows editor
+        // %userprofile%\AppData\LocalLow\<companyname>\<productname>
+        // linux
+        // $HOME/.config/unity3d
+        // as i make these updates, i have changed the companyname to
+        // Fragile Ebro Studio
+        string path = Application.persistentDataPath + "/savedata.json";
+
+        string storystate = currentStory.state.ToJson();
+
+        // write to json file
+        File.WriteAllText(path, storystate);
+        Debug.Log("Saved file!");
+
+    }
+
+    public void LoadFile()
+    {
+        string path = Application.persistentDataPath + "/savedata.json";
+
+        string storystate = File.ReadAllText(path);
+
+        currentStory.state.LoadJson(storystate);
+        Debug.Log("Loaded file!");
     }
 
 }

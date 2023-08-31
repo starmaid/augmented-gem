@@ -4,10 +4,10 @@
 
 You see a messy desk. #portrait:adv_annoyed
 
-* Papers
++ Papers
     There are many papers scattered about. #portrait:adv_confused_nogem
     -> Lab_Desk
-* Glassware
++ Glassware
     You see some dirty glassware. #portrait:adv_worried
     -> Lab_Desk
 + Walk away.
@@ -18,7 +18,7 @@ You see a messy desk. #portrait:adv_annoyed
 
 You notice a windowsill and glass pane looking out towards a wall of rock. #portrait:adv_confused
 
-* Whats this doing here? 
++ Whats this doing here? #portrait:adv_worried
     The window doesn't answer you. #portrait:gem_angery
     ++ Walk Away.
         -> DONE
