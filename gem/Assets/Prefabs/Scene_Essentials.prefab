@@ -336,8 +336,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 54.004997, y: 0}
+  m_SizeDelta: {x: 58.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1724443836423227750
 CanvasRenderer:
@@ -939,8 +939,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 200, y: 0}
+  m_SizeDelta: {x: 350, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5705417171107256036
 CanvasRenderer:
@@ -1442,8 +1442,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 52.504997, y: 0}
+  m_SizeDelta: {x: 55.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4333244618737790418
 CanvasRenderer:
@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 617f93543cfd85241b78049ceb4afb94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainInkAsset: {fileID: 4900000, guid: 1516cf992ca9d431b98919165965b4c3, type: 3}
+  mainInkAsset: {fileID: 4900000, guid: d87185437d694233ebb4675385d7212a, type: 3}
   endInteractSignal: {fileID: 11400000, guid: 7afdaf4e5fbf98f84b9d5c1fc3e00801, type: 2}
   dialoguePanel: {fileID: 579435166684159313}
   continueIcon: {fileID: 7528156755162653096}
@@ -2617,8 +2617,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 54.004997, y: 0}
+  m_SizeDelta: {x: 58.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8963578832528855683
 CanvasRenderer:

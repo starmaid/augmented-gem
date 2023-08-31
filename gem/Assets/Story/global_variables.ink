@@ -6,6 +6,8 @@ INCLUDE sections/library.ink
 
 
 EXTERNAL pauseForCutscene()
+EXTERNAL callSignal(signalName)
+EXTERNAL goToNext(delayTime)
 
 // main.ink
 // contains global variables

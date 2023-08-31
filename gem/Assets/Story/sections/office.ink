@@ -129,6 +129,9 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 
 ===1_shelf===
 {stopping:
+	-
+	FOR the sake of convenience, here's the key #portrait:none //DEBUG
+	~has_key = true
     -
     The Adventurer picks up an ornate dagger from the dusty shelf. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
@@ -233,15 +236,17 @@ The adventurer collects the gem. #portrait:none
 === 1_shaped_key ===
 “A lead key, of course, won't hold its shape when you turn it in a lock-- now it's my time to shine! Just hold me out, and...”  #portrait:gem_excited
 [TRANSMUTE using C]
-->DONE
+->1_transmute_key
 
 === 1_transmute_key === //triggered when transmute successful
 // sfx: turned to gold
 ~has_key = true
-The Adventurer watches as the dull gray shape turns gilded, and glittering in the dim, dusty light. They look surprised, but not as impressed as they REALLY ought to. #portrait:none
+The Adventurer watches as the dull gray shape turns gilded, and glittering in the dim, dusty light.
 “Oh! Huh..”  #portrait:adv_curious
+They look surprised, but not as impressed as they REALLY ought to. #portrait:none
 “...” #portrait:gem_neutral
-	*   [You won't throw a fit, not now.] #portrait:gem_angry
+	*   [You won't throw a fit, not now.]
+		"..." #portrait:gem_angry
     	The Adventurer can almost definitely feel your annoyance. Telepathy was never good for keeping your emotions to yourself.  #portrait:gem_angry
     	"Ahh, what's wrong?"  #portrait:adv_worried
     	"...You will see the value in my power eventually."  #portrait:gem_angry
@@ -269,5 +274,6 @@ The Adventurer watches as the dull gray shape turns gilded, and glittering in th
 	"Oh! It worked..." #portrait:adv_curious
 	"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
 	Your total friendship point: {friendship}
+	~callSignal("UnlockDoor")
 	->DONE
 }
