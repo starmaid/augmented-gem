@@ -66,7 +66,7 @@ public class RatMovement: IBeast
         {
             animTimer += Time.deltaTime;
 
-            if (isMoving && animTimer > 0.1) //added isMoving
+            if (animTimer > 0.1) //added isMoving
             {
                 animTimer = 0;
                 spriteRenderer.sprite = getNextTex();

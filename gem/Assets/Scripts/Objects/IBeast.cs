@@ -10,6 +10,7 @@ public abstract class IBeast : MonoBehaviour
     [SerializeField] public Material goldMaterial;
     private TriggerInteract interactState;
     protected bool isEnabled;
+    public bool IsEnabled {get{return isEnabled;}}
 
     protected float flipTimer;
     protected float animTimer;
@@ -43,7 +44,7 @@ public abstract class IBeast : MonoBehaviour
         isEnabled = false;
         spriteRenderer.material = goldMaterial;
         interactState.isEnabled = true;
-        //change tag to interactable
+        this.gameObject.tag="interactable";
         yield return new WaitForSeconds(0f);
     }
 

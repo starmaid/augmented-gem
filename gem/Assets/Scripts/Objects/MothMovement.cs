@@ -45,12 +45,12 @@ public class MothMovement: IBeast
         isEnabled = false;
         spriteRenderer.material = goldMaterial;
 
-        rigidBody2d.velocity = new Vector3(0,-8f,0);
-
-        yield return new WaitForSeconds(0.2f);
-
+        rigidBody2d.gravityScale = 9.8f;
+        //calculate the fall with gravity to give it more weight
+        yield return new WaitForSeconds(0.1f);
+        rigidBody2d.gravityScale = 0;
         rigidBody2d.velocity = Vector3.zero;
-
+        this.gameObject.tag="interactable";
         GetComponent<TriggerInteract>().isEnabled = true;
     }
 

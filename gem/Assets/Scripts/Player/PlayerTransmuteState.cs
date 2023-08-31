@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class PlayerTransmuteState : PlayerBaseState
 {
+    private IBeast _beast;
     public PlayerTransmuteState(PlayerStateManager context, PlayerStateFactory states) : base(context, states)
     {
     }
@@ -37,9 +39,19 @@ public class PlayerTransmuteState : PlayerBaseState
     }
 
     public void HandleTransmute(){
-        if (_context.CheckObject() == "transmutable"){
-            _context.BeastObj.StartCoroutine(_context.BeastObj.transmute()); //if it aint monobehavior it dont let me start coroutine. pretty bs
-            // Debug.Log("Transmuting!" + _context.BeastObj);
+        Vector2 startPos = _context.RayPoint.transform.position;
+        Vector2 endPos = startPos + new Vector2(_context.MyAnimator.GetFloat("moveX"),_context.MyAnimator.GetFloat("moveY")) * _context.RayDistance;
+        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Raycast Detectable"));
+        Debug.DrawLine(startPos,endPos,Color.magenta);
+        if (hit.collider != null){
+            if (hit.collider.CompareTag("transmutable")){
+                _beast = hit.collider.GetComponent<IBeast>();
+                // Debug.Log("check this beast!" + (_beast!=null));
+                if(_beast.IsEnabled){
+                    _beast.StartCoroutine(_beast.transmute());
+                }
+            }
         }
     }
+
 }
