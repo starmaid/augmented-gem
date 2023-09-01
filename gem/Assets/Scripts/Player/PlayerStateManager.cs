@@ -211,7 +211,7 @@ public class PlayerStateManager : MonoBehaviour
         String tag = "";
         Vector2 startPos = _rayPoint.transform.position;
         Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"), _animator.GetFloat("moveY")) * _rayDistance;
-        RaycastHit2D hit = Physics2D.Linecast(startPos, endPos, 1 << LayerMask.NameToLayer("Default"));
+        RaycastHit2D hit = Physics2D.Linecast(startPos, endPos, 1 << LayerMask.NameToLayer("Raycast Detectable"));
         if (hit.collider != null)
         {
             // Debug.DrawLine(startPos,endPos,Color.red);

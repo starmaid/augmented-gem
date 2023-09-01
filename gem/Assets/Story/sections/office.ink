@@ -8,6 +8,7 @@ Maybe besides your memories. Your patience. Your CHARITABILITY.
 You are so. Goddamn. Bored. #speed:0.1
 \-\-and there's nothing you can do about it, besides wait.
 ...until...
+~pauseForCutscene()
 //#SFX: rumbling sound
 “Hm..?” #portrait:gem_statue_neutral
 ~pauseForCutscene()
@@ -24,7 +25,7 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 ~pauseForCutscene()
 
 "I better get their attention while they're still here..."  #portrait:gem_statue_worried
-(wiggle bitch wiggle. press z to wiggle)
+\[Press and hold Z to WIGGLE.\]
 // ~callSignal(WiggleMode)
 ->DONE
 
@@ -34,60 +35,66 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 
 ~pauseForCutscene()
 //#CUTSCENE: The adventurer approaches the Gem, and touches it. 
-//this section does not show : (
+The adventurer approaches the statue, admiring its golden features. Their eyes fall on you, running their fingers along your dust covered, perfect edges.
 This is it! Your way out... Better think twice how you should approach this. #portrait:none
-	+   Greet them in a friendly manner, you can't scare them away! 
-    	"Fine evening, Adventurer! How can I help you?" #portrait:gem_statue_excited
-	+   Be clear and precise. This might be your only opportunity.
+	+   [Greet them in a friendly manner, you can't scare them away! ]
+    	"Fine evening, Adventurer! How can I be of assistance?" #portrait:gem_statue_excited
+	+   [Be clear and precise. This might be your only opportunity.]
     	“Listen closely, Adventurer…” #portrait:gem_statue_neutral
     	“If you want a chance to get out of here, do NOT let go!”
 - ...Ah!!!! Who's there?” #portrait:adv_worried_nogem
-
-~pauseForCutscene()
-//#CUTSCENE: The adventurer backs away a few steps, walks around the office, tries to exit the door (SFX: locked door) and then sits down defeatedly.
 “Wait- don't move! Listen to me!”  #portrait:gem_statue_angry
+~pauseForCutscene()
+
+//#CUTSCENE: The adventurer backs away a few steps
 “Don't hurt me! I didn't stealing anything from you!” #portrait:adv_worried_nogem
-	+   \(The statue can't talk back, Dulbert...\)  #portrait:gem_statue_angry
-	+   \(If there's no contact, I can't talk to them...\)  #portrait:gem_statue_angry
+Damn it! They walked off... #portrait:gem_statue_angry
+	+   \(The statue can't talk back, Dulbert!\)  #portrait:gem_statue_angry
+	+   \(If there's no contact, I can't talk to you!\)  #portrait:gem_statue_angry
 	+   \(Humans are SO. STUPID.\)  #portrait:gem_statue_angry
+-"Ugh, this place is creeping me out..." #portrait:adv_worried_nogem
+"Come on... There's gotta be a way out somewhere..."
+~pauseForCutscene()
+
+//#CUTSCENE: the adventurer walks away.
 //#CUTSCENE: Fade to black.
-- ~pauseForCutscene()
-  You think you blew your chance. #portrait:none
-...
+You think you blew your chances. That human's your key out of this dreadful place. #portrait:none
+You watch as they fiddle with the lock with no finesse of a thief, pry at the door with no strength of a fighter.
+Lucky for you, this adventurer seems far from competent to escape a locked dungeon alone.
+With enough time, they'll eventually come back, begging for your grace and guidance.
+~pauseForCutscene()
+
 //Wait like. a few seconds?
-"..." #portrait:adv_curious_nogem
-// ->DONE
-
-~pauseForCutscene()
-"...hello? Are you still there?" #portrait:adv_neutral_nogem
-	+ \(Damn it. I need to get their attention again.\)
-
+...
+"...hello? Are you still there? Talking statue?"  #portrait:adv_curious_nogem
+<i>Unlucky for you</i>, this is the human that you are stuck with. #portrait:none
 ~pauseForCutscene()
 
-//PLAYER: wiggle time
-//CUTSCENE: the guy notices and approaches the gem.
-- The Adventurer hesitates, then walks back over-- good! --And pokes you. It’ll do. #portrait:none
+//#CUTSCENE: Fade from black.The adventurer is standing at the edge of the 
+Hesitantly, the adventurer walks back over-- good! --And pokes you. It’ll do. #portrait:none
 “DON’T take your hand away! I cannot speak to you otherwise.” #portrait:gem_angry
 “Ah–!” #portrait:adv_worried_nogem
 “...How are you speaking with your mouth closed?”  #portrait:adv_frown_nogem
 “LOOK DOWN FUCKFACE” #portrait:gem_statue_angry
 “You’re… the gem?” #portrait:adv_curious_nogem
-“Indeed! Telepathy, Dulbert.” #portrait:gem_statue_neutral
+“Indeed! Telepathy via contact, Dulbert.” #portrait:gem_statue_neutral
 “...” #portrait:adv_curious_nogem
 “...Oh, I must be losing it.” #portrait:adv_frown_nogem
-“Listen, kid… There are oddities in this world so stupendous that you may never understand with your humble little brain… Not unless you’ve seen them with your own eyes, touched them with your own fingers.” #portrait:gem_statue_excited
+“Listen, kid… There are oddities in this world so stupendous that you may never understand with your humble little brain… "#portrait:gem_statue_excited
+"Not unless you’ve seen them with your own eyes, touched them with your own fingers.”
  “\-\- Which you are in the perfect position to do! You can witness wonderful things here, with ME, if you could just… get me OUT of this shiny little prison!”
 “...”  #portrait:adv_frown_nogem
 You can’t quite tell what they’re thinking, but they seem far too worried about something else to admire your spectacular self. Odd! You’ve always been good with charming humans. Better step up your game...! #portrait:none
 	+   [Threaten them.]"You’re not going to get anywhere alone, Dulbert."  #portrait:gem_statue_neutral
     	“That’s not my name-” #portrait:adv_worried_nogem //#signal:try_continue
+		// ~ goToNext(0.3f) //dont thing this works
     	“I know this mansion like the back of my crystal faces, DULBERT. I have the key to this office gate that you couldn’t budge. My guidance is the best chance you’ve got.” #portrait:gem_statue_angry
     	“But of course, you feel free to go ahead and try it on your own,  fail, stay stuck in here for a thousand years, and then die of BOREDOM.” #portrait:gem_statue_neutral
     	“...DIE?” #portrait:adv_worried_nogem
     	“Oh, right, that too! And probably much, much sooner!” #portrait:gem_statue_excited
     	“...”  #portrait:adv_frown_nogem
     	“Well, tell me when you make up your mind! I’ll be here dozing away, it’s not like it matters to me.” #portrait:gem_statue_neutral
-    	You wiggle once more, pretending to tuck yourself into those golden fingers. #portrait:none
+    	You wiggle once more, pretending to tuck yourself into those golden fingers as comfortably as you can. #portrait:none
     	+ + \(...\)
 			\(...Are they looking?\)#portrait:gem_statue_worried
 	+   [Reassure them.] "Fear not Dulbert, nothing to be concerned about! I know exactly how we could get out of here…“ #portrait:gem_statue_neutral
@@ -103,44 +110,44 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 "..." #portrait:adv_frown_nogem
 “For the first stage of your guided tour, you've got to get me out of this statue.” #portrait:gem_statue_neutral
 “I.. guess so-- how?” #portrait:adv_frown_nogem
-	*   [“There's a dagger, on the shelf over there."]
+	*   “There's a dagger, near the shelf over there." #portrait:gem_statue_neutral
     	~ friendship += 1
     	"If memory serves, that is. Pry me out! Don't take your time.” #portrait:gem_statue_neutral
    	 	“Where? There's.. a lot of stuff in here,” #portrait:adv_curious_nogem
    	 	“That way-- on the right.” #portrait:gem_statue_neutral
    	 	\[MOVE using WASD or ARROW KEYS\] #portrait:none
-    	\[INTERACT using E or Z\]
+    	\[INTERACT using Z\]
 	*   [“I don't CARE, just break it!"]
     	“I don't CARE, just break it! Seems like it should be a familiar enough concept to you!” #portrait:gem_statue_angry
    	 “Fine! I'm sorry about the dumbwaiter...” #portrait:adv_worried_nogem
-    	“It wasn't being used for much. Fine, there might be a dagger on that shelf\-\-that way--” #portrait:gem_statue_neutral
-    	[MOVE using WASD or ARROW KEYS] #portrait:none
-    	[INTERACT using E or Z]
+    	“It wasn't being used for much. Fine, there might be a dagger near that shelf\-\-that way--” #portrait:gem_statue_neutral
+    	\[MOVE using WASD or ARROW KEYS\] #portrait:none
+    	\[INTERACT using Z\]
 -    
 ->DONE
 
 // ===1_begin===
 // The adventurer is stuck in the office!
-// + [check the shelf] -> 1_shelf
+// + [check the shelf] -> 1_dagger
 // + [check the bottles] -> 1_bottles
 // + [check the statue] -> 1_statue
 // + {has_key} [turn gold] -> 1_transmute_key
 // + [check the door] -> 1_door
 
-===1_shelf===
+===1_dagger===
 {stopping:
 	-
 	FOR the sake of convenience, here's the key #portrait:none //DEBUG
 	~has_key = true
     -
-    The Adventurer picks up an ornate dagger from the dusty shelf. #portrait:none
+    The Adventurer picks up an ornate dagger beside a pile of dusty books. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
 	// sfx: shuffle of “item acquired but im lowkey about it also I'm tucking it away”
-	[Open menu using ESC key. Select the dagger from inventory, and then USE in front of the alchemist statue.]
+	// \[Open menu using ESC key. Select the dagger from inventory, and then USE in front of the alchemist statue.\]
 	~ has_dagger = true
 	~ callSignal("ItemRetrieved")
-    -
-    It's just an empty shelf.  #portrait:none
+    // -
+    // It's just an empty shelf.  #portrait:none
 }
 ->DONE
 
