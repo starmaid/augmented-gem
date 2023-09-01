@@ -46,6 +46,7 @@ public class PlayerStateManager : MonoBehaviour
 
     //INTERACTING OBJECTS
     private Pushable _pushedObj;
+    // private IBeast _beast;
     public TriggerInteract _interactObj;
 
     //AUDIO
@@ -77,7 +78,12 @@ public class PlayerStateManager : MonoBehaviour
     public Vector3 Change{get{return _change;} set{_change = value;}}
     public Collider2D MyCollider{get{return _myCollider;} set{_myCollider = value;}}
     // public  MovementAxis MyAxis {get{return _myAxis;} set{_myAxis = value;}}
+
+    public GameObject RayPoint {get{return _rayPoint;}}
+    public float RayDistance {get{return _rayDistance;}}
     public Pushable PushedObj{get{return _pushedObj;} set{_pushedObj = value;}}
+    // public IBeast BeastObj{get{return _beast;} set{_beast = value;}}
+
     public AudioSource MyAudioSource{get{return _myAudioSource;} set{_myAudioSource = value;}}
 
     // Start is called before the first frame update
@@ -125,13 +131,16 @@ public class PlayerStateManager : MonoBehaviour
     void Update(){
         Vector2 startPos = _rayPoint.transform.position;
         Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"),_animator.GetFloat("moveY")) * _rayDistance;
-        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Default"));
+        RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Raycast Detectable"));
         if (hit.collider!=null){
             if(hit.collider.CompareTag("interactable")){
                 Debug.DrawLine(startPos,endPos,Color.yellow);
             }
             else if(hit.collider.CompareTag("pushable")){
                 Debug.DrawLine(startPos,endPos,Color.red);
+            }
+            else{
+                Debug.DrawLine(startPos,endPos,Color.green);
             }
 
             // sorry this is backwards but we have to check if the new highlight
@@ -216,6 +225,11 @@ public class PlayerStateManager : MonoBehaviour
                 tag = "pushable";
                 _pushedObj = hit.collider.GetComponent<Pushable>();
             }
+            // if (hit.collider.CompareTag("transmutable")){
+            //     tag = "transmutable";
+            //     _beast = hit.collider.GetComponent<IBeast>();
+            //     // Debug.Log("check this beast!" + (_beast!=null));
+            // }
             return tag;
         }
         else

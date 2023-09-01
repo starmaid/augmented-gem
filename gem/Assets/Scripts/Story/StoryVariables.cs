@@ -11,7 +11,6 @@ public class StoryVariables
     private const string saveVariablesKey = "INK_VARIABLES";
 
     public StoryVariables(TextAsset loadGlobalsJSON)
-
     {
         // create the story
         globalVariablesStory = new Story(loadGlobalsJSON.text);

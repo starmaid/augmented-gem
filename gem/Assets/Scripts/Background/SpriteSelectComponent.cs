@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class SpriteSelectComponent : MonoBehaviour
 {
-    [SerializeField] public Material newMaterial;
+    // [SerializeField] public Material newMaterial;
+    [SerializeField] public Material intMaterial;
+    [SerializeField] public Material transMaterial;
 
     [Range(0f, 1f)]
     [SerializeField] public float highlightScale = 0.2f;
@@ -41,7 +43,7 @@ public class SpriteSelectComponent : MonoBehaviour
 
             newSpriteComponent = newObject.AddComponent<SpriteRenderer>();
             newSpriteComponent.sprite = mySprite;
-            newSpriteComponent.material = newMaterial;
+            newSpriteComponent.material = intMaterial; //default
             newSpriteComponent.sortingLayerName = "HighlightSprites";
 
             // set it as inactive (we are just setting up!)
@@ -55,6 +57,12 @@ public class SpriteSelectComponent : MonoBehaviour
     {
         if (!highlightEnabled)
         {
+            if(this.CompareTag("interactable")){
+                newSpriteComponent.material = intMaterial;
+            }else if(this.CompareTag("transmutable")){
+                newSpriteComponent.material = transMaterial;
+            }
+
             highlightEnabled = true;
             timer = 0;
             if (newObject != null)
