@@ -15,9 +15,10 @@ public class TriggerInteract : MonoBehaviour
     [Header("Ink")]
     //[SerializeField] private TextAsset inkJSON;
     [SerializeField] private string knotName;
+    // [SerializeField] private BooleanSO isRetrieved;
 
-    private bool playerInRange;
-    private void Awake()
+    public bool playerInRange;
+    void Awake()
     {
         playerInRange = false;
     }
@@ -76,12 +77,6 @@ public class TriggerInteract : MonoBehaviour
                 //  Debug.Log("ending overlap!");
                 endOverlapSignal.Raise();
             }
-        }
-    }
-
-    public void GetPickedUp(){
-        if(playerInRange){
-            
         }
     }
 }
