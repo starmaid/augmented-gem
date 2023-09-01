@@ -2,31 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MothMovement: MonoBehaviour
+public class MothMovement: IBeast
 {
-    [SerializeField] public List<Sprite> texFrames;
-    private int tex_index = 0;
+    // [SerializeField] public List<Sprite> texFrames;
+    // private int tex_index = 0;
 
-    [SerializeField] public Material goldMaterial;
+    // [SerializeField] public Material goldMaterial;
 
-    private bool isEnabled;
+    // private bool isEnabled;
 
-    private float flipTimer;
-    private float animTimer;
-    private float moveTimer;
-    private float moveDirectionAngle;
-    private Vector3 moveDirection;
-    private float moveSpeed;
-    private bool isMoving;
+    // private float flipTimer;
+    // private float animTimer;
+    // private float moveTimer;
+    // private float moveDirectionAngle;
+    // private Vector3 moveDirection;
+    // private float moveSpeed;
+    // private bool isMoving;
 
     private float yOffset;
     private float xOffset;
 
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rigidBody2d;
+    // private SpriteRenderer spriteRenderer;
+    // private Rigidbody2D rigidBody2d;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidBody2d = GetComponent<Rigidbody2D>();
@@ -34,39 +34,39 @@ public class MothMovement: MonoBehaviour
         flipTimer = 2;
         animTimer = 0;
         moveSpeed = 1.5f;
-        xOffset = 0;
-        yOffset = 0;
+        xOffset = 0;//
+        yOffset = 0;//
         isEnabled = true;
     }
 
-    public IEnumerator transmute()
+    public override IEnumerator transmute()
     {
         rigidBody2d.velocity = Vector3.zero;
         isEnabled = false;
         spriteRenderer.material = goldMaterial;
 
-        rigidBody2d.velocity = new Vector3(0,-8f,0);
-
-        yield return new WaitForSeconds(0.4f);
-
+        rigidBody2d.gravityScale = 9.8f;
+        //calculate the fall with gravity to give it more weight
+        yield return new WaitForSeconds(0.1f);
+        rigidBody2d.gravityScale = 0;
         rigidBody2d.velocity = Vector3.zero;
-
+        this.gameObject.tag="interactable";
         GetComponent<TriggerInteract>().isEnabled = true;
     }
 
-    private Sprite getNextTex()
-    {
-        tex_index++;
-        if (tex_index >= texFrames.Count)
-        {
-            tex_index = 0;
-        }
+    // protected override Sprite getNextTex()
+    // {
+    //     tex_index++;
+    //     if (tex_index >= texFrames.Count)
+    //     {
+    //         tex_index = 0;
+    //     }
 
-        return texFrames[tex_index];
-    }
+    //     return texFrames[tex_index];
+    // }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         //if (isEnabled && Time.time > 5)
         //{
@@ -132,4 +132,5 @@ public class MothMovement: MonoBehaviour
             transform.position += new Vector3(xOffset, yOffset, 0) * Time.deltaTime;
         }
     }
+
 }

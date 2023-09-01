@@ -25,6 +25,8 @@ public class PlayerMoveState : PlayerBaseState
         } else if (_context.IsPushingPressed && _context.CheckObject() == "pushable"){
             SwitchState(_states.Push());
 
+        } else if (_context.IsTransmutingPressed){
+            SwitchState(_states.Transmute());
         }
     }
 
