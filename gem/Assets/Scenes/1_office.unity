@@ -4603,7 +4603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9
+      value: -9.5
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4646,8 +4646,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7171305073720839198, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171305073720839198, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7171305073720839198, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5242,11 +5250,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7856291077241364463, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7856291077241364463, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
       propertyPath: m_SortingLayerID
-      value: 1363641961
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6503195483585513571, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
       propertyPath: m_Layer
@@ -5300,6 +5308,9 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: -876546973899608171, guid: 3c1c32b342e23304d87bf7650c7e5fd2, type: 3}
+    - target: {fileID: 3685528219917358588, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
     - target: {fileID: 1884892029873759257, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
       propertyPath: m_Layer
       value: 2
