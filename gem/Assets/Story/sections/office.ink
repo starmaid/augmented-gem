@@ -207,6 +207,9 @@ The adventurer collects the gem. #portrait:none
 - not has_dagger:
 	{cycle:
 	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
+	  for simplicity debug: ur getting the dagger and the gem
+	  ~ has_dagger = true
+	  ~ has_gem = true
 	- (This human is not very bright...) #portrait:gem_angry
 	- (ARGHHH!!!!!!) #portrait:gem_angry
 	}
@@ -218,23 +221,12 @@ The adventurer collects the gem. #portrait:none
     	“You're gonna make a key out of …” #portrait:adv_confused
     	They pick up a jar and squint to read it's faded label,
     	“...salt??”
-    	“Transmutation works only on pure substances and living things, and we need something malleable enough to shape.” #portrait:gem_neutral
-    	“Perhaps lead will do.. over there,” #portrait:gem_neutral
-    	The Adventurer collects a small piece of lead. #portrait:none
-    	//#SFX: shuffle of “item acquired but im lowkey about it also im tucking it away”
-    	“Shape it into a key, now.”  #portrait:gem_neutral
-    	//#SFX:: schlopr. Idk buttons please come up with something
-    	With some concentration, The Adventurer molds the lump of lead into a key. #portrait:none
-    	//#CUTSCENE: there is a key sprite on the table
-    	*   “Perfect!”  #portrait:gem_excited
-        	~ friendship += 1
-   		 “I’ve had some clay shaping experiences in my life.”  #portrait:adv_happy
-   		 “Ah, you a master poterie?” #portrait:gem_excited
-   		 “... No, I mean I’ve played with mud when I was a child.” #portrait:adv_frown
-   		 -> 1_shaped_key
-    	*   “Hm. It'll do.”  #portrait:gem_neutral
-   		 “...Alright.” #portrait:adv_frown
-   		 -> 1_shaped_key
+		“Transmutation works only on pure substances and living things, and we need something malleable enough to shape.” #portrait:gem_neutral
+		“Perhaps lead will do.. over there,” #portrait:gem_neutral
+		The Adventurer collects a small piece of lead. #portrait:none
+		“Shape it into a key, now.”  #portrait:gem_neutral	
+
+    	->1_check_bottles
     	-
     	"There sure is a lot of stuff here..." #portrait:adv_curious
     	"This isn't even half of it! Don't worry, we'll see more once we're out of here." #portrait:gem_excited
@@ -242,10 +234,31 @@ The adventurer collects the gem. #portrait:none
 }
 ->DONE
 
+=== 1_check_bottles ===
+
+~callSignal("BeginSceneKeyshaping")
+~pauseForCutscene()
+//#SFX:: schlopr. Idk buttons please come up with something
+//#CUTSCENE: there is a key sprite on the table
+With some concentration, The Adventurer molds the lump of lead into a key. #portrait:none
+~pauseForCutscene()
+"How is this?" #portrait:adv_neutral
+"Hmm..."#portrait:gem_neutral
+*   “Perfect!”  #portrait:gem_excited
+	~ friendship += 1
+	“I’ve had some clay shaping experiences in my life.”  #portrait:adv_happy
+	“Ah, you a master poterie?” #portrait:gem_excited
+	“... No, I mean I’ve played with mud when I was a child.” #portrait:adv_frown
+	-> 1_shaped_key
+*   “Hm. It'll do.”  #portrait:gem_neutral
+	“...Alright.” #portrait:adv_frown
+	-> 1_shaped_key
+->DONE
+
 === 1_shaped_key ===
 “A lead key, of course, won't hold its shape when you turn it in a lock-- now it's my time to shine! Just hold me out, and...”  #portrait:gem_excited
 [TRANSMUTE using C]
-->1_transmute_key
+->DONE
 
 === 1_transmute_key === //triggered when transmute successful
 // sfx: turned to gold
