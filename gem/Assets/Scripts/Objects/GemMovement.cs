@@ -40,11 +40,12 @@ public class GemMovement : MonoBehaviour
     private IEnumerator GetNoticed()
     {
         isNoticed = true;
-        yield return new WaitForSeconds(5f); //amount of seconds to wait
+        yield return new WaitForSeconds(3f); //amount of seconds to wait
         if(GetNoticedSignal != null){
             GetNoticedSignal.Raise();
             // StoryManager.pauseAndHideStory();
             Debug.Log("FOUND YOU !");
+            player.GetComponent<PlayerStateManager>().SwitchToAdvMode();
         }
     }
 }

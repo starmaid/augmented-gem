@@ -784,7 +784,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""da0276ac-6e2d-4d58-a4c3-8abf9ab1e9fb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -793,7 +793,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""b4d250b1-659f-4640-96f6-cf8605025dc1"",
                     ""path"": ""<Keyboard>/z"",
-                    ""interactions"": ""Hold(duration=0.2)"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Wiggle"",
