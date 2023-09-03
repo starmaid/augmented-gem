@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class BasicBeast : MonoBehaviour
+public class BasicBeast : ITransmutable
 {
-    protected Transmutable myTransmutable;
+    [Header("Golding")]
+    [SerializeField] public Material goldMaterial;
+    // protected TriggerInteract interactState;
+    // public AudioSource transmuteSFX;
+    // protected bool isEnabled;
+  
+    // protected SpriteRenderer mySpriteRenderer;
+
+    // protected Transmutable myTransmutable;
+
+    [Header("Animation")]
     [SerializeField] public List<Sprite> texFrames;
     protected int tex_index = 0;
 
-    // [SerializeField] public Material goldMaterial;
-    // private TriggerInteract interactState;
-    // protected bool isEnabled;
-    // public bool IsEnabled {get{return isEnabled;}}
-
-    protected SpriteRenderer mySpriteRenderer;
+    [Header("Movement")]
     public Rigidbody2D myRigidBody;
     // private bool isEnabled;
     protected float flipTimer;
@@ -24,67 +29,56 @@ public class BasicBeast : MonoBehaviour
     protected Vector3 moveDirection;
     protected float moveSpeed;
     protected bool isMoving;
-    public bool isEnabled;
-
-    // protected SpriteRenderer spriteRenderer;
-    // protected Rigidbody2D rigidBody2d;
-    // public BasicBeast(float fTimer, float mSpeed, float aTimer){
-    //     myTransmutable = new Transmutable();
-    //     // flipTimer = 2;
-    //     // moveSpeed = 1.5f;
-    //     // animTimer = 0; 
-    //     flipTimer = fTimer;
-    //     moveSpeed = mSpeed;
-    //     animTimer = aTimer;   
-    //     RigidBody2d = myTransmutable.RigidBody2d;
-    //     isEnabled = myTransmutable.IsEnabled;
-    // }
 
     protected virtual void Start()
     {
-        myTransmutable = GetComponent<Transmutable>();
-        // myTransmutable.Awake();
+        isEnabled = true;
+        // myTransmutable = GetComponent<Transmutable>();
         myRigidBody = GetComponent<Rigidbody2D>();
-        mySpriteRenderer = myTransmutable.SpriteRenderer;
-        // mySpriteRenderer = GetComponent<SpriteRenderer>();
-        isEnabled = myTransmutable.IsEnabled;
-        // Debug.Log("Awake is called from BasicBeast.cs, isenabled = " + isEnabled);
-
-        // myTransmutable = new Transmutable();
-
-        // spriteRenderer = GetComponent<SpriteRenderer>();
-        // rigidBody2d = GetComponent<Rigidbody2D>();
-        // interactState = GetComponent<TriggerInteract>();
-        // transmuteSFX = Resources.Load<AudioSource>("Audio/SFX/Player/transmute.wav");
-        // isMoving = false;
-        // isEnabled = true;
-        // flipTimer = 2;
-        // moveSpeed = 1.5f;
-        // animTimer = 0;   
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        interactState = GetComponent<TriggerInteract>();
+        // mySpriteRenderer = myTransmutable.SpriteRenderer;
+        // isEnabled = myTransmutable.IsEnabled;
     }
 
-    public virtual IEnumerator Transmute(){
-        yield return new WaitForSeconds(0f);
-        if (myTransmutable.IsEnabled){
-            StartCoroutine(myTransmutable.Transmute());
-            myRigidBody.velocity = Vector3.zero;
-            isMoving = false;
-            isEnabled = myTransmutable.IsEnabled;
-            Debug.Log("transmute called in BasicBeast.cs, isenabled = " + isEnabled);
-        }
-    }
+    // public virtual IEnumerator Transmute(){
+    //     // yield return new WaitForSeconds(0f);
+    //     if (isEnabled){
+    //         isEnabled = false;
+    //         mySpriteRenderer.material = goldMaterial;
+    //         interactState.isEnabled = true;
+    //         this.gameObject.tag="interactable";
+    //         transmuteSFX.Play();
+    //         yield return new WaitForSeconds(transmuteSFX.clip.length);
+    //         // StartCoroutine(Transmute());
+    //         myRigidBody.velocity = Vector3.zero;
+    //         isMoving = false;
+    //         // isEnabled = myTransmutable.IsEnabled;
+    //     }
+    // }
 
-    protected virtual Sprite getNextTex(){
+    protected virtual Sprite GetNextTex(){
         tex_index++;
         if (tex_index >= texFrames.Count)
         {
             tex_index = 0;
         }
-
         return texFrames[tex_index];
     }
 
-
-
-
+    public override IEnumerator Transmute()
+    {
+        if (isEnabled){
+            isEnabled = false;
+            mySpriteRenderer.material = goldMaterial;
+            interactState.isEnabled = true;
+            this.gameObject.tag="interactable";
+            transmuteSFX.Play();
+            yield return new WaitForSeconds(transmuteSFX.clip.length);
+            // StartCoroutine(Transmute());
+            myRigidBody.velocity = Vector3.zero;
+            isMoving = false;
+            // isEnabled = myTransmutable.IsEnabled;
+        }
+    }
 }

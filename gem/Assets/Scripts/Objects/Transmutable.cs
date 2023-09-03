@@ -2,32 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Transmutable : MonoBehaviour
+public class Transmutable : ITransmutable
 {
-    [SerializeField] public Material goldMaterial;
-    protected TriggerInteract interactState;
-    public AudioSource transmuteSFX;
-    protected bool isEnabled;
-    public bool IsEnabled {get{return isEnabled;}}
-    [HideInInspector] public SpriteRenderer SpriteRenderer;
-    // public Rigidbody2D RigidBody2d;
-    
-    void Awake(){
+    [SerializeField] public List<Sprite> texFrames;
+
+    void Start()
+    {
         isEnabled = true;
-        SpriteRenderer = GetComponent<SpriteRenderer>();
-        // RigidBody2d = GetComponent<Rigidbody2D>();
         interactState = GetComponent<TriggerInteract>();
-        // Debug.Log("Awake is called from Transmutable.cs, isenabled = " + isEnabled);
-        // transmuteSFX = Resources.Load<AudioSource>("Audio/SFX/Player/transmute.wav");
+        mySpriteRenderer = GetComponent<SpriteRenderer>();
+        mySpriteRenderer.sprite = texFrames[0];
     }
 
-    public IEnumerator Transmute(){
-        isEnabled = false;
-        SpriteRenderer.material = goldMaterial;
-        interactState.isEnabled = true;
-        this.gameObject.tag="interactable";
-        transmuteSFX.Play();
-        yield return new WaitForSeconds(transmuteSFX.clip.length);
-        Debug.Log("transmute called in Transmutable.cs, isenabled = " + isEnabled);
+    public override IEnumerator Transmute()
+    {
+        if(isEnabled){
+            isEnabled = false;
+            //change the image to something else
+            mySpriteRenderer.sprite = texFrames[1];
+            interactState.isEnabled = true;
+            transmuteSFX.Play();
+            yield return new WaitForSeconds(transmuteSFX.clip.length);
+        }
     }
 }

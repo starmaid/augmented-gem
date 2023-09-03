@@ -4,92 +4,35 @@ using UnityEngine;
 
 public class MothMovement: BasicBeast
 {
-    // [SerializeField] public List<Sprite> texFrames;
-    // private int tex_index = 0;
-
-    // [SerializeField] public Material goldMaterial;
-    // protected SpriteRenderer spriteRenderer;
-    // public Rigidbody2D rigidBody2d;
-    // private bool isEnabled;
-
-    // private float flipTimer;
-    // private float animTimer;
-    // private float moveTimer;
-    // private float moveDirectionAngle;
-    // private Vector3 moveDirection;
-    // private float moveSpeed;
-    // private BasicBeast myBeast;
-
     private float yOffset;
     private float xOffset;
 
-    // public MothMovement() : base(2, 0, 1.5f)
-    // {
-        // spriteRenderer = base.myTransmutable.SpriteRenderer;
-        // rigidBody2d = base.myTransmutable.RigidBody2d;
-        // isEnabled = base.myTransmutable.IsEnabled;
-    // }
-
-    // private SpriteRenderer spriteRenderer;
-    // private Rigidbody2D rigidBody2d;
-
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        // myTransmutable = GetComponent<Transmutable>();
-        // // myTransmutable.Awake();
-        // myRigidBody = GetComponent<Rigidbody2D>();
-        // mySpriteRenderer = myTransmutable.SpriteRenderer;
-        // // mySpriteRenderer = GetComponent<SpriteRenderer>();
-        // isEnabled = myTransmutable.IsEnabled;
-        // this = new MothMovement(2f,0f,1.5f);
         flipTimer = 2;
         animTimer = 0;
         moveSpeed = 1.5f;
-        xOffset = 0;//
-        yOffset = 0;//
+        xOffset = 0; //
+        yOffset = 0; //
     }
 
     public override IEnumerator Transmute()
     {
         StartCoroutine(base.Transmute());
-        // rigidBody2d.velocity = Vector3.zero;
-        // isEnabled = false;
-        // spriteRenderer.material = goldMaterial;
 
-        myRigidBody.gravityScale = 9.8f;
         //calculate the fall with gravity to give it more weight
+        myRigidBody.gravityScale = 9.8f;
         yield return new WaitForSeconds(0.1f);
         myRigidBody.gravityScale = 0;
         myRigidBody.velocity = Vector3.zero;
         Debug.Log("transmute called in MothMovement.cs");
         Debug.Log("isenabled:" + isEnabled);
-    
-        // this.gameObject.tag="interactable";
-        // GetComponent<TriggerInteract>().isEnabled = true;
-        // transmuteSFX.Play();
-        // yield return new WaitForSeconds(transmuteSFX.clip.length);
     }
-
-    // protected override Sprite getNextTex()
-    // {
-    //     tex_index++;
-    //     if (tex_index >= texFrames.Count)
-    //     {
-    //         tex_index = 0;
-    //     }
-
-    //     return texFrames[tex_index];
-    // }
-
+//i just lost the game
     // Update is called once per frame
     void Update()
     {
-        //if (isEnabled && Time.time > 5)
-        //{
-        //    StartCoroutine(transmute());
-        //}
 
         if (isEnabled)
         {
@@ -98,7 +41,7 @@ public class MothMovement: BasicBeast
             if (animTimer > 0.1)
             {
                 animTimer = 0;
-                mySpriteRenderer.sprite = getNextTex();
+                mySpriteRenderer.sprite = GetNextTex();
             }
 
             xOffset = Mathf.Sin(Time.time * 10) * 2f;
