@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerTransmuteState : PlayerBaseState
 {
-    private IBeast _beast;
+    private BasicBeast _beast;
     public PlayerTransmuteState(PlayerStateManager context, PlayerStateFactory states) : base(context, states)
     {
     }
@@ -45,10 +45,10 @@ public class PlayerTransmuteState : PlayerBaseState
         Debug.DrawLine(startPos,endPos,Color.magenta);
         if (hit.collider != null){
             if (hit.collider.CompareTag("transmutable")){
-                _beast = hit.collider.GetComponent<IBeast>();
+                _beast = hit.collider.GetComponent<BasicBeast>();
                 // Debug.Log("check this beast!" + (_beast!=null));
-                if(_beast.IsEnabled){
-                    _beast.StartCoroutine(_beast.transmute());
+                if(_beast.isEnabled){
+                    _beast.StartCoroutine(_beast.Transmute());
                 }
             }
         }

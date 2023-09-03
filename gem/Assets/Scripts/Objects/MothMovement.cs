@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MothMovement: IBeast
+public class MothMovement: BasicBeast
 {
     // [SerializeField] public List<Sprite> texFrames;
     // private int tex_index = 0;
 
     // [SerializeField] public Material goldMaterial;
-
+    // protected SpriteRenderer spriteRenderer;
+    // public Rigidbody2D rigidBody2d;
     // private bool isEnabled;
 
     // private float flipTimer;
@@ -17,10 +18,17 @@ public class MothMovement: IBeast
     // private float moveDirectionAngle;
     // private Vector3 moveDirection;
     // private float moveSpeed;
-    // private bool isMoving;
+    // private BasicBeast myBeast;
 
     private float yOffset;
     private float xOffset;
+
+    // public MothMovement() : base(2, 0, 1.5f)
+    // {
+        // spriteRenderer = base.myTransmutable.SpriteRenderer;
+        // rigidBody2d = base.myTransmutable.RigidBody2d;
+        // isEnabled = base.myTransmutable.IsEnabled;
+    // }
 
     // private SpriteRenderer spriteRenderer;
     // private Rigidbody2D rigidBody2d;
@@ -28,30 +36,40 @@ public class MothMovement: IBeast
     // Start is called before the first frame update
     protected override void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidBody2d = GetComponent<Rigidbody2D>();
-        isMoving = false;
+        base.Start();
+        // myTransmutable = GetComponent<Transmutable>();
+        // // myTransmutable.Awake();
+        // myRigidBody = GetComponent<Rigidbody2D>();
+        // mySpriteRenderer = myTransmutable.SpriteRenderer;
+        // // mySpriteRenderer = GetComponent<SpriteRenderer>();
+        // isEnabled = myTransmutable.IsEnabled;
+        // this = new MothMovement(2f,0f,1.5f);
         flipTimer = 2;
         animTimer = 0;
         moveSpeed = 1.5f;
         xOffset = 0;//
         yOffset = 0;//
-        isEnabled = true;
     }
 
-    public override IEnumerator transmute()
+    public override IEnumerator Transmute()
     {
-        rigidBody2d.velocity = Vector3.zero;
-        isEnabled = false;
-        spriteRenderer.material = goldMaterial;
+        StartCoroutine(base.Transmute());
+        // rigidBody2d.velocity = Vector3.zero;
+        // isEnabled = false;
+        // spriteRenderer.material = goldMaterial;
 
-        rigidBody2d.gravityScale = 9.8f;
+        myRigidBody.gravityScale = 9.8f;
         //calculate the fall with gravity to give it more weight
         yield return new WaitForSeconds(0.1f);
-        rigidBody2d.gravityScale = 0;
-        rigidBody2d.velocity = Vector3.zero;
-        this.gameObject.tag="interactable";
-        GetComponent<TriggerInteract>().isEnabled = true;
+        myRigidBody.gravityScale = 0;
+        myRigidBody.velocity = Vector3.zero;
+        Debug.Log("transmute called in MothMovement.cs");
+        Debug.Log("isenabled:" + isEnabled);
+    
+        // this.gameObject.tag="interactable";
+        // GetComponent<TriggerInteract>().isEnabled = true;
+        // transmuteSFX.Play();
+        // yield return new WaitForSeconds(transmuteSFX.clip.length);
     }
 
     // protected override Sprite getNextTex()
@@ -66,7 +84,7 @@ public class MothMovement: IBeast
     // }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
         //if (isEnabled && Time.time > 5)
         //{
@@ -80,7 +98,7 @@ public class MothMovement: IBeast
             if (animTimer > 0.1)
             {
                 animTimer = 0;
-                spriteRenderer.sprite = getNextTex();
+                mySpriteRenderer.sprite = getNextTex();
             }
 
             xOffset = Mathf.Sin(Time.time * 10) * 2f;
@@ -100,16 +118,16 @@ public class MothMovement: IBeast
             }
             else
             {
-                rigidBody2d.velocity = Vector3.zero;
+                myRigidBody.velocity = Vector3.zero;
                 flipTimer -= Time.deltaTime;
 
                 if (xOffset > 0)
                 {
-                    spriteRenderer.flipX = true;
+                    mySpriteRenderer.flipX = true;
                 }
                 else
                 {
-                    spriteRenderer.flipX = false;
+                    mySpriteRenderer.flipX = false;
                 }
 
                 if (flipTimer < 0)
@@ -121,11 +139,11 @@ public class MothMovement: IBeast
                     moveDirection = new Vector3(Mathf.Cos(moveDirectionAngle), Mathf.Sin(moveDirectionAngle), 0);
                     if (Mathf.Cos(moveDirectionAngle) > 0)
                     {
-                        spriteRenderer.flipX = true;
+                        mySpriteRenderer.flipX = true;
                     }
                     else
                     {
-                        spriteRenderer.flipX = false;
+                        mySpriteRenderer.flipX = false;
                     }
                 }
             }
