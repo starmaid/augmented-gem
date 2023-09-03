@@ -30,10 +30,12 @@ public class SceneTransition : MonoBehaviour
         // Debug.Log ("wanna go through the door? " + Unlocked.initialValue + Unlocked + unlocked);
         if(other.CompareTag("Player")&& !other.isTrigger && Unlocked.initialValue){
             if (Application.CanStreamedLevelBeLoaded(sceneName)){
+                Debug.Log("Calling save from SceneTransition");
                 StoryManager.GetInstance().SaveFile();
                 currentPlayerPos.initialValue = transportTo.initialValue;
                 SceneManager.LoadScene(sceneName);
-                StoryManager.GetInstance().LoadFile();
+                // Calling load still acts on the current storymanager - scene hasnt changed
+                //StoryManager.GetInstance().LoadFile();
             }
             else{
                 Debug.LogError(sceneName + " is not found");
