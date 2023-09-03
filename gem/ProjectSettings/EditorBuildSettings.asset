@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Office_Test.unity
     guid: 4ba20aa3bfcfd1d0e96f74abfb617694
   - enabled: 1
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/4_south_hall.unity
     guid: b8d523cca39b48f4f8e869865153e169
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Playground.unity
     guid: 428131f5024c4ef4794198aaeb0e866d
   m_configObjects: {}
