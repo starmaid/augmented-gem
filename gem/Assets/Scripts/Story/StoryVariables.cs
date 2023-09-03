@@ -12,6 +12,8 @@ public class StoryVariables
 
     public StoryVariables(TextAsset loadGlobalsJSON)
     {
+        Debug.LogWarning("dont use this override. use the other one.");
+
         // create the story
         globalVariablesStory = new Story(loadGlobalsJSON.text);
         // if we have saved data, load it
@@ -22,6 +24,19 @@ public class StoryVariables
         // }
 
         // initialize the dictionary
+        variables = new Dictionary<string, Ink.Runtime.Object>();
+        foreach (string name in globalVariablesStory.variablesState)
+        {
+            Ink.Runtime.Object value = globalVariablesStory.variablesState.GetVariableWithName(name);
+            variables.Add(name, value);
+            //Debug.Log("Initialized global dialogue variable: " + name + " = " + value);
+        }
+    }
+
+    public StoryVariables(ref Story story)
+    {
+        globalVariablesStory = story;
+
         variables = new Dictionary<string, Ink.Runtime.Object>();
         foreach (string name in globalVariablesStory.variablesState)
         {
@@ -72,6 +87,14 @@ public class StoryVariables
         foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
         {
             story.variablesState.SetGlobal(variable.Key, variable.Value);
+        }
+    }
+
+    public void check()
+    {
+        foreach (var variable in variables)
+        {
+            Debug.Log(variable.Key + ": " + variable.Value);
         }
     }
 

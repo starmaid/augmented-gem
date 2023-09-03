@@ -18,6 +18,7 @@ public class StoryManager : MonoBehaviour
 
     [Header("Main Ink File")]
     [SerializeField] private TextAsset mainInkAsset;
+    [SerializeField] public bool loadOnStart = true;
 
     [Header("Story UI")]
     [SerializeField] private SignalSO endInteractSignal;
@@ -99,6 +100,8 @@ public class StoryManager : MonoBehaviour
         Application.targetFrameRate = 30;
 
         currentStory = new Story(mainInkAsset.text);
+        dialogueVariables = new StoryVariables(ref currentStory);
+        
         if (instance != null)
         {
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
@@ -107,7 +110,9 @@ public class StoryManager : MonoBehaviour
 
         typingSpeed = defaultTypingSpeed;
 
-        dialogueVariables = new StoryVariables(mainInkAsset);
+        //dialogueVariables = new StoryVariables(mainInkAsset);
+        // I made an override that uses the current story
+        
         inkExternalFunctions = new InkExternalFunctions();
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
@@ -130,7 +135,7 @@ public class StoryManager : MonoBehaviour
             if (obj is SignalSO)
             {
                 inkCallableSignals.Add( (SignalSO) obj );
-                print(obj.name + " loaded to be called from ink");
+                //print(obj.name + " loaded to be called from ink");
             }
         }
 
@@ -155,6 +160,11 @@ public class StoryManager : MonoBehaviour
 
     private void Start()
     {
+        if (loadOnStart)
+        {
+            LoadFile();
+        }
+
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         
@@ -238,7 +248,7 @@ public class StoryManager : MonoBehaviour
 
     public void TryContinue()
     {
-        print("raised contuinue");
+        //print("raised contuinue");
 
         if (pausedByCutscene) { 
             Debug.Log("pausedByCutscene. Return");
@@ -256,7 +266,7 @@ public class StoryManager : MonoBehaviour
         if (canContinueToNextLine
             && currentStory.currentChoices.Count == 0)
         {
-            print("actually continue");
+            //print("actually continue");
             ContinueStory();
         }
     }
@@ -277,7 +287,7 @@ public class StoryManager : MonoBehaviour
             resumeCutsceneSignal.Raise();
         }
 
-        print("paused and hid story");
+        //print("paused and hid story");
     }
 
     // this function is called by a signal from the timeline
@@ -297,13 +307,13 @@ public class StoryManager : MonoBehaviour
             pauseCutsceneSignal.Raise();
         }
 
-        print("resumed and play story");
+        //print("resumed and play story");
         SoftEnterDialogueMode();
     }
 
     public void EnterDialogueMode(string knotName)
     {
-        print("starting " + knotName);
+        //print("starting " + knotName);
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         trySkipDialogue = false;
@@ -593,7 +603,7 @@ public class StoryManager : MonoBehaviour
                     //layoutAnimator.Play(currentLayout);
                     //portraitAnimator.Play(currentPortrait);
 
-                    print("played " + currentLayout);
+                    //print("played " + currentLayout);
 
                     break;
                 case LAYOUT_TAG:
@@ -660,7 +670,7 @@ public class StoryManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
             // NOTE: The below two lines were added to fix a bug after the Youtube video was made
-            print("made choice " + choiceIndex);
+            //print("made choice " + choiceIndex);
             // discard the continue
             // String answer = currentStory.Continue();
             ContinueStory();
@@ -713,7 +723,7 @@ public class StoryManager : MonoBehaviour
 
         foreach (FileInfo f in info)
         {
-            print("Found: " + f.Name);
+            //print("Found: " + f.Name);
             results.Add(f.Name);
         }
 
@@ -748,7 +758,15 @@ public class StoryManager : MonoBehaviour
 
         string storystate = File.ReadAllText(path);
 
+        // I dont know why the state isnt updating the variables... - lets override everything
+        currentStory = new Story(mainInkAsset.text);
         currentStory.state.LoadJson(storystate);
+
+        // make sure variables are loaded with current state
+        dialogueVariables = new StoryVariables(ref currentStory);
+
+        //dialogueVariables.check();
+
         Debug.Log("Loaded file!");
     }
 
