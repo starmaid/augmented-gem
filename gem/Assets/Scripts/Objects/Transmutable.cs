@@ -22,6 +22,7 @@ public class Transmutable : ITransmutable
             //change the image to something else
             mySpriteRenderer.sprite = texFrames[1];
             interactState.isEnabled = true;
+            this.gameObject.tag="interactable";
             transmuteSFX.Play();
             yield return new WaitForSeconds(transmuteSFX.clip.length);
             Debug.Log("weh.");
