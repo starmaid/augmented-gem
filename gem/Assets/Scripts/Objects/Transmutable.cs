@@ -16,6 +16,7 @@ public class Transmutable : ITransmutable
 
     public override IEnumerator Transmute()
     {
+        Debug.Log("attempt to transmute");
         if(isEnabled){
             isEnabled = false;
             //change the image to something else
@@ -23,6 +24,7 @@ public class Transmutable : ITransmutable
             interactState.isEnabled = true;
             transmuteSFX.Play();
             yield return new WaitForSeconds(transmuteSFX.clip.length);
+            Debug.Log("weh.");
         }
     }
 }
