@@ -2,65 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeMovement: IBeast
+public class SnakeMovement: BasicBeast
 {
-    // [SerializeField] public List<Sprite> texFrames;
-    // private int tex_index = 0;
-
-    // [SerializeField] public Material goldMaterial;
-
-    // private bool isEnabled;
-
-    // private float flipTimer;
-    // private float animTimer;
-    // private float moveTimer;
-    // private float moveDirectionAngle;
-    // private Vector3 moveDirection;
-    // private float moveSpeed;
-    // private bool isMoving;
-
-    // private SpriteRenderer spriteRenderer;
-    // private Rigidbody2D rigidBody2d;
-
-    // Start is called before the first frame update
-    // void Start()
-    // {
-        // spriteRenderer = GetComponent<SpriteRenderer>();
-        // rigidBody2d = GetComponent<Rigidbody2D>();
-        // isMoving = false;
-        // flipTimer = 2;
-        // moveSpeed = 1.5f;
-        // isEnabled = true;
-        // animTimer = 0;
-    // }
-
-    // public IEnumerator transmute()
-    // {
-    //     rigidBody2d.velocity = Vector3.zero;
-    //     isEnabled = false;
-    //     spriteRenderer.material = goldMaterial;
-    //     GetComponent<TriggerInteract>().isEnabled = true;
-    //     yield return new WaitForSeconds(0f);
-    // }
-
-    // private Sprite getNextTex()
-    // {
-    //     tex_index++;
-    //     if (tex_index >= texFrames.Count)
-    //     {
-    //         tex_index = 0;
-    //     }
-
-    //     return texFrames[tex_index];
-    // }
-
-    // Update is called once per frame
-    protected override void Update()
+    protected override void Start()
     {
-        //if (isEnabled && Time.time > 5)
-        //{
-        //    transmute();
-        //}
+        base.Start();
+        flipTimer = 2;
+        animTimer = 0;
+        moveSpeed = 1.5f;
+    }
+
+    void Update()
+    {
 
         if (isEnabled)
         {
@@ -69,7 +22,7 @@ public class SnakeMovement: IBeast
             if (isMoving && animTimer > 0.3)
             {
                 animTimer = 0;
-                spriteRenderer.sprite = getNextTex();
+                mySpriteRenderer.sprite = GetNextTex();
             }
 
             if (isMoving)
@@ -84,11 +37,11 @@ public class SnakeMovement: IBeast
 
                 //transform.position += moveDirection * moveSpeed * Time.deltaTime;
                 //rigidBody2d.velocity = Vector3.zero;
-                rigidBody2d.velocity = moveDirection * moveSpeed;
+                myRigidBody.velocity = moveDirection * moveSpeed;
             }
             else
             {
-                rigidBody2d.velocity = Vector3.zero;
+                myRigidBody.velocity = Vector3.zero;
                 flipTimer -= Time.deltaTime;
                 //if (Random.value > 0.997)
                 //{
@@ -104,11 +57,11 @@ public class SnakeMovement: IBeast
                     moveDirection = new Vector3(Mathf.Cos(moveDirectionAngle), Mathf.Sin(moveDirectionAngle), 0);
                     if (Mathf.Cos(moveDirectionAngle) > 0)
                     {
-                        spriteRenderer.flipX = true;
+                        mySpriteRenderer.flipX = true;
                     }
                     else
                     {
-                        spriteRenderer.flipX = false;
+                        mySpriteRenderer.flipX = false;
                     }
                 }
             }

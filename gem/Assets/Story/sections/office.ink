@@ -67,7 +67,7 @@ With enough time, they'll eventually come back, begging for your grace and guida
 //Wait like. a few seconds?
 ...
 "...hello? Are you still there? Talking statue?"  #portrait:adv_curious_nogem
-<i>Unlucky for you</i>, this is the human that you are stuck with. #portrait:none
+Unlucky for you, <i>this</i> is the human that you are stuck with. #portrait:none
 ~pauseForCutscene()
 
 //#CUTSCENE: Fade from black.The adventurer is standing at the edge of the 
@@ -136,9 +136,9 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 
 ===1_dagger===
 {stopping:
-	-
-	FOR the sake of convenience, here's the key #portrait:none //DEBUG
-	~has_key = true
+	// -
+	// FOR the sake of convenience, here's the key #portrait:none //DEBUG
+	// ~has_key = true
     -
     The Adventurer picks up an ornate dagger beside a pile of dusty books. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
@@ -207,7 +207,7 @@ The adventurer collects the gem. #portrait:none
 - not has_dagger:
 	{cycle:
 	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
-	  for simplicity debug: ur getting the dagger and the gem
+	//   for simplicity debug: ur getting the dagger and the gem
 	  ~ has_dagger = true
 	  ~ has_gem = true
 	- (This human is not very bright...) #portrait:gem_angry
@@ -280,6 +280,7 @@ They look surprised, but not as impressed as they REALLY ought to. #portrait:non
 	- “Listen, I really just need to get out of here.” #portrait:adv_frown
   	“Then let's go!”  #portrait:gem_angry
   	“Please,”  #portrait:adv_frown
+	~callSignal("ItemRetrieved")
   ->DONE
 
 

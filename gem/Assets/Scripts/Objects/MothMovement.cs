@@ -2,76 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MothMovement: IBeast
+public class MothMovement: BasicBeast
 {
-    // [SerializeField] public List<Sprite> texFrames;
-    // private int tex_index = 0;
-
-    // [SerializeField] public Material goldMaterial;
-
-    // private bool isEnabled;
-
-    // private float flipTimer;
-    // private float animTimer;
-    // private float moveTimer;
-    // private float moveDirectionAngle;
-    // private Vector3 moveDirection;
-    // private float moveSpeed;
-    // private bool isMoving;
-
     private float yOffset;
     private float xOffset;
 
-    // private SpriteRenderer spriteRenderer;
-    // private Rigidbody2D rigidBody2d;
-
-    // Start is called before the first frame update
     protected override void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidBody2d = GetComponent<Rigidbody2D>();
-        isMoving = false;
+        base.Start();
         flipTimer = 2;
         animTimer = 0;
         moveSpeed = 1.5f;
-        xOffset = 0;//
-        yOffset = 0;//
-        isEnabled = true;
+        xOffset = 0; //
+        yOffset = 0; //
     }
 
-    public override IEnumerator transmute()
+    public override IEnumerator Transmute()
     {
-        rigidBody2d.velocity = Vector3.zero;
-        isEnabled = false;
-        spriteRenderer.material = goldMaterial;
+        StartCoroutine(base.Transmute());
 
-        rigidBody2d.gravityScale = 9.8f;
         //calculate the fall with gravity to give it more weight
+        myRigidBody.gravityScale = 9.8f;
         yield return new WaitForSeconds(0.1f);
-        rigidBody2d.gravityScale = 0;
-        rigidBody2d.velocity = Vector3.zero;
-        this.gameObject.tag="interactable";
-        GetComponent<TriggerInteract>().isEnabled = true;
+        myRigidBody.gravityScale = 0;
+        myRigidBody.velocity = Vector3.zero;
+        Debug.Log("transmute called in MothMovement.cs");
+        Debug.Log("isenabled:" + isEnabled);
     }
-
-    // protected override Sprite getNextTex()
-    // {
-    //     tex_index++;
-    //     if (tex_index >= texFrames.Count)
-    //     {
-    //         tex_index = 0;
-    //     }
-
-    //     return texFrames[tex_index];
-    // }
-
+//i just lost the game
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        //if (isEnabled && Time.time > 5)
-        //{
-        //    StartCoroutine(transmute());
-        //}
 
         if (isEnabled)
         {
@@ -80,7 +41,7 @@ public class MothMovement: IBeast
             if (animTimer > 0.1)
             {
                 animTimer = 0;
-                spriteRenderer.sprite = getNextTex();
+                mySpriteRenderer.sprite = GetNextTex();
             }
 
             xOffset = Mathf.Sin(Time.time * 10) * 2f;
@@ -100,16 +61,16 @@ public class MothMovement: IBeast
             }
             else
             {
-                rigidBody2d.velocity = Vector3.zero;
+                myRigidBody.velocity = Vector3.zero;
                 flipTimer -= Time.deltaTime;
 
                 if (xOffset > 0)
                 {
-                    spriteRenderer.flipX = true;
+                    mySpriteRenderer.flipX = true;
                 }
                 else
                 {
-                    spriteRenderer.flipX = false;
+                    mySpriteRenderer.flipX = false;
                 }
 
                 if (flipTimer < 0)
@@ -121,11 +82,11 @@ public class MothMovement: IBeast
                     moveDirection = new Vector3(Mathf.Cos(moveDirectionAngle), Mathf.Sin(moveDirectionAngle), 0);
                     if (Mathf.Cos(moveDirectionAngle) > 0)
                     {
-                        spriteRenderer.flipX = true;
+                        mySpriteRenderer.flipX = true;
                     }
                     else
                     {
-                        spriteRenderer.flipX = false;
+                        mySpriteRenderer.flipX = false;
                     }
                 }
             }
