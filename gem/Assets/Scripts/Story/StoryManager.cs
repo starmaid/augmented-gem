@@ -73,6 +73,7 @@ public class StoryManager : MonoBehaviour
 
     string currentLayout;
     string currentPortrait;
+    bool readyToPlayAnim;
 
     int stateNameHash;
 
@@ -95,6 +96,8 @@ public class StoryManager : MonoBehaviour
         // Do not destroy this object, when we load a new scene.
         // DontDestroyOnLoad(gameObject);
 
+        Application.targetFrameRate = 30;
+
         currentStory = new Story(mainInkAsset.text);
         if (instance != null)
         {
@@ -111,6 +114,7 @@ public class StoryManager : MonoBehaviour
         currentAudioInfo = defaultAudioInfo;
 
         pausedByCutscene = false;
+        readyToPlayAnim = false;
 
         currentStory.BindExternalFunction("pauseForCutscene", () =>
         {
@@ -153,7 +157,7 @@ public class StoryManager : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
-
+        
         // get the layout animator
         layoutAnimator = dialoguePanel.GetComponent<Animator>();
 
@@ -168,7 +172,8 @@ public class StoryManager : MonoBehaviour
 
         InitializeAudioInfoDictionary();
 
-        
+        currentPortrait = "default";
+        currentLayout = "none";
     }
 
     private void CallSignalFromInk(string signalName)
@@ -302,13 +307,13 @@ public class StoryManager : MonoBehaviour
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         trySkipDialogue = false;
-        dialoguePanel.SetActive(true);
+        //dialoguePanel.SetActive(true);
 
         dialogueVariables.StartListening(currentStory);
 
         // reset portrait, layout, and speaker
         //displayNameText.text = "???";
-        portraitAnimator.Play("default");
+        //portraitAnimator.Play("default");
         //layoutAnimator.Play("none");
 
         currentStory.ChoosePathString(knotName);
@@ -323,14 +328,14 @@ public class StoryManager : MonoBehaviour
         // currentStory = new Story(mainInkAsset.text);
         dialogueIsPlaying = true;
         trySkipDialogue = false;
-        dialoguePanel.SetActive(true);
+        //dialoguePanel.SetActive(true);
     
         dialogueVariables.StartListening(currentStory);
         inkExternalFunctions.Bind(currentStory, emoteAnimator);
     
         // reset portrait, layout, and speaker
         displayNameText.text = "???";
-        // portraitAnimator.Play("default");
+        //portraitAnimator.Play("default");
         //layoutAnimator.Play("none");
     
         currentStory.ChoosePathString(knotName);
@@ -342,9 +347,9 @@ public class StoryManager : MonoBehaviour
     {
         dialogueIsPlaying = true;
         trySkipDialogue = false;
-        dialoguePanel.SetActive(true);
-        layoutAnimator.Play(currentLayout);
-        portraitAnimator.Play(currentPortrait);
+        //dialoguePanel.SetActive(true);
+        //layoutAnimator.Play(currentLayout);
+        //portraitAnimator.Play(currentPortrait);
         TryContinue();
     }
 
@@ -371,6 +376,16 @@ public class StoryManager : MonoBehaviour
         // go back to default audio
         SetCurrentAudioInfo(defaultAudioInfo.id);
         endInteractSignal.Raise();
+    }
+
+    private void Update()
+    {
+        if (dialogueIsPlaying && readyToPlayAnim)
+        {
+            dialoguePanel.SetActive(true);
+            layoutAnimator.Play(currentLayout);
+            portraitAnimator.Play(currentPortrait);
+        }
     }
 
     private void ContinueStory()
@@ -401,11 +416,14 @@ public class StoryManager : MonoBehaviour
                 return;
             }
 
+            readyToPlayAnim = false;
+
             // return speed to default, if it needs to change it will inside handletags
             typingSpeed = defaultTypingSpeed;
             // handle tags
             HandleTags(currentStory.currentTags);
 
+            readyToPlayAnim = true;
 
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
@@ -572,14 +590,15 @@ public class StoryManager : MonoBehaviour
                         currentPortrait = tagValue;
                     }
 
-                    layoutAnimator.Play(currentLayout);
-                    portraitAnimator.Play(currentPortrait);
+                    //layoutAnimator.Play(currentLayout);
+                    //portraitAnimator.Play(currentPortrait);
 
                     print("played " + currentLayout);
 
                     break;
                 case LAYOUT_TAG:
-                    layoutAnimator.Play(tagValue);
+                    //layoutAnimator.Play(tagValue);
+                    currentLayout = tagValue;
                     break;
                 case AUDIO_TAG:
                     SetCurrentAudioInfo(tagValue);
