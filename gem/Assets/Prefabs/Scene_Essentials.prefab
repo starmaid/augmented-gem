@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Intensity: 0.4
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0784374100000000698647515bfe116fbf59e6a48b8854c93fbfb746
+  m_ApplyToSortingLayers: 0784374100000000698647515bfe116fbf59e6a48b8854c93fbfb746236fc9a3
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1888,7 +1888,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 6823237506341479040}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 5
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -1897,7 +1897,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1547079901
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &5541576814418411052
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 48
-  m_ScaleFactor: 3
+  m_ScaleFactor: 1
   m_ReferenceResolution: {x: 640, y: 480}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 1
@@ -3696,15 +3696,15 @@ PrefabInstance:
       objectReference: {fileID: 4109763558588671646}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.62393165
+      value: 0.7604167
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.3400236
+      value: 0.45000002
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.36923078
+      value: 0.45000002
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder
