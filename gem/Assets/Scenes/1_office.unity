@@ -286,7 +286,7 @@ PrefabInstance:
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: intMaterial
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
+      objectReference: {fileID: -876546973899608171, guid: 907ec477735e3144391ba00a93234ff1, type: 3}
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: transMaterial
       value: 
@@ -3640,13 +3640,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: intMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: transMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
+      propertyPath: highlightScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Size.y
       value: 0.93026185
@@ -3754,6 +3750,18 @@ PrefabInstance:
       propertyPath: loadOnStart
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: frequencyLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: defaultTypingSpeed
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: dialogueTypingSoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9271605e401e4ca4aa515f71220b6b1b, type: 3}
     - target: {fileID: 49962507229378006, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_Name
       value: Scene_Essentials
@@ -4052,7 +4060,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.75000006
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
@@ -5545,14 +5553,6 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: bb4de99f02cf2bf09995e05c84af48a2, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: intMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: transMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Size.x
       value: 0.5357814

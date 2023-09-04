@@ -36,11 +36,14 @@ public class StoryManager : MonoBehaviour
     private TextMeshProUGUI[] choicesText;
 
     [Header("Audio")]
-    [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
-    [SerializeField] private DialogueAudioInfoSO[] audioInfos;
-    [SerializeField] private bool makePredictable;
-    private DialogueAudioInfoSO currentAudioInfo;
-    private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
+    // [SerializeField] private DialogueAudioInfoSO defaultAudioInfo;
+    // [SerializeField] private DialogueAudioInfoSO[] audioInfos;
+    // [SerializeField] private bool makePredictable;
+    // private DialogueAudioInfoSO currentAudioInfo;
+    // private Dictionary<string, DialogueAudioInfoSO> audioInfoDictionary;
+    [SerializeField] private AudioClip dialogueTypingSoundClip;
+    [SerializeField] private int frequencyLevel;
+    [SerializeField] private bool stopAudioSource; // for stopping dialogue sound clip if too long
     private AudioSource audioSource;
 
     [Header("Cutscenes")]
@@ -66,7 +69,7 @@ public class StoryManager : MonoBehaviour
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
-    private const string AUDIO_TAG = "audio";
+//    private const string AUDIO_TAG = "audio";
     private const string SPEED_TAG = "speed";
 
     private StoryVariables dialogueVariables;
@@ -116,7 +119,7 @@ public class StoryManager : MonoBehaviour
         inkExternalFunctions = new InkExternalFunctions();
 
         audioSource = this.gameObject.AddComponent<AudioSource>();
-        currentAudioInfo = defaultAudioInfo;
+//        currentAudioInfo = defaultAudioInfo;
 
         pausedByCutscene = false;
         readyToPlayAnim = false;
@@ -180,7 +183,7 @@ public class StoryManager : MonoBehaviour
             index++;
         }
 
-        InitializeAudioInfoDictionary();
+        // InitializeAudioInfoDictionary();
 
         currentPortrait = "default";
         currentLayout = "none";
@@ -222,29 +225,29 @@ public class StoryManager : MonoBehaviour
         TryContinue();
     }
 
-    private void InitializeAudioInfoDictionary()
-    {
-        audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
-        audioInfoDictionary.Add(defaultAudioInfo.id, defaultAudioInfo);
-        foreach (DialogueAudioInfoSO audioInfo in audioInfos)
-        {
-            audioInfoDictionary.Add(audioInfo.id, audioInfo);
-        }
-    }
+    // private void InitializeAudioInfoDictionary()
+    // {
+    //     audioInfoDictionary = new Dictionary<string, DialogueAudioInfoSO>();
+    //     audioInfoDictionary.Add(defaultAudioInfo.id, defaultAudioInfo);
+    //     foreach (DialogueAudioInfoSO audioInfo in audioInfos)
+    //     {
+    //         audioInfoDictionary.Add(audioInfo.id, audioInfo);
+    //     }
+    // }
 
-    private void SetCurrentAudioInfo(string id)
-    {
-        DialogueAudioInfoSO audioInfo = null;
-        audioInfoDictionary.TryGetValue(id, out audioInfo);
-        if (audioInfo != null)
-        {
-            this.currentAudioInfo = audioInfo;
-        }
-        else
-        {
-            Debug.LogWarning("Failed to find audio info for id: " + id);
-        }
-    }
+    // private void SetCurrentAudioInfo(string id)
+    // {
+    //     DialogueAudioInfoSO audioInfo = null;
+    //     audioInfoDictionary.TryGetValue(id, out audioInfo);
+    //     if (audioInfo != null)
+    //     {
+    //         this.currentAudioInfo = audioInfo;
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("Failed to find audio info for id: " + id);
+    //     }
+    // }
 
     public void TryContinue()
     {
@@ -384,7 +387,7 @@ public class StoryManager : MonoBehaviour
         prePausedLine = null;
 
         // go back to default audio
-        SetCurrentAudioInfo(defaultAudioInfo.id);
+        // SetCurrentAudioInfo(defaultAudioInfo.id);
         endInteractSignal.Raise();
     }
 
@@ -488,7 +491,8 @@ public class StoryManager : MonoBehaviour
             // if not rich text, add the next letter and wait a small time
             else
             {
-                PlayDialogueSound(dialogueText.maxVisibleCharacters, dialogueText.text[dialogueText.maxVisibleCharacters]);
+                //PlayDialogueSound(dialogueText.maxVisibleCharacters, dialogueText.text[dialogueText.maxVisibleCharacters]);
+                PlayDialogueSound(dialogueText.maxVisibleCharacters);
                 dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
             }
@@ -501,60 +505,70 @@ public class StoryManager : MonoBehaviour
         canContinueToNextLine = true;
     }
 
-    private void PlayDialogueSound(int currentDisplayedCharacterCount, char currentCharacter)
-    {
-        // set variables for the below based on our config
-        AudioClip[] dialogueTypingSoundClips = currentAudioInfo.dialogueTypingSoundClips;
-        int frequencyLevel = currentAudioInfo.frequencyLevel;
-        float minPitch = currentAudioInfo.minPitch;
-        float maxPitch = currentAudioInfo.maxPitch;
-        bool stopAudioSource = currentAudioInfo.stopAudioSource;
-
-        // play the sound based on the config
-        if (currentDisplayedCharacterCount % frequencyLevel == 0)
-        {
-            if (stopAudioSource)
-            {
+    private void PlayDialogueSound(int currentDisplayedCharacterCount) {
+        if (currentDisplayedCharacterCount % frequencyLevel == 0) {
+            if (stopAudioSource) {
                 audioSource.Stop();
             }
-            AudioClip soundClip = null;
-            // create predictable audio from hashing
-            if (makePredictable)
-            {
-                int hashCode = currentCharacter.GetHashCode();
-                // sound clip
-                int predictableIndex = hashCode % dialogueTypingSoundClips.Length;
-                soundClip = dialogueTypingSoundClips[predictableIndex];
-                // pitch
-                int minPitchInt = (int)(minPitch * 100);
-                int maxPitchInt = (int)(maxPitch * 100);
-                int pitchRangeInt = maxPitchInt - minPitchInt;
-                // cannot divide by 0, so if there is no range then skip the selection
-                if (pitchRangeInt != 0)
-                {
-                    int predictablePitchInt = (hashCode % pitchRangeInt) + minPitchInt;
-                    float predictablePitch = predictablePitchInt / 100f;
-                    audioSource.pitch = predictablePitch;
-                }
-                else
-                {
-                    audioSource.pitch = minPitch;
-                }
-            }
-            // otherwise, randomize the audio
-            else
-            {
-                // sound clip
-                int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
-                soundClip = dialogueTypingSoundClips[randomIndex];
-                // pitch
-                audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-            }
-
-            // play sound
-            audioSource.PlayOneShot(soundClip);
+            audioSource.PlayOneShot(dialogueTypingSoundClip);
         }
     }
+
+    // a more complicated PlayDialogueSound
+    // private void PlayDialogueSound(int currentDisplayedCharacterCount, char currentCharacter)
+    // {
+    //     // set variables for the below based on our config
+    //     AudioClip[] dialogueTypingSoundClips = currentAudioInfo.dialogueTypingSoundClips;
+    //     int frequencyLevel = currentAudioInfo.frequencyLevel;
+    //     float minPitch = currentAudioInfo.minPitch;
+    //     float maxPitch = currentAudioInfo.maxPitch;
+    //     bool stopAudioSource = currentAudioInfo.stopAudioSource;
+
+    //     // play the sound based on the config
+    //     if (currentDisplayedCharacterCount % frequencyLevel == 0)
+    //     {
+    //         if (stopAudioSource)
+    //         {
+    //             audioSource.Stop();
+    //         }
+    //         AudioClip soundClip = null;
+    //         // create predictable audio from hashing
+    //         if (makePredictable)
+    //         {
+    //             int hashCode = currentCharacter.GetHashCode();
+    //             // sound clip
+    //             int predictableIndex = hashCode % dialogueTypingSoundClips.Length;
+    //             soundClip = dialogueTypingSoundClips[predictableIndex];
+    //             // pitch
+    //             int minPitchInt = (int)(minPitch * 100);
+    //             int maxPitchInt = (int)(maxPitch * 100);
+    //             int pitchRangeInt = maxPitchInt - minPitchInt;
+    //             // cannot divide by 0, so if there is no range then skip the selection
+    //             if (pitchRangeInt != 0)
+    //             {
+    //                 int predictablePitchInt = (hashCode % pitchRangeInt) + minPitchInt;
+    //                 float predictablePitch = predictablePitchInt / 100f;
+    //                 audioSource.pitch = predictablePitch;
+    //             }
+    //             else
+    //             {
+    //                 audioSource.pitch = minPitch;
+    //             }
+    //         }
+    //         // otherwise, randomize the audio
+    //         else
+    //         {
+    //             // sound clip
+    //             int randomIndex = UnityEngine.Random.Range(0, dialogueTypingSoundClips.Length);
+    //             soundClip = dialogueTypingSoundClips[randomIndex];
+    //             // pitch
+    //             audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
+    //         }
+
+    //         // play sound
+    //         audioSource.PlayOneShot(soundClip);
+    //     }
+    // }
 
     private void HideChoices()
     {
@@ -610,9 +624,9 @@ public class StoryManager : MonoBehaviour
                     //layoutAnimator.Play(tagValue);
                     currentLayout = tagValue;
                     break;
-                case AUDIO_TAG:
-                    SetCurrentAudioInfo(tagValue);
-                    break;
+//                case AUDIO_TAG:
+//                    SetCurrentAudioInfo(tagValue);
+//                    break;
                 case SPEED_TAG:
                     // set the speed temporarily to a different value
                     try {
