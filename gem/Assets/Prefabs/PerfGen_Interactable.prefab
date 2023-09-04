@@ -101,10 +101,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272aa68e70b46a949ab935e195d51726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnabled: 1
   overlapSignal: {fileID: 11400000, guid: a2d380a4f8c08b0b3ae054192c4c1439, type: 2}
   endOverlapSignal: {fileID: 11400000, guid: 2def20a354c0aa2b4b5418a6e268f71b, type: 2}
   interactSignal: {fileID: 0}
   knotName: Lab_Desk
+  playerInRange: 0
 --- !u!82 &4661250642064670157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -286,5 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f382b495071dc14f82525cf92a3a152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newMaterial: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-  highlightScale: 0.05
+  intMaterial: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
+  transMaterial: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
+  highlightScale: 0
+  doesntHaveAnimator: 0
