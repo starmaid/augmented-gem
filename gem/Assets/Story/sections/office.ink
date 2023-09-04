@@ -298,7 +298,38 @@ They look surprised, but not as impressed as they <i>really</i> ought to. #portr
 	The door is unlocked! #portrait:none
 	"Oh! It worked..." #portrait:adv_curious
 	"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
-	Your total friendship point: {friendship}
+	// Your total friendship point: {friendship}
 	~callSignal("UnlockDoor")
 	->DONE
 }
+
+===2_door===
+{cycle:
+- 	"..."
+	"Where do you think you're going?"
+	"We might've missed something in there, I thought we could check?"
+	"What? No. No you haven't."
+	"There are far more exciting things"
+	"There's a patch of cobblestone on the ceiling two paces south of the shelf that is shaped like a cat or a cow."
+	"Ta. Tour over. There's nothing else in that room."
+}
+->DONE
+
+===z_cushion_spotted===
+"Huh? A dead end... Strange, I didn't remember it being there." #portrait:gem_neutral
+"Some conveniently placed pillows...!" #portrait:adv_smile
+	* 	"Hey, now's not the time to slack off!"  #portrait:gem_angry
+		The adventurer ignores your words and head straight for the comfortable looking cushions.
+	* 	"...Fine, take a break then." #portrait:gem_angry
+		"Goodness!"
+-With all the strange things going on, you might as well take a break. 
+
+->DONE
+
+===z_demo_end===
+Thank you for completing the demo of <i> Chrysopoeia: A Glimmer in the Dark </i>!
+What? "That's too short?" you say? Sorry, carving out an underground castle was more time consuming than we anticipated!
+If you enjoy what you've played and would like to know more about the Adventurer and the gem, consider leaving a comment!
+We still have a lot of ideas we want to put in this game, and much more story to tell, but it'll be your support that'll help us see it through. It means a lot to us.
+We hope to see you return to the dark in the future...
+-> DONE
