@@ -1,4 +1,4 @@
-# Untitled Gem Dungeon Game
+# Chrysopoeia: A Shimmer In The Dark
 
 Project for the [19th RPG Maker Horror Game Jam](https://itch.io/jam/19th-rpg-maker-horror-game-jam).
 
