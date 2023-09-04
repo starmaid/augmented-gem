@@ -43,7 +43,7 @@ This is it! Your way out... Better think twice how you should approach this. #po
     	"Fine evening, Adventurer! How can I be of assistance?" #portrait:gem_statue_excited
 	+   [Be clear and precise. This might be your only opportunity.]
     	“Listen closely, Adventurer…” #portrait:gem_statue_neutral
-    	“If you want a chance to get out of here, do NOT let go!”
+    	“If you want a chance to get out of here, do <i>not</i> let go!”
 - "...Ah!!!! Who's there?” #portrait:adv_worried_nogem
 “Wait- don't move! Listen to me!”  #portrait:gem_statue_angry
 ~pauseForCutscene()
