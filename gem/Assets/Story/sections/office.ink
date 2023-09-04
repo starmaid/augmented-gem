@@ -25,11 +25,13 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 ~pauseForCutscene()
 
 "I better get their attention while they're still here..."  #portrait:gem_statue_worried
+~callSignal("WiggleMode")
 \[Press and hold Z to WIGGLE.\]
-// ~callSignal(WiggleMode)
+// ~callSignal("PauseCutsceneSignal")
 ->DONE
 
 ===1_begin_cutscene_2===
+
 //#PLAYER: When the player press any move keys or act keys, the gem wiggles instead, giving off a little shimmer.
 "...!" #portrait:adv_neutral_nogem
 
@@ -208,8 +210,8 @@ The adventurer collects the gem. #portrait:none
 	{cycle:
 	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
 	//   for simplicity debug: ur getting the dagger and the gem
-	  ~ has_dagger = true
-	  ~ has_gem = true
+	//   ~ has_dagger = true
+	//   ~ has_gem = true
 	- (This human is not very bright...) #portrait:gem_angry
 	- (ARGHHH!!!!!!) #portrait:gem_angry
 	}

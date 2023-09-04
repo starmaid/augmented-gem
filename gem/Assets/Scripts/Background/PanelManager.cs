@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // Controller of Start Menu and Pause Menu
 public class PanelManager : MonoBehaviour
@@ -32,7 +34,9 @@ public class PanelManager : MonoBehaviour
         };
     }
 
-    
+    public void LoadSceneByStr(String name){
+        SceneManager.LoadScene(name);
+    }
 
     public void pause(){
         playerInput.actions.FindActionMap("Adventurer").Disable(); 
