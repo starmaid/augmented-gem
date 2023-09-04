@@ -47,11 +47,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: player
-    uniqueID: 1363641961
-    locked: 0
   - name: HighlightSprites
     uniqueID: 1863450203
+    locked: 0
+  - name: player
+    uniqueID: 1363641961
     locked: 0
   - name: interactable
     uniqueID: 2766559679

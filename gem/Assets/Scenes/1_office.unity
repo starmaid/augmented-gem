@@ -286,7 +286,7 @@ PrefabInstance:
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: intMaterial
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
+      objectReference: {fileID: -876546973899608171, guid: 907ec477735e3144391ba00a93234ff1, type: 3}
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: transMaterial
       value: 
@@ -3687,13 +3687,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d2b8bb422a126faaca511ebe801f622f, type: 2}
     - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: intMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: transMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
+      propertyPath: highlightScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Size.y
       value: 0.93026185
@@ -5521,14 +5517,6 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: bb4de99f02cf2bf09995e05c84af48a2, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: intMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 981b277a4c90a66488b3364dea9f3690, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: transMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Size.x
       value: 0.5357814
