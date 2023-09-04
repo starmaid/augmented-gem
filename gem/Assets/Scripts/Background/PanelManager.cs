@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,8 +32,6 @@ public class PanelManager : MonoBehaviour
             }
         };
     }
-
-    
 
     public void pause(){
         playerInput.actions.FindActionMap("Adventurer").Disable(); 

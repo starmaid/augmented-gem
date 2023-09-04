@@ -3,8 +3,8 @@
 You have been dormant for so long. #portrait:none 
 You cannot remember how long you have been down here...
 A year? A decade? A <i>century</i>?
-Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that there's no decomposition for you to estimate with.
-Maybe besides your memories. Your patience. Your CHARITABILITY.
+Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that there isn't even any decomposition for you to estimate with.
+Maybe besides your memories. Your patience. Your <i>charitability</i>.
 You are so. Goddamn. Bored. #speed:0.1
 \-\-and there's nothing you can do about it, besides wait.
 ...until...
@@ -25,11 +25,13 @@ Someone crashes into the room. Through the… dumbwaiter? Huh, you forgot that w
 ~pauseForCutscene()
 
 "I better get their attention while they're still here..."  #portrait:gem_statue_worried
+~callSignal("WiggleMode")
 \[Press and hold Z to WIGGLE.\]
-// ~callSignal(WiggleMode)
+// ~callSignal("PauseCutsceneSignal")
 ->DONE
 
 ===1_begin_cutscene_2===
+
 //#PLAYER: When the player press any move keys or act keys, the gem wiggles instead, giving off a little shimmer.
 "...!" #portrait:adv_neutral_nogem
 
@@ -41,13 +43,13 @@ This is it! Your way out... Better think twice how you should approach this. #po
     	"Fine evening, Adventurer! How can I be of assistance?" #portrait:gem_statue_excited
 	+   [Be clear and precise. This might be your only opportunity.]
     	“Listen closely, Adventurer…” #portrait:gem_statue_neutral
-    	“If you want a chance to get out of here, do NOT let go!”
-- ...Ah!!!! Who's there?” #portrait:adv_worried_nogem
+    	“If you want a chance to get out of here, do <i>not</i> let go!”
+- "...Ah!!!! Who's there?” #portrait:adv_worried_nogem
 “Wait- don't move! Listen to me!”  #portrait:gem_statue_angry
 ~pauseForCutscene()
 
 //#CUTSCENE: The adventurer backs away a few steps
-“Don't hurt me! I didn't stealing anything from you!” #portrait:adv_worried_nogem
+“Don't hurt me! I didn't steal anything from you!” #portrait:adv_worried_nogem
 Damn it! They walked off... #portrait:gem_statue_angry
 	+   \(The statue can't talk back, Dulbert!\)  #portrait:gem_statue_angry
 	+   \(If there's no contact, I can't talk to you!\)  #portrait:gem_statue_angry
@@ -58,39 +60,39 @@ Damn it! They walked off... #portrait:gem_statue_angry
 
 //#CUTSCENE: the adventurer walks away.
 //#CUTSCENE: Fade to black.
-You think you blew your chances. That human's your key out of this dreadful place. #portrait:none
+You think you blew your chances. That human's your best chance to escape this dreadful place. #portrait:none
 You watch as they fiddle with the lock with no finesse of a thief, pry at the door with no strength of a fighter.
-Lucky for you, this adventurer seems far from competent to escape a locked dungeon alone.
-With enough time, they'll eventually come back, begging for your grace and guidance.
+Lucky for you, this adventurer seems far from competent enough to escape a locked dungeon alone.
+You just need to wait a little bit longer-- they'll eventually come back, begging for your grace and guidance.
 ~pauseForCutscene()
 
 //Wait like. a few seconds?
 ...
 "...hello? Are you still there? Talking statue?"  #portrait:adv_curious_nogem
-Unlucky for you, <i>this</i> is the human that you are stuck with. #portrait:none
+Unlucky for you, <i>this</i> is the human that you’re stuck with. #portrait:none
 ~pauseForCutscene()
 
-//#CUTSCENE: Fade from black.The adventurer is standing at the edge of the 
+//#CUTSCENE: Fade from black.The adventurer is standing at the edge of the
 Hesitantly, the adventurer walks back over-- good! --And pokes you. It’ll do. #portrait:none
-“DON’T take your hand away! I cannot speak to you otherwise.” #portrait:gem_angry
+“<i>Don’t</i> take your hand away! I cannot speak to you otherwise.” #portrait:gem_angry
 “Ah–!” #portrait:adv_worried_nogem
 “...How are you speaking with your mouth closed?”  #portrait:adv_frown_nogem
 “LOOK DOWN FUCKFACE” #portrait:gem_statue_angry
 “You’re… the gem?” #portrait:adv_curious_nogem
-“Indeed! Telepathy via contact, Dulbert.” #portrait:gem_statue_neutral
+“Indeed! Contact telepathy, Dulbert.” #portrait:gem_statue_neutral
 “...” #portrait:adv_curious_nogem
 “...Oh, I must be losing it.” #portrait:adv_frown_nogem
 “Listen, kid… There are oddities in this world so stupendous that you may never understand with your humble little brain… "#portrait:gem_statue_excited
 "Not unless you’ve seen them with your own eyes, touched them with your own fingers.”
- “\-\- Which you are in the perfect position to do! You can witness wonderful things here, with ME, if you could just… get me OUT of this shiny little prison!”
+“\-\- Which you are in the perfect position to do! You can witness wonderful things here, with <i>me,</i> if you could just… get me <i>out</i> of this shiny little prison!”
 “...”  #portrait:adv_frown_nogem
 You can’t quite tell what they’re thinking, but they seem far too worried about something else to admire your spectacular self. Odd! You’ve always been good with charming humans. Better step up your game...! #portrait:none
 	+   [Threaten them.]"You’re not going to get anywhere alone, Dulbert."  #portrait:gem_statue_neutral
     	“That’s not my name-” #portrait:adv_worried_nogem //#signal:try_continue
 		// ~ goToNext(0.3f) //dont thing this works
-    	“I know this mansion like the back of my crystal faces, DULBERT. I have the key to this office gate that you couldn’t budge. My guidance is the best chance you’ve got.” #portrait:gem_statue_angry
-    	“But of course, you feel free to go ahead and try it on your own,  fail, stay stuck in here for a thousand years, and then die of BOREDOM.” #portrait:gem_statue_neutral
-    	“...DIE?” #portrait:adv_worried_nogem
+    	“I know this mansion like the back of my crystal faces, <i>Dulbert</i>. I have the key to this office gate that you couldn’t budge. My guidance is the best chance you’ve got.” #portrait:gem_statue_angry
+    	“But of course, you feel free to go ahead and try it on your own,  fail, stay stuck in here for a thousand years, and then die of <i>BOREDOM</i>.” #portrait:gem_statue_neutral
+    	“...<i>Die</i>?” #portrait:adv_worried_nogem
     	“Oh, right, that too! And probably much, much sooner!” #portrait:gem_statue_excited
     	“...”  #portrait:adv_frown_nogem
     	“Well, tell me when you make up your mind! I’ll be here dozing away, it’s not like it matters to me.” #portrait:gem_statue_neutral
@@ -103,7 +105,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	“Now, now, I understand. People are often scared of what they don’t understand. Lucky for you, I know this mansion like my very own crystalline structure, and I’m a great tutor too!”#portrait:gem_statue_excited
     	"Not to mention the unimaginable power that I possess..."#portrait:gem_statue_neutral
     	"That sounds... intense." #portrait:adv_frown_nogem
-    	“Fret not, fret not. Never ever would I let you get in harm’s way, I promise! As long as you do exactly what I instruct, you’ll be PERFECTLY FINE.”#portrait:gem_statue_neutral
+    	“Fret not, fret not. Never ever would I let you get in harm’s way, I promise! As long as you do exactly what I instruct, you’ll be <i>perfectly fine</i>.”#portrait:gem_statue_neutral
 - The Adventurer looks around the room briefly, as if for some other last minute option, before turning back to you. #portrait:none
 “...fine.” #portrait:adv_frown_nogem
 “Very well! I'm glad you chose correctly!” #portrait:gem_statue_excited
@@ -117,8 +119,8 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
    	 	“That way-- on the right.” #portrait:gem_statue_neutral
    	 	\[MOVE using WASD or ARROW KEYS\] #portrait:none
     	\[INTERACT using Z\]
-	*   [“I don't CARE, just break it!"]
-    	“I don't CARE, just break it! Seems like it should be a familiar enough concept to you!” #portrait:gem_statue_angry
+	*   [“I don't <i>care</i>, just break it!"]
+    	“I don't <i>care</i>, just break it! Seems like it should be a familiar enough concept to you!” #portrait:gem_statue_angry
    	 “Fine! I'm sorry about the dumbwaiter...” #portrait:adv_worried_nogem
     	“It wasn't being used for much. Fine, there might be a dagger near that shelf\-\-that way--” #portrait:gem_statue_neutral
     	\[MOVE using WASD or ARROW KEYS\] #portrait:none
@@ -172,7 +174,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	“No! Don't be ridiculous. Do you think the Great Alchemist would have her door locked with a wooden key?"  #portrait:gem_angry
 		"Gold! Only Gold would do. And we're going to dabble with some alchemy to create gold. Didn't you hear me?” #portrait:gem_angry
     	“I did-- but I don't know how to do magic, and ah.. you don't have hands,” #portrait:adv_frown
-    	“It’s alchemy, not magic!? The DISRESPECT...” #portrait:gem_angry
+    	“It’s alchemy, not magic!? The <i>disrespect</i>...” #portrait:gem_angry
     	“Well, I don’t know anything about either of those!” #portrait:adv_frown
     	*  [ “Why are you even here then??" ]
         	//should there be a better explanation from the adv?
@@ -208,8 +210,8 @@ The adventurer collects the gem. #portrait:none
 	{cycle:
 	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
 	//   for simplicity debug: ur getting the dagger and the gem
-	  ~ has_dagger = true
-	  ~ has_gem = true
+	//   ~ has_dagger = true
+	//   ~ has_gem = true
 	- (This human is not very bright...) #portrait:gem_angry
 	- (ARGHHH!!!!!!) #portrait:gem_angry
 	}
@@ -248,7 +250,7 @@ With some concentration, The Adventurer molds the lump of lead into a key. #port
 	~ friendship += 1
 	“I’ve had some clay shaping experiences in my life.”  #portrait:adv_happy
 	“Ah, you a master poterie?” #portrait:gem_excited
-	“... No, I mean I’ve played with mud when I was a child.” #portrait:adv_frown
+	“... No, I mean I played with mud when I was a child.” #portrait:adv_frown
 	-> 1_shaped_key
 *   “Hm. It'll do.”  #portrait:gem_neutral
 	“...Alright.” #portrait:adv_frown
@@ -265,7 +267,7 @@ With some concentration, The Adventurer molds the lump of lead into a key. #port
 ~has_key = true
 The Adventurer watches as the dull gray shape turns gilded, and glittering in the dim, dusty light.
 “Oh! Huh..”  #portrait:adv_curious
-They look surprised, but not as impressed as they REALLY ought to. #portrait:none
+They look surprised, but not as impressed as they <i>really</i> ought to. #portrait:none
 “...” #portrait:gem_neutral
 	*   [You won't throw a fit, not now.]
 		"..." #portrait:gem_angry
