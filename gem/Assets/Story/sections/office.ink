@@ -42,12 +42,12 @@ This is it! Your way out... Better think twice how you should approach this. #po
 	+   [Be clear and precise. This might be your only opportunity.]
     	“Listen closely, Adventurer…” #portrait:gem_statue_neutral
     	“If you want a chance to get out of here, do NOT let go!”
-- ...Ah!!!! Who's there?” #portrait:adv_worried_nogem
+- "...Ah!!!! Who's there?” #portrait:adv_worried_nogem
 “Wait- don't move! Listen to me!”  #portrait:gem_statue_angry
 ~pauseForCutscene()
 
 //#CUTSCENE: The adventurer backs away a few steps
-“Don't hurt me! I didn't stealing anything from you!” #portrait:adv_worried_nogem
+“Don't hurt me! I didn't steal anything from you!” #portrait:adv_worried_nogem
 Damn it! They walked off... #portrait:gem_statue_angry
 	+   \(The statue can't talk back, Dulbert!\)  #portrait:gem_statue_angry
 	+   \(If there's no contact, I can't talk to you!\)  #portrait:gem_statue_angry
@@ -87,7 +87,7 @@ Hesitantly, the adventurer walks back over-- good! --And pokes you. It’ll do. 
 You can’t quite tell what they’re thinking, but they seem far too worried about something else to admire your spectacular self. Odd! You’ve always been good with charming humans. Better step up your game...! #portrait:none
 	+   [Threaten them.]"You’re not going to get anywhere alone, Dulbert."  #portrait:gem_statue_neutral
     	“That’s not my name-” #portrait:adv_worried_nogem //#signal:try_continue
-		// ~ goToNext(0.3f) //dont thing this works
+		// ~ goToNext(0.3f) //dont think this works
     	“I know this mansion like the back of my crystal faces, DULBERT. I have the key to this office gate that you couldn’t budge. My guidance is the best chance you’ve got.” #portrait:gem_statue_angry
     	“But of course, you feel free to go ahead and try it on your own,  fail, stay stuck in here for a thousand years, and then die of BOREDOM.” #portrait:gem_statue_neutral
     	“...DIE?” #portrait:adv_worried_nogem
@@ -175,7 +175,6 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	“It’s alchemy, not magic!? The DISRESPECT...” #portrait:gem_angry
     	“Well, I don’t know anything about either of those!” #portrait:adv_frown
     	*  [ “Why are you even here then??" ]
-        	//should there be a better explanation from the adv?
          	“Did you hit your head? Why are you even here, if not to seek the Great Alchemist? ” #portrait:gem_angry
    		 The Adventurer looks away, unreadable. #portrait:none
    		 "..." #portrait:adv_neutral
@@ -207,7 +206,6 @@ The adventurer collects the gem. #portrait:none
 - not has_dagger:
 	{cycle:
 	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
-	//   for simplicity debug: ur getting the dagger and the gem
 	  ~ has_dagger = true
 	  ~ has_gem = true
 	- (This human is not very bright...) #portrait:gem_angry
