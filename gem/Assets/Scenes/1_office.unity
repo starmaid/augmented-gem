@@ -1740,6 +1740,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beast_Moth
       objectReference: {fileID: 0}
+    - target: {fileID: 8147968565568537685, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
+      propertyPath: goldMaterial
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
+    - target: {fileID: 8147968565568537685, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
+      propertyPath: transmuteSFX
+      value: 
+      objectReference: {fileID: 2101931557}
     m_RemovedComponents:
     - {fileID: 3019613383544315863, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
     m_RemovedGameObjects: []
@@ -1954,7 +1962,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &717902665
 MonoBehaviour:
@@ -3585,7 +3593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_LocalScale.y
@@ -4053,6 +4061,10 @@ PrefabInstance:
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_BackGroundColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -5499,7 +5511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4148959137535411358, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6043,6 +6055,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -2695619058785784247, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
+--- !u!82 &2101931557 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 303138785555753962, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
+  m_PrefabInstance: {fileID: 535188049}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117463533
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,7 +6258,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6110441438520785414
 PrefabInstance:
