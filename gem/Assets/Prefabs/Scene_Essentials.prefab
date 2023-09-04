@@ -1006,8 +1006,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4291611852
+  m_fontColor: {r: 0.801, g: 0.801, b: 0.801, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1036,7 +1036,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -21.3
+  m_lineSpacing: 5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1999,9 +1999,9 @@ MonoBehaviour:
   - {fileID: 7205868100510718267}
   - {fileID: 3795440479196583597}
   - {fileID: 965592917711255866}
-  defaultAudioInfo: {fileID: 11400000, guid: af0e5bb7705944941a6d7cc9dc38de17, type: 2}
-  audioInfos: []
-  makePredictable: 0
+  dialogueTypingSoundClip: {fileID: 0}
+  frequencyLevel: 0
+  stopAudioSource: 0
   resumeCutsceneSignal: {fileID: 11400000, guid: 36ac289c0154924479e39a4c9d965a9d, type: 2}
   pauseCutsceneSignal: {fileID: 11400000, guid: b6fedb366fd9fe946bf40a4d50472b38, type: 2}
 --- !u!114 &3677390367980126325
@@ -3696,15 +3696,15 @@ PrefabInstance:
       objectReference: {fileID: 4109763558588671646}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.7375
+      value: 0.5208334
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.4984375
+      value: 0.346875
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.49843752
+      value: 0.346875
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder
