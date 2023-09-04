@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PanelManager : MonoBehaviour
 {
     private PlayerInput playerInput;
+    // public PlayerControls playerControls;
     private bool gamePaused;
     private bool gameStarted;
     public GameObject pauseMenuUI;
@@ -34,16 +35,28 @@ public class PanelManager : MonoBehaviour
     }
 
     public void pause(){
-        playerInput.actions.FindActionMap("Adventurer").Disable(); 
-        playerInput.actions.FindActionMap("UI").Enable(); 
+        // playerInput.actions.FindActionMap("Adventurer").Disable(); 
+        // playerInput.actions.FindActionMap("UI").Enable(); 
+
+        player.GetComponent<PlayerStateManager>().SeizeAdvControl();
+        // playerControls.Adventurer.Disable();
+        // playerControls.Gem.Enable();
+        playerInput.SwitchCurrentActionMap("UI");
+
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gamePaused = true;
     }
+    
 
     public void resume(){
-        playerInput.actions.FindActionMap("UI").Disable(); 
-        playerInput.actions.FindActionMap("Adventurer").Enable(); 
+        // playerInput.actions.FindActionMap("UI").Disable(); 
+        // playerInput.actions.FindActionMap("Adventurer").Enable(); 
+        
+        player.GetComponent<PlayerStateManager>().ReturnAdvControl();
+        // playerControls.Adventurer.Enable();
+        // playerControls.Gem.Disable();
+        playerInput.SwitchCurrentActionMap("Adventurer");
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         gamePaused = false;

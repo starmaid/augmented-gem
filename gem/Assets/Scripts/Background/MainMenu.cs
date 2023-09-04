@@ -15,9 +15,16 @@ public class MainMenu : MonoBehaviour
         Transitioner.SetActive(true);
     }
     IEnumerator LoadSceneByInt(int index){
+        Time.timeScale = 1f;
         Transitioner.GetComponent<Animator>().SetTrigger("start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(index);
+    }
+
+    public void LoadSceneByIntRunner(int index){
+        Debug.Log("start");
+        StartCoroutine(LoadSceneByInt(index));
+        Debug.Log("end");
     }
 
     public void StartNewGame(){
