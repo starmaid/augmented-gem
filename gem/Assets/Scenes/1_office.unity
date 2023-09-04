@@ -1740,16 +1740,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Beast_Moth
       objectReference: {fileID: 0}
-    - target: {fileID: 8147968565568537685, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
-      propertyPath: goldMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
-    - target: {fileID: 8147968565568537685, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
-      propertyPath: transmuteSFX
-      value: 
-      objectReference: {fileID: 2101931557}
-    m_RemovedComponents:
-    - {fileID: 3019613383544315863, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6055,11 +6046,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: -2695619058785784247, guid: 25f5539c5ef8db24a961408c486a8c92, type: 3}
---- !u!82 &2101931557 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 303138785555753962, guid: 47111c85f5f70e94ebe126838752a49f, type: 3}
-  m_PrefabInstance: {fileID: 535188049}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117463533
 GameObject:
   m_ObjectHideFlags: 0
