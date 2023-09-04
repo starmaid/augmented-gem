@@ -1925,7 +1925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -254.8, y: -80}
+  m_AnchoredPosition: {x: -254.79999, y: -80}
   m_SizeDelta: {x: 450, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1328206665
@@ -2628,6 +2628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transitioner: {fileID: 1057616301}
   transitionTime: 2.5
+  mainInkAsset: {fileID: 4900000, guid: d87185437d694233ebb4675385d7212a, type: 3}
 --- !u!1 &1749997155
 GameObject:
   m_ObjectHideFlags: 0
@@ -3266,15 +3267,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.8439491
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.3273703
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.43710193
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder
