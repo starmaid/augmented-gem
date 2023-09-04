@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Ink.Runtime;
+using System.IO;
 
 public class MainMenu : MonoBehaviour
 {
     // public Animator transitionAnimator;
-    public GameObject Transitioner;
+    [SerializeField] public GameObject Transitioner;
 
-    public float transitionTime;
+    [SerializeField] public float transitionTime;
+
+    [SerializeField] public TextAsset mainInkAsset;
 
     void Start(){
         Transitioner.SetActive(true);
@@ -28,6 +31,16 @@ public class MainMenu : MonoBehaviour
     }
 
     public void StartNewGame(){
+
+        // begin hack to create new blank story
+        // stolen from the StoryManager's Save function
+        // because i dont want to add a whole storymanager to this scene
+        Story currentStory = new Story(mainInkAsset.text);
+        string path = Application.persistentDataPath + "/savedata.json";
+        string storystate = currentStory.state.ToJson();
+        File.WriteAllText(path, storystate);
+        // end hack to create new blank 
+
         StartCoroutine(LoadSceneByInt(SceneManager.GetActiveScene().buildIndex+1));
     }
 

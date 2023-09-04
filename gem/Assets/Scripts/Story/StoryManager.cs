@@ -5,10 +5,8 @@ using Ink.Runtime;
 using TMPro;
 using UnityEngine.EventSystems;
 using System;
-using UnityEngine.Rendering;
 using System.IO;
 using SuperTiled2Unity;
-using System.Linq.Expressions;
 
 public class StoryManager : MonoBehaviour
 {
@@ -124,11 +122,17 @@ public class StoryManager : MonoBehaviour
         pausedByCutscene = false;
         readyToPlayAnim = false;
 
+        BindAllFunctions();
+
+    }
+
+    public void BindAllFunctions()
+    {
         currentStory.BindExternalFunction("pauseForCutscene", () =>
         {
             pauseAndHideStory();
-        });    
-        
+        });
+
         // find and load all signals we could call from ink
         // this path is relative to the Assets/Resources folder
         UnityEngine.Object[] loadedResources = Resources.LoadAll("Signals", typeof(SignalSO));
@@ -137,7 +141,7 @@ public class StoryManager : MonoBehaviour
         {
             if (obj is SignalSO)
             {
-                inkCallableSignals.Add( (SignalSO) obj );
+                inkCallableSignals.Add((SignalSO)obj);
                 //print(obj.name + " loaded to be called from ink");
             }
         }
@@ -166,6 +170,7 @@ public class StoryManager : MonoBehaviour
         if (loadOnStart)
         {
             LoadFile();
+            BindAllFunctions();
         }
 
         dialogueIsPlaying = false;

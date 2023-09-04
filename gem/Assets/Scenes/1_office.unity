@@ -1781,6 +1781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Transitioner: {fileID: 513622748}
   transitionTime: 2.5
+  mainInkAsset: {fileID: 0}
 --- !u!1 &429644348
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,10 +4556,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
-      propertyPath: loadOnStart
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10663711845535141, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: frequencyLevel
       value: 2
       objectReference: {fileID: 0}
@@ -5064,7 +5061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -5072,7 +5069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.75000006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6823237506341479040, guid: c5b1cdcc7af13b6c3ae121fc74c5acff, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
