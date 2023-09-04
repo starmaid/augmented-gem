@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 3767998986532767068}
   - component: {fileID: 5535957968154223980}
   - component: {fileID: 4828595936382870815}
-  - component: {fileID: 4871037802160252510}
   - component: {fileID: 657509739487015640}
   m_Layer: 6
   m_Name: Beast_Rat
@@ -37,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2729310571260170580
 MonoBehaviour:
@@ -51,11 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2238078191afe34b855c90d9b59c8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transmuteSFX: {fileID: 657509739487015640}
+  goldMaterial: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
   texFrames:
   - {fileID: 21300000, guid: b49e3df03ca7d5d119be5e62b8c46c28, type: 3}
   - {fileID: 21300000, guid: dfda11439b0fd244eb0fd1b8331f3416, type: 3}
   myRigidBody: {fileID: 4828595936382870815}
-  isEnabled: 1
 --- !u!114 &7757597093786821479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,21 +217,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4871037802160252510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5432859949516486173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a672717cc4d5bbbbea14cfa496de0eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goldMaterial: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
-  transmuteSFX: {fileID: 0}
-  SpriteRenderer: {fileID: 0}
 --- !u!82 &657509739487015640
 AudioSource:
   m_ObjectHideFlags: 0

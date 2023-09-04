@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5392257110162784237}
   - component: {fileID: 5320392357533634649}
   - component: {fileID: 4647390556831011121}
-  - component: {fileID: 3019613383544315863}
   - component: {fileID: 303138785555753962}
   m_Layer: 6
   m_Name: Beast_Moth
@@ -37,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8147968565568537685
 MonoBehaviour:
@@ -51,11 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e052f9fc9f6fa342be3251635512d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transmuteSFX: {fileID: 303138785555753962}
+  goldMaterial: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
   texFrames:
   - {fileID: 21300000, guid: ca7649e59bca1512fb5db11829fb3d58, type: 3}
   - {fileID: 21300000, guid: efa4e03dff39dcdfab38cf0e39024dd5, type: 3}
   myRigidBody: {fileID: 4647390556831011121}
-  isEnabled: 1
 --- !u!114 &8209059817140320164
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,21 +218,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3019613383544315863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1670793019573008004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a672717cc4d5bbbbea14cfa496de0eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goldMaterial: {fileID: -876546973899608171, guid: 5c16bf9a40793bf42b83744fb9b55434, type: 3}
-  transmuteSFX: {fileID: 0}
-  SpriteRenderer: {fileID: 5392257110162784237}
 --- !u!82 &303138785555753962
 AudioSource:
   m_ObjectHideFlags: 0
