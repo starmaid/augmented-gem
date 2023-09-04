@@ -829,7 +829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6722412, y: 0}
+  m_AnchoredPosition: {x: -0.671875, y: 0}
   m_SizeDelta: {x: -12.1104, y: 60.8921}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1590449294811869537
@@ -1886,7 +1886,7 @@ Canvas:
   m_GameObject: {fileID: 4438248151087751458}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 6823237506341479040}
   m_PlaneDistance: 5
   m_PixelPerfect: 1
@@ -2662,7 +2662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6722412, y: 0}
+  m_AnchoredPosition: {x: -0.671875, y: 0}
   m_SizeDelta: {x: -12.1104, y: 60.8921}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8985197900699566075
@@ -3207,7 +3207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6722412, y: 0}
+  m_AnchoredPosition: {x: -0.671875, y: 0}
   m_SizeDelta: {x: -12.1104, y: 60.8921}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7837563787515277199
@@ -3696,15 +3696,15 @@ PrefabInstance:
       objectReference: {fileID: 4109763558588671646}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.7604167
+      value: 0.7375
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.45000002
+      value: 0.4984375
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.45000002
+      value: 0.49843752
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder
