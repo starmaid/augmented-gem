@@ -295,17 +295,12 @@ They look surprised, but not as impressed as they <i>really</i> ought to. #portr
 	"..." #portrait:adv_neutral_nogem
 	->DONE
 - else:
-	{stopping:
-		-
-		//sfx: door unlocked!
-		The door is unlocked! #portrait:none
-		"Oh! It worked..." #portrait:adv_curious
-		"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
-		// Your total friendship point: {friendship}
-		~callSignal("UnlockDoor")
-		-
-		~callSignal("UseDoor")
-	}
+	//sfx: door unlocked!
+	The door is unlocked! #portrait:none
+	"Oh! It worked..." #portrait:adv_curious
+	"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
+	// Your total friendship point: {friendship}
+	~callSignal("UnlockDoor")
 }
 -> DONE
 

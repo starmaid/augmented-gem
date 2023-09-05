@@ -15,12 +15,16 @@ public class TriggerInteract : MonoBehaviour
     [Header("Ink")]
     //[SerializeField] private TextAsset inkJSON;
     [SerializeField] private string knotName;
+    private bool useKnot;
     // [SerializeField] private BooleanSO isRetrieved;
 
     public bool playerInRange;
     void Awake()
     {
         playerInRange = false;
+        if (knotName != ""){
+            useKnot = true;
+        }
     }
 
     public bool GetPlayerInRange() { return playerInRange; }
@@ -37,10 +41,10 @@ public class TriggerInteract : MonoBehaviour
             
             if (interactSignal != null)
             {
-                Debug.Log("interacting!!!");
+                Debug.Log("signaling for new action!" );
                 interactSignal.Raise();
             }
-            if (knotName != null)
+            if (useKnot && knotName != null)
             {
                 print("trying to enter dialogue " + knotName);
                 StoryManager.GetInstance().EnterDialogueMode(knotName);
@@ -81,6 +85,6 @@ public class TriggerInteract : MonoBehaviour
     }
 
     public void DisableKnot(){
-        knotName = null;
+        useKnot = false;
     }
 }
