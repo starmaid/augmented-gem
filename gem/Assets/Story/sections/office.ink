@@ -333,3 +333,200 @@ If you enjoy what you've played and would like to know more about the Adventurer
 We still have a lot of ideas we want to put in this game, and much more story to tell, but it'll be your support that'll help us see it through. It means a lot to us.
 We hope to see you return to the dark in the future...
 -> DONE
+
+=== 1_lion_statue ===
+{
+- not has_gem:
+	{stopping:
+	- 
+	The Adventurer stops to look at a statue of a lion with an orb in it's mouth.
+	-
+	{cycle:
+	- (Why do you care about a statue! <i>I'm</i> right here!) #portrait:gem_statue_angry
+	- (This human is not very bright...) #portrait:gem_statue_angry
+	- (ARGHHH!!!!!!) #portrait:gem_statue_angry
+		}
+- has_gem:
+	{stopping:
+	- 
+	The Adventurer stops to look at a statue of a lion with an orb in it's mouth.
+	"This is pretty..." #portrait:adv_curious
+	"This is <i>nothing</i> compared to what I could show you\-\-" #portrait:gem_excited
+	"\-\-once we're <i>out of this stupid room!</i>" #portrait:gem_angry
+	"I just think big cats are nice..." #portrait:adv_frown
+	-
+	"She had some sort of <i>something</i> with lions..." #portrait:gem_neutral  
+		}
+	}
+}
+->DONE
+
+=== 1_books ===
+{
+- not has_gem:
+	{stopping:
+	- 
+	The Adventurer flips through book. The dust that rises off the page makes them sneeze.
+	-
+	{cycle:
+	- (You probably can't even read that! Leave it alone!) #portrait:gem_angry
+	- (This human is not very bright...) #portrait:gem_angry
+	- (ARGHHH!!!!!!) #portrait:gem_angry
+		}
+	}
+- has_gem:
+	{stopping:
+	- 
+	The Adventurer flips through book. The dust that rises off the page makes them sneeze (again.)
+	"..." #portrait:adv_curious
+	"What's <i>'Chrsopoeia: The Great Work of Alchemy'?</i>" portrait:adv_neutral
+	"Look at me, and then ask that question one more time. Really slowly." #portrait:gem_neutral
+	-
+	"There are plenty more ah... <i>coherent</i> books in the library." #portrait:gem_worried
+	}
+}
+	->DONE
+
+
+=== 1_papers ===
+{
+- not has_gem:
+	{stopping:
+	- 
+	The Adventurer squints at the scribbled papers scattered around the room.
+	-
+	{cycle:
+	- (They <i>definitely</i> can't read those...) #portrait:gem_angry
+	- (This human is not very bright...) #portrait:gem_angry
+	- (ARGHHH!!!!!!) #portrait:gem_angry
+		}
+	}
+- has_gem:
+	{stopping:
+	- 
+	The Adventurer squints at the scribbled papers scattered around the room.
+	"..." #portrait:adv_confused
+	"Err.. I can't read this." #portrait:adv_frown
+	"She wrote everything in code, so no one else could claim credit for her work." #portrait:gem_neutral
+	"Do you know how to translate it?" #portrait:adv_curious
+	"I don't think you would find it much more comprehensible." #portrait:gem_neutral
+	-
+	"One of the skills I am going to have to teach you is <i>'prioritization.'</i>" #portrait:gem_angry
+	}
+}
+->DONE
+
+=== 1_alchemy_equiptment ===
+{
+- not has_gem:
+	{stopping:
+		- 
+		The Adventurer pokes at some glassware on a table. 
+		-
+		{cycle:
+		- (Are they ignoring me?) #portrait:gem_angry
+		- (This human is not very bright...) #portrait:gem_angry
+		- (ARGHHH!!!!!!) #portrait:gem_angry
+		}
+	}
+- has_gem:
+	{stopping:
+	- 
+	The Adventurer pokes at some glassware on a table.
+	"Are you sure you're not interested in alchemy?" #portrait:gem_excited
+	"Oh\-\- that's what that's for?" #portrait:adv_curious
+	"..What did you THINK it was for?" #portrait:gem_neutral
+	"I dunno... cooking maybe?" #portrait:adv_frown
+	-
+	"This is useless to both of us right now." #portrait:gem_angry
+	}
+}
+->DONE
+
+=== 1_rubble ===
+{
+- not has_gem:
+	{stopping:
+	- 
+	The Adventurer looks at the crumbled stone where the dumbwaiter used to be.
+	-
+	{cycle:
+	- (They're not going to try to climb that, are they? ...That would be entertaining to watch.) #portrait:gem_neutral
+	- (This human is not very bright...) #portrait:gem_angry
+	- (ARGHHH!!!!!!) #portrait:gem_angry
+	}
+	}
+- has_gem:
+	{stopping:
+	- 
+	The Adventurer looks at the crumbled stone where the dumbwaiter used to be.
+	"This place took ages to build..." #portrait:gem_worried
+	"..." #portrait:gem_neutral
+	"Kick it for me!" #portrait:gem_angry
+	"..." #portrait:adv_frown
+	The adventurer gives the wall a light kick, and a few more pebbles tumble down. They wince.
+	"Did that ah.. help..?" #portrait:adv_neutral
+	"..." #portrait:gem_worried
+	"Let's just leave!" #portrait:gem_neutral
+	-
+	"Things aren't in the best shape up there..." #portrait:adv_frown
+	}
+}
+->DONE
+
+
+=== 1_bookw ===
+{
+- not has_gem:
+	{stopping:
+	-
+	The Adventurer pauses at a bookshelf.
+	// -
+    {cycle:
+    - (Hpmh. The human probably isn't even bright enough to read them.) #portrait:gem_statue_angry
+    - (That is very clearly not a dagger... what is the human doing?) #portrait:gem_statue_angry
+    - (Is the human blind? That is a <i>book<i>shelf, not a <i>dagger<i> shelf...) #portrait:gem_statue_angry
+    }
+    }
+- has_gem:
+	{stopping:
+	-
+	The Adventurer pauses as a bookshelf.
+	"That's a lot of dust... I can't even read the titles of the books" #portrait:adv_curious
+	+ "You probably can't even read them anyways, dulbert." #portrait:gem_angry
+	-> DONE
+	+ "We do not have time to read books, dusty or otherwise." #portrait:gem_neurtral
+	-> DONE
+    }
+}
+-> DONE
+
+
+=== 1_booke ===
+{
+- not has_gem:
+	{stopping:
+	-
+	The Adventurer checks out a bookshelf.
+	{cycle:
+		- (Hpmh. The human probably isn't even bright enough to read them.) #portrait:gem_statue_angry
+		- (That is very clearly not a dagger... what is the human doing?) #portrait:gem_statue_angry
+		- (Is the human blind? That is a <i>book<i>shelf, not a <i>dagger<i> shelf...) #portrait:gem_statue_angry
+		}
+    }
+- has_gem:
+	{stopping:
+	-
+	The Adventurer checks out a bookshelf.
+	"'Properties of Gold'?, 'The Journey to Immortal Life'?, <i>'Urine to ur Riches'?!<i>" #portrait:adv_curious
+	+ "Don't be so scandalized. This is all standard alchemical practice" #portrait:gem_neutral
+		"I- huh... okay?" #portrait:adv_neutral
+		"'OKAY'??? Clearly your mind is too simple to realize the- ... I am not going to bother explaining this to a dulbert. Let's just go" #portrait:gem_angry
+		-> DONE
+	+ "While it  might seem strange to common folk, like you, to an alchemist this is standard practice." #portrait:gem_neutral
+		"Oh. Huh, interesting" #portrait:adv_curious
+		"Interesting is just the start of it! But... let's discuss this another time. Preferably once we're out of this castle" #portrait:gem_excited
+		-> DONE
+    }
+}
+-> DONE
