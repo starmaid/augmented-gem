@@ -44,6 +44,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private bool stopAudioSource; // for stopping dialogue sound clip if too long
     private AudioSource audioSource;
 
+    [SerializeField] private AudioSource backgroundAudio;
+
     [Header("Cutscenes")]
     [SerializeField] public SignalSO resumeCutsceneSignal;
     [SerializeField] public SignalSO pauseCutsceneSignal;
@@ -157,6 +159,10 @@ public class StoryManager : MonoBehaviour
         currentStory.BindExternalFunction("goToNext", (int delayTime) =>
         {
             StartCoroutine(GoToNext(delayTime));
+        });
+        currentStory.BindExternalFunction("startBackgroundAudio", () =>
+        {
+            StartBackgroundAudio();
         });
     }
 
@@ -360,6 +366,10 @@ public class StoryManager : MonoBehaviour
         ContinueStory();
     }
 
+    public void StartBackgroundAudio() {
+        backgroundAudio.Play();
+    }
+
     // can only call this AFTER A SOFT EXIT
     private void SoftEnterDialogueMode()
     {
@@ -395,6 +405,7 @@ public class StoryManager : MonoBehaviour
         // SetCurrentAudioInfo(defaultAudioInfo.id);
         endInteractSignal.Raise();
     }
+
 
     private void Update()
     {
