@@ -126,6 +126,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	\[MOVE using WASD or ARROW KEYS\] #portrait:none
     	\[INTERACT using Z\]
 -    
+~startBackgroundAudio()
 ->DONE
 
 // ===1_begin===
