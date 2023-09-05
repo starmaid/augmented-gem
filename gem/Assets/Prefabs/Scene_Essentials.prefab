@@ -1994,14 +1994,15 @@ MonoBehaviour:
   dialogueText: {fileID: 1575984031205374583}
   displayNameText: {fileID: 0}
   portraitAnimator: {fileID: 5382580006892980711}
-  defaultTypingSpeed: 0.04
+  defaultTypingSpeed: 0.01
   choices:
   - {fileID: 7205868100510718267}
   - {fileID: 3795440479196583597}
   - {fileID: 965592917711255866}
   dialogueTypingSoundClip: {fileID: 8300000, guid: 9271605e401e4ca4aa515f71220b6b1b, type: 3}
-  frequencyLevel: 2
+  frequencyLevel: 4
   stopAudioSource: 0
+  backgroundAudio: {fileID: 0}
   resumeCutsceneSignal: {fileID: 11400000, guid: 36ac289c0154924479e39a4c9d965a9d, type: 2}
   pauseCutsceneSignal: {fileID: 11400000, guid: b6fedb366fd9fe946bf40a4d50472b38, type: 2}
 --- !u!114 &3677390367980126325
@@ -3695,16 +3696,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4109763558588671646}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.7895834
+      value: 0.22314814
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.39375
+      value: 0.2776042
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.39375
+      value: 0.37013888
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder
