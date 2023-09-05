@@ -139,9 +139,9 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 
 ===1_dagger===
 {stopping:
-	// -
-	// FOR the sake of convenience, here's the key #portrait:none //DEBUG
-	// ~has_key = true
+	-
+	FOR the sake of convenience, here's the key #portrait:none //DEBUG
+	~has_key = true
     -
     The Adventurer picks up an ornate dagger beside a pile of dusty books. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
@@ -295,14 +295,19 @@ They look surprised, but not as impressed as they <i>really</i> ought to. #portr
 	"..." #portrait:adv_neutral_nogem
 	->DONE
 - else:
-	//sfx: door unlocked!
-	The door is unlocked! #portrait:none
-	"Oh! It worked..." #portrait:adv_curious
-	"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
-	// Your total friendship point: {friendship}
-	~callSignal("UnlockDoor")
-	->DONE
+	{stopping:
+		-
+		//sfx: door unlocked!
+		The door is unlocked! #portrait:none
+		"Oh! It worked..." #portrait:adv_curious
+		"See, I told you how you can rely on me. Now, just follow my lead..."  #portrait:gem_excited
+		// Your total friendship point: {friendship}
+		~callSignal("UnlockDoor")
+		-
+		~callSignal("UseDoor")
+	}
 }
+-> DONE
 
 ===2_door===
 {cycle:
@@ -378,9 +383,9 @@ We hope to see you return to the dark in the future...
 - has_gem:
 	{stopping:
 	- 
-	The Adventurer flips through book. The dust that rises off the page makes them sneeze (again.)
+	The Adventurer flips through book. The dust that rises off the page makes them sneeze \(again.\)
 	"..." #portrait:adv_curious
-	"What's <i>'Chrsopoeia: The Great Work of Alchemy'?</i>" portrait:adv_neutral
+	"What's <i>'Chrysopoeia: The Great Work of Alchemy'?</i>" #portrait:adv_neutral
 	"Look at me, and then ask that question one more time. Really slowly." #portrait:gem_neutral
 	-
 	"There are plenty more ah... <i>coherent</i> books in the library." #portrait:gem_worried
