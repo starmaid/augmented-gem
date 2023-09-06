@@ -200,7 +200,7 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 ->DONE
 
 ===1_collect_gem===
-The adventurer collects the gem. #portrait:none
+You give one last look to the statue, and happily nestle yourself into the Adventurer's grasp. #portrait:none
 ~has_gem = true
 ->DONE
 
@@ -375,7 +375,7 @@ We hope to see you return to the dark in the future...
 - not has_gem:
 	{stopping:
 	- 
-	The Adventurer flips through book. The dust that rises off the page makes them sneeze.
+	The Adventurer flips through book. The dust that rises off the page makes them sneeze.  #portrait:none
 	-
 	{cycle:
 	- (You probably can't even read that! Leave it alone!) #portrait:gem_angry
@@ -430,7 +430,7 @@ We hope to see you return to the dark in the future...
 - not has_gem:
 	{stopping:
 		- 
-		The Adventurer pokes at some glassware on a table. 
+		The Adventurer pokes at some glassware on a table. #portrait:none
 		-
 		{cycle:
 		- (Are they ignoring me?) #portrait:gem_angry
