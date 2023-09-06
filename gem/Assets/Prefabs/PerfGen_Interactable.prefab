@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f382b495071dc14f82525cf92a3a152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intMaterial: {fileID: -876546973899608171, guid: 907ec477735e3144391ba00a93234ff1, type: 3}
+  intMaterial: {fileID: -876546973899608171, guid: 0c1a23694770fa642822e2f85b790328, type: 3}
   transMaterial: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
   highlightScale: 0
   doesntHaveAnimator: 0

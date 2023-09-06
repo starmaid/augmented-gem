@@ -516,14 +516,6 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 65cb40122f756365cb176270df835e76, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: intMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: 907ec477735e3144391ba00a93234ff1, type: 3}
-    - target: {fileID: 6405225035081977371, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
-      propertyPath: transMaterial
-      value: 
-      objectReference: {fileID: -876546973899608171, guid: a23484c6331c1a44da048de8a690af6b, type: 3}
     - target: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Size.y
       value: 1.2864556
