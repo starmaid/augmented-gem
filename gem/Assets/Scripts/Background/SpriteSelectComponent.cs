@@ -35,13 +35,23 @@ public class SpriteSelectComponent : MonoBehaviour
         // set things up
         if (mySpriteRenderer != null)
         {
-            mySprite = mySpriteRenderer.sprite;
+            // this is stupid and wasnt a good idea
+            //mySprite = Sprite.Create(mySpriteRenderer.sprite.texture,
+            //    mySpriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f), 
+            //    mySpriteRenderer.sprite.pixelsPerUnit);
+
+            // this should work but idk why
+            //mySprite = Sprite.Create(mySpriteRenderer.sprite.texture,
+            //    mySpriteRenderer.sprite.rect, mySpriteRenderer.sprite.pivot, 
+            //    mySpriteRenderer.sprite.pixelsPerUnit,
+            //    (uint) 20);
 
             // build the child sprite renderer
             newObject = new GameObject(name + "_highlight");
             newObject.transform.SetParent(this.transform, false);
 
             newSpriteComponent = newObject.AddComponent<SpriteRenderer>();
+            
             newSpriteComponent.sprite = mySprite;
             newSpriteComponent.material = intMaterial; //default
             newSpriteComponent.sortingLayerName = "HighlightSprites";

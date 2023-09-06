@@ -79,4 +79,8 @@ public class TriggerInteract : MonoBehaviour
             }
         }
     }
+
+    public void DisableKnot(){
+        knotName = null;
+    }
 }

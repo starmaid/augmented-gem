@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,24 @@ public class MainMenu : MonoBehaviour
     [SerializeField] public float transitionTime;
 
     [SerializeField] public TextAsset mainInkAsset;
+    private static MainMenu instance;
+
+    public static MainMenu GetInstance()
+    {
+        return instance;
+    }
+    void Awake(){
+        if (instance != null)
+        {
+            Debug.LogWarning("Found more than one Dialogue Manager in the scene");
+        }
+        instance = this;
+    }
 
     void Start(){
         Transitioner.SetActive(true);
     }
+
     IEnumerator LoadSceneByInt(int index){
         Time.timeScale = 1f;
         Transitioner.GetComponent<Animator>().SetTrigger("start");
@@ -29,6 +44,26 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(LoadSceneByInt(index));
         Debug.Log("end");
     }
+
+    public void LoadNextScene(){
+        Debug.Log("start");
+        StartCoroutine(LoadSceneByInt(SceneManager.GetActiveScene().buildIndex+1));
+        Debug.Log("end");
+    }
+
+    IEnumerator LoadSceneByStr(String sceneName){
+        Time.timeScale = 1f;
+        Transitioner.GetComponent<Animator>().SetTrigger("start");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadSceneByStrRunner(String sceneName){
+        // Debug.Log("start");
+        StartCoroutine(LoadSceneByStr(sceneName));
+        // Debug.Log("end");
+    }
+
 
     public void StartNewGame(){
 
