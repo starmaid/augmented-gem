@@ -5,14 +5,14 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [SerializeField] BooleanSO isRetrieved;
-    [SerializeField] TriggerInteract triggerInteract;
+    [SerializeField] SpriteSelectComponent spriteSelectedComp;
     [SerializeField] AudioSource pickUpSound;
 
     // Start is called before the first frame update
     void Awake()
     {
         // triggerInteract = GetComponent<TriggerInteract>();
-        triggerInteract.playerInRange = false;
+        // spriteSelectedComp.HighlightEnabled = false;
         if(isRetrieved.initialValue){
             this.gameObject.SetActive(false);
         }else{
@@ -21,7 +21,7 @@ public class Collectible : MonoBehaviour
     }
 
     public void GetPickedUp(){
-        if(triggerInteract.playerInRange){
+        if(spriteSelectedComp.isActiveAndEnabled && spriteSelectedComp.HighlightEnabled){
             pickUpSound.Play();
             isRetrieved.initialValue = true;
             StartCoroutine(PlayAudioAndDisable(pickUpSound));

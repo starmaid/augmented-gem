@@ -117,13 +117,13 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
     	"If memory serves, that is. Pry me out! Don't take your time.” #portrait:gem_statue_neutral
    	 	“Where? There's.. a lot of stuff in here,” #portrait:adv_curious_nogem
    	 	“That way-- on the right.” #portrait:gem_statue_neutral
-   	 	\[MOVE using WASD or ARROW KEYS\] #portrait:none
+   	 	\[MOVE using ARROW KEYS\] #portrait:none
     	\[INTERACT using Z\]
 	*   [“I don't <i>care</i>, just break it!"]
     	“I don't <i>care</i>, just break it! Seems like it should be a familiar enough concept to you!” #portrait:gem_statue_angry
    	 “Fine! I'm sorry about the dumbwaiter...” #portrait:adv_worried_nogem
     	“It wasn't being used for much. Fine, there might be a dagger near that shelf\-\-that way--” #portrait:gem_statue_neutral
-    	\[MOVE using WASD or ARROW KEYS\] #portrait:none
+    	\[MOVE using ARROW KEYS\] #portrait:none
     	\[INTERACT using Z\]
 -    
 ~startBackgroundAudio()
@@ -139,9 +139,9 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 
 ===1_dagger===
 {stopping:
-	-
-	FOR the sake of convenience, here's the key #portrait:none //DEBUG
-	~has_key = true
+	// -
+	// FOR the sake of convenience, here's the key #portrait:none //DEBUG
+	// ~has_key = true
     -
     The Adventurer picks up an ornate dagger beside a pile of dusty books. #portrait:none
 	//note: little bit of flavor text like this whenever you pick something up
@@ -310,14 +310,16 @@ They look surprised, but not as impressed as they <i>really</i> ought to. #portr
 -> DONE
 
 ===2_door===
-{cycle:
-- 	"..."
-	"Where do you think you're going?"
-	"We might've missed something in there, I thought we could check?"
-	"What? No. No you haven't."
-	"There are far more exciting things"
-	"There's a patch of cobblestone on the ceiling two paces south of the shelf that is shaped like a cat or a cow."
-	"Ta. Tour over. There's nothing else in that room."
+{stopping:
+- 	"..." #portrait:adv_neutral
+	"Where do you think you're going?" #portrait:gem_worried
+	"We might've missed something in there, I thought we could check?" #portrait:adv_curious
+	"What? No. No you haven't." #portrait:gem_angry
+	"There are far more exciting things down the corridor. Like that moss down there! Go check out that patch of moss."
+-	"...!"
+	You vibrate in displeasure. The adventurer backs off a little. #portrait:none
+-	Never. Never again. #portrait:none
+-	Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never. Never.
 }
 ->DONE
 
@@ -338,6 +340,7 @@ What? "That's too short?" you say? Sorry, carving out an underground castle was 
 If you enjoy what you've played and would like to know more about the Adventurer and the gem, consider leaving a comment!
 We still have a lot of ideas we want to put in this game, and much more story to tell, but it'll be your support that'll help us see it through. It means a lot to us.
 We hope to see you return to the dark in the future...
+~callSignal("UseDoor")
 -> DONE
 
 === 1_lion_statue ===

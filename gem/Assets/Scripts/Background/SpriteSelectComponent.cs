@@ -15,6 +15,7 @@ public class SpriteSelectComponent : MonoBehaviour
     [SerializeField] public bool doesntHaveAnimator = false;
 
     private bool highlightEnabled;
+    public bool HighlightEnabled {get{return highlightEnabled;}}
 
     private SpriteRenderer mySpriteRenderer;
     private Sprite mySprite;
@@ -65,8 +66,8 @@ public class SpriteSelectComponent : MonoBehaviour
 
     public void tryEnable()
     {
-        if (!highlightEnabled)
-        {
+        // if (!highlightEnabled)
+        // {   Debug.Log("try enabled");
             if(this.CompareTag("interactable")){
                 newSpriteComponent.material = intMaterial;
             }else if(this.CompareTag("transmutable")){
@@ -79,19 +80,19 @@ public class SpriteSelectComponent : MonoBehaviour
             {
                 newObject.SetActive(true);
             }
-        }
+        // }
     }
 
     public void tryDisable()
     {
-        if (highlightEnabled)
-        {
+        // if (highlightEnabled)
+        // {   Debug.Log("try disabled");
             highlightEnabled = false;
             if (newObject != null)
             {
                 newObject.SetActive(false);
             }
-        }
+        // }
     }
 
 
