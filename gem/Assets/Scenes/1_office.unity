@@ -551,7 +551,7 @@ PrefabInstance:
     - target: {fileID: 7171305073720839198, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f903d6c8b00f4b98dab7fb8004dba487, type: 3}
+      objectReference: {fileID: 21300000, guid: c296d00391345c76c98351dee3c8e7cd, type: 3}
     - target: {fileID: 7171305073720839198, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1848,7 +1848,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 2, y: 3}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4265,7 +4265,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 74b6ff95a84627ae39533a5f8adb2514, type: 2}
-  m_InitialState: 0
+  m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -6837,7 +6837,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.7}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -7537,7 +7537,7 @@ MonoBehaviour:
         m_MethodName: set_sprite
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: e13964d951c1c53b08d7bc044e8664d6, type: 3}
+          m_ObjectArgument: {fileID: 21300000, guid: 49ad1678aec91fac0b8806e8efaf756a, type: 3}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
