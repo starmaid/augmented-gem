@@ -1,10 +1,11 @@
-name: Unity Build
+name: Unity Check
 
 on:
+  pull_request:
+    branches: [ "main" ]
   push:
-    tags: 
-      - '*'
-
+    branches: [ "main" ]
+  
 jobs:
   buildForAllSupportedPlatforms:
     name: Build for ${{ matrix.targetPlatform }}
@@ -13,11 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         targetPlatform:
-          - StandaloneOSX # Build a macOS standalone (Intel 64-bit).
           - StandaloneWindows # Build a Windows standalone.
-          - StandaloneWindows64 # Build a Windows 64-bit standalone.
-          - StandaloneLinux64 # Build a Linux 64-bit standalone.
-          - WebGL # WebGL.
     steps:
       - uses: actions/checkout@v3
         with:
