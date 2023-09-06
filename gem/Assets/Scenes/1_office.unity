@@ -5842,7 +5842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1622324107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7083,7 +7083,8 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2292551312463151160, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -7158,6 +7159,11 @@ MonoBehaviour:
   transportTo: {fileID: 11400000, guid: 8c09386f726659d0ba29d07e9de8ac89, type: 2}
   currentPlayerPos: {fileID: 11400000, guid: cf0e20e6f9cef9e7694df39d2940d7ba, type: 2}
   unlocked: {fileID: 11400000, guid: 73b2143aeedeb556cb6f8e050f798cfa, type: 2}
+--- !u!82 &1924438186 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4661250642064670157, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
+  m_PrefabInstance: {fileID: 1924438182}
+  m_PrefabAsset: {fileID: 0}
 --- !u!61 &1924438187 stripped
 BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 6843023963393246312, guid: 1baa5047b56f22343aa11ff88775ba7a, type: 3}
@@ -7182,6 +7188,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1924438185}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
         m_MethodName: ChangeSceneViaTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1924438186}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
