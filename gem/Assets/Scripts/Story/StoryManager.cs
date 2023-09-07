@@ -25,7 +25,8 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
-    [SerializeField] private float defaultTypingSpeed = 0.04f;
+    [SerializeField] private float defaultTypingSpeed = 0.01f;
+    [SerializeField] private float pauseFactor = 12.0f;
     private float typingSpeed;
     private Animator layoutAnimator;
 
@@ -43,6 +44,7 @@ public class StoryManager : MonoBehaviour
     [SerializeField] private int frequencyLevel;
     [SerializeField] private bool stopAudioSource; // for stopping dialogue sound clip if too long
     private AudioSource audioSource;
+    private const string punctuation = ".,;?!-";
 
     [SerializeField] private AudioSource backgroundAudio;
 
@@ -485,9 +487,11 @@ public class StoryManager : MonoBehaviour
 
         bool isAddingRichTextTag = false;
 
+        char previousLetter = 'a'; // placeholder character
+
         // display each letter one at a time
         foreach (char letter in line.ToCharArray())
-        {
+        {   
             // if the submit button is pressed, finish up displaying the line right away
             if (trySkipDialogue)
             {
@@ -512,6 +516,10 @@ public class StoryManager : MonoBehaviour
                 PlayDialogueSound(dialogueText.maxVisibleCharacters);
                 dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(typingSpeed);
+                if (punctuation.Contains(previousLetter) && !punctuation.Contains(letter)) {
+                    yield return new WaitForSeconds(typingSpeed * pauseFactor);
+                }
+                previousLetter = letter;
             }
         }
 
