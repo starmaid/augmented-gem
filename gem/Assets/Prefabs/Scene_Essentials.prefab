@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2080670972324631490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 9.000003, y: 201}
+  m_AnchoredPosition: {x: 10, y: 200}
   m_SizeDelta: {x: 192, y: 192}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4221635536306315758
@@ -1833,6 +1833,7 @@ GameObject:
   - component: {fileID: 5535386773142570068}
   - component: {fileID: 5541576814418411052}
   - component: {fileID: 6871557001423221631}
+  - component: {fileID: 6550617234083871239}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1940,6 +1941,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6550617234083871239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438248151087751458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb201e5ec11b7be7e9b004005eacaa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Transitioner: {fileID: 5347615158372225358}
+  transitionTime: 2.5
+  mainInkAsset: {fileID: 0}
 --- !u!1 &4833074444329637503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +2003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainInkAsset: {fileID: 4900000, guid: d87185437d694233ebb4675385d7212a, type: 3}
-  loadOnStart: 1
+  loadOnStart: 0
   endInteractSignal: {fileID: 11400000, guid: 7afdaf4e5fbf98f84b9d5c1fc3e00801, type: 2}
   dialoguePanel: {fileID: 579435166684159313}
   continueIcon: {fileID: 7528156755162653096}
@@ -2079,7 +2095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5954604697768584355
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2148,7 +2164,7 @@ Animator:
   m_GameObject: {fileID: 5347615158372225358}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 25f5cb711fe63e0e6817dbb81b7a523b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3701,15 +3717,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.22314814
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.2776042
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7393665187659582274, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.37013888
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7483152659175474684, guid: 29b294c4d2808a0618c9c2be89be9129, type: 3}
       propertyPath: m_RootOrder

@@ -454,7 +454,7 @@ public class StoryManager : MonoBehaviour
             // handle tags
             HandleTags(currentStory.currentTags);
 
-            readyToPlayAnim = true;
+            
 
             // handle case where the last line is an external function
             if (nextLine.Equals("") && !currentStory.canContinue)
@@ -464,6 +464,7 @@ public class StoryManager : MonoBehaviour
             // otherwise, handle the normal case for continuing the story
             else
             {
+                readyToPlayAnim = true;
                 displayLineCoroutine = StartCoroutine(DisplayLine(nextLine));
             }
         }

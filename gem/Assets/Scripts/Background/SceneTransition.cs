@@ -29,17 +29,31 @@ public class SceneTransition : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other){
         // Debug.Log ("wanna go through the door? " + Unlocked.initialValue + Unlocked + unlocked);
         if(other.CompareTag("Player")&& !other.isTrigger && Unlocked.initialValue){
-            if (Application.CanStreamedLevelBeLoaded(sceneName)){
-                Debug.Log("Calling save from SceneTransition");
-                StoryManager.GetInstance().SaveFile();
-                currentPlayerPos.initialValue = transportTo.initialValue;
-                SceneManager.LoadScene(sceneName);
-                // Calling load still acts on the current storymanager - scene hasnt changed
-                //StoryManager.GetInstance().LoadFile();
-            }
-            else{
-                Debug.LogError(sceneName + " is not found");
-            }
+            ChangeScene();
         }
+    }
+
+    // if this were to be called, you need a triggerinteract on the same gameobject!!
+    public void ChangeSceneViaTrigger(){
+        if (Unlocked.initialValue){
+            ChangeScene();
+        }
+    }
+
+    public void ChangeScene(){
+        if (Application.CanStreamedLevelBeLoaded(sceneName)){
+            Debug.Log("Calling save from SceneTransition");
+            StoryManager.GetInstance().SaveFile();
+            currentPlayerPos.initialValue = transportTo.initialValue;
+            // yield return new WaitForSeconds(1f);
+            // SceneManager.LoadScene(sceneName);
+            MainMenu.GetInstance().LoadSceneByStrRunner(sceneName);
+            // Calling load still acts on the current storymanager - scene hasnt changed
+            //StoryManager.GetInstance().LoadFile();
+        }
+        else{
+            Debug.LogError(sceneName + " is not found");
+        }
+
     }
 }

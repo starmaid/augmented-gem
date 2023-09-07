@@ -15,6 +15,7 @@ public class SpriteSelectComponent : MonoBehaviour
     [SerializeField] public bool doesntHaveAnimator = false;
 
     private bool highlightEnabled;
+    public bool HighlightEnabled {get{return highlightEnabled;}}
 
     private SpriteRenderer mySpriteRenderer;
     private Sprite mySprite;
@@ -35,13 +36,23 @@ public class SpriteSelectComponent : MonoBehaviour
         // set things up
         if (mySpriteRenderer != null)
         {
-            mySprite = mySpriteRenderer.sprite;
+            // this is stupid and wasnt a good idea
+            //mySprite = Sprite.Create(mySpriteRenderer.sprite.texture,
+            //    mySpriteRenderer.sprite.rect, new Vector2(0.5f, 0.5f), 
+            //    mySpriteRenderer.sprite.pixelsPerUnit);
+
+            // this should work but idk why
+            //mySprite = Sprite.Create(mySpriteRenderer.sprite.texture,
+            //    mySpriteRenderer.sprite.rect, mySpriteRenderer.sprite.pivot, 
+            //    mySpriteRenderer.sprite.pixelsPerUnit,
+            //    (uint) 20);
 
             // build the child sprite renderer
             newObject = new GameObject(name + "_highlight");
             newObject.transform.SetParent(this.transform, false);
 
             newSpriteComponent = newObject.AddComponent<SpriteRenderer>();
+            
             newSpriteComponent.sprite = mySprite;
             newSpriteComponent.material = intMaterial; //default
             newSpriteComponent.sortingLayerName = "HighlightSprites";
@@ -55,8 +66,8 @@ public class SpriteSelectComponent : MonoBehaviour
 
     public void tryEnable()
     {
-        if (!highlightEnabled)
-        {
+        // if (!highlightEnabled)
+        // {   Debug.Log("try enabled");
             if(this.CompareTag("interactable")){
                 newSpriteComponent.material = intMaterial;
             }else if(this.CompareTag("transmutable")){
@@ -69,19 +80,19 @@ public class SpriteSelectComponent : MonoBehaviour
             {
                 newObject.SetActive(true);
             }
-        }
+        // }
     }
 
     public void tryDisable()
     {
-        if (highlightEnabled)
-        {
+        // if (highlightEnabled)
+        // {   Debug.Log("try disabled");
             highlightEnabled = false;
             if (newObject != null)
             {
                 newObject.SetActive(false);
             }
-        }
+        // }
     }
 
 

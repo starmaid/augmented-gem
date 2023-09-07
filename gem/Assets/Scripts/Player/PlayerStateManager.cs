@@ -58,6 +58,9 @@ public class PlayerStateManager : MonoBehaviour
     //HIGHLIGHTS
     private SpriteSelectComponent _spriteSelectComponent;
 
+    private GameObject _currentHit;
+    private String _currentHitTag;
+
 
     //GETTERS AND SETTERS
     public PlayerBaseState CurrentState{get{return _currentState;} set{_currentState = value;}}
@@ -81,7 +84,7 @@ public class PlayerStateManager : MonoBehaviour
 
     public GameObject RayPoint {get{return _rayPoint;}}
     public float RayDistance {get{return _rayDistance;}}
-    public Pushable PushedObj{get{return _pushedObj;} set{_pushedObj = value;}}
+    public GameObject CurrentHit {get{return _currentHit;} set{_currentHit = value;}}
     // public IBeast BeastObj{get{return _beast;} set{_beast = value;}}
 
     public AudioSource MyAudioSource{get{return _myAudioSource;} set{_myAudioSource = value;}}
@@ -133,6 +136,8 @@ public class PlayerStateManager : MonoBehaviour
         Vector2 endPos = startPos + new Vector2(_animator.GetFloat("moveX"),_animator.GetFloat("moveY")) * _rayDistance;
         RaycastHit2D hit = Physics2D.Linecast(startPos,endPos, 1 << LayerMask.NameToLayer("Raycast Detectable"));
         if (hit.collider!=null){
+            // Debug.Log("currenthit: " + _currentHit + "  hit.collider: " + hit.collider.GameObject());
+
             if(hit.collider.CompareTag("interactable")){
                 Debug.DrawLine(startPos,endPos,Color.yellow);
             }
@@ -142,38 +147,41 @@ public class PlayerStateManager : MonoBehaviour
             else{
                 Debug.DrawLine(startPos,endPos,Color.green);
             }
-
-            // sorry this is backwards but we have to check if the new highlight
-            // is different from the old highlighted
-            // not-null component and a null new hit component will still not equal
-            // so this will still disable
-            if (_spriteSelectComponent != null && !_spriteSelectComponent.Equals(hit.collider.gameObject.GetComponent<SpriteSelectComponent>())) {
-                _spriteSelectComponent.tryDisable();
-            }
-            
-            // try to get the component
-            _spriteSelectComponent = hit.collider.gameObject.GetComponent<SpriteSelectComponent>();
-
-            // highlight it
-            if (_spriteSelectComponent != null) 
-            {
-                _spriteSelectComponent.tryEnable();
-            }
-
-            // Debug.Log("hits: " + hit.collider.name);
-            // else{
-            //     Debug.DrawLine(startPos,endPos,Color.white);
-            // }
         }
         else{
             Debug.DrawLine(startPos,endPos,Color.green);
+        }
 
-            // if we have something loaded, but we didnt hit anything this update
-            // disable and remove it.
-            if (_spriteSelectComponent != null)
-            {
+        //EXPECTED BEHAVIOR
+        // if current obj is different from hit obj
+            // disable current obj (if it exist and has selectable component to disable)
+            // update current obj to hit obj. if object exist, check for tags and component
+            // enable new current obj (if it has selectable component)
+        // if current obj is the same to hit obj
+            // if it's selectable and an object  + obj and hit obj have different tags???
+                //try enable current obj. again
+
+        if (_currentHit != hit.collider.GameObject()){
+            if (_currentHit != null && _spriteSelectComponent != null){
+                // Debug.Log("disable current obj (if it exist and has selectable component to disable)");
                 _spriteSelectComponent.tryDisable();
-                _spriteSelectComponent = null;
+            }
+            // Debug.Log("update current obj to hit obj");
+            _currentHit = hit.collider.GameObject();
+            if (_currentHit!= null){
+                _spriteSelectComponent = _currentHit.GetComponent<SpriteSelectComponent>();
+                _currentHitTag = _currentHit.tag;
+            }
+            if(_currentHit!= null && _spriteSelectComponent != null){
+                // Debug.Log("enable new current obj");
+                _spriteSelectComponent.tryEnable();
+            }
+
+        }else{
+            // Debug.Log("currenthit: " + _currentHit.tag + "  hit.collider: " + hit.collider.GameObject().tag);
+            if (_currentHit != null && _spriteSelectComponent != null &&  _currentHitTag != hit.collider.GameObject().tag){
+                // Debug.Log(" if it's selectable and an object  + obj and hit obj have different tags, enable it");
+                _spriteSelectComponent.tryEnable();
             }
         }
     }
@@ -223,7 +231,7 @@ public class PlayerStateManager : MonoBehaviour
             if (hit.collider.CompareTag("pushable"))
             {
                 tag = "pushable";
-                _pushedObj = hit.collider.GetComponent<Pushable>();
+                // _pushedObj = hit.collider.GetComponent<Pushable>();
             }
             // if (hit.collider.CompareTag("transmutable")){
             //     tag = "transmutable";
