@@ -2010,13 +2010,14 @@ MonoBehaviour:
   dialogueText: {fileID: 1575984031205374583}
   displayNameText: {fileID: 0}
   portraitAnimator: {fileID: 5382580006892980711}
-  defaultTypingSpeed: 0.01
+  defaultTypingSpeed: 0.015
+  pauseFactor: 12
   choices:
   - {fileID: 7205868100510718267}
   - {fileID: 3795440479196583597}
   - {fileID: 965592917711255866}
   dialogueTypingSoundClip: {fileID: 8300000, guid: 9271605e401e4ca4aa515f71220b6b1b, type: 3}
-  frequencyLevel: 4
+  frequencyLevel: 3
   stopAudioSource: 0
   backgroundAudio: {fileID: 0}
   resumeCutsceneSignal: {fileID: 11400000, guid: 36ac289c0154924479e39a4c9d965a9d, type: 2}
