@@ -1,5 +1,4 @@
 ===1_begin_cutscene_1===
-//#CUTSCENE: Fade to black.
 You have been dormant for so long. #portrait:none 
 You cannot remember how long you have been down here...
 A year? A decade? A <i>century</i>?
