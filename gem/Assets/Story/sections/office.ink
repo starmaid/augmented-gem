@@ -5,7 +5,7 @@ You cannot remember how long you have been down here...
 A year? A decade? A <i>century</i>?
 Time feels just as stagnant as the air in this room-- changeless, clogged with dust. It has been sealed so long and so well that there isn't even any decomposition for you to estimate with.
 Maybe besides your memories. Your patience. Your <i>charitability</i>.
-You are so. Goddamn. Bored. #speed:0.1
+You are so. Goddamn. Bored. #speed:0.05
 \-\-and there's nothing you can do about it, besides wait.
 ...until...
 ~pauseForCutscene()
@@ -74,7 +74,7 @@ Unlucky for you, <i>this</i> is the human that you’re stuck with. #portrait:no
 
 //#CUTSCENE: Fade from black.The adventurer is standing at the edge of the
 Hesitantly, the adventurer walks back over-- good! --And pokes you. It’ll do. #portrait:none
-“<i>Don’t</i> take your hand away! I cannot speak to you otherwise.” #portrait:gem_angry
+“<i>Don’t</i> take your hand away! I cannot speak to you otherwise.” #portrait:gem_statue_angry
 “Ah–!” #portrait:adv_worried_nogem
 “...How are you speaking with your mouth closed?”  #portrait:adv_frown_nogem
 “LOOK DOWN FUCKFACE” #portrait:gem_statue_angry
@@ -159,8 +159,8 @@ You can’t quite tell what they’re thinking, but they seem far too worried ab
 {
 - not has_dagger:
    {stopping:
-   - "I'm so glad you enjoy admiring me, but I would love to get out of here first. Would you please hurry up? #portrait:gem_angry
-   - "..." #portrait:gem_angry
+   - "I'm so glad you enjoy admiring me, but I would love to get out of here first. Would you please hurry up? #portrait:gem_statue_angry
+   - "..." #portrait:gem_statue_angry
    }
 - has_dagger:
 	{stopping:
@@ -209,12 +209,12 @@ You give one last look to the statue, and happily nestle yourself into the Adven
 {
 - not has_dagger:
 	{cycle:
-	- (There's nothing there! Stop snooping around...) #portrait:gem_angry
+	- (There's nothing there! Stop snooping around...) #portrait:gem_statue_angry
 	//   for simplicity debug: ur getting the dagger and the gem
 	//   ~ has_dagger = true
 	//   ~ has_gem = true
-	- (This human is not very bright...) #portrait:gem_angry
-	- (ARGHHH!!!!!!) #portrait:gem_angry
+	- (This human is not very bright...) #portrait:gem_statue_angry
+	- (ARGHHH!!!!!!) #portrait:gem_statue_angry
 	}
 - not has_gem:
 	(if you don't come get me first, those things will not mean anything to you!) #portrait:gem_angry
@@ -375,7 +375,7 @@ We hope to see you return to the dark in the future...
 - not has_gem:
 	{stopping:
 	- 
-	The Adventurer flips through book. The dust that rises off the page makes them sneeze.  #portrait:none
+	The Adventurer flips through a book. The dust that rises off the page makes them sneeze.  #portrait:none
 	-
 	{cycle:
 	- (You probably can't even read that! Leave it alone!) #portrait:gem_angry
@@ -386,7 +386,7 @@ We hope to see you return to the dark in the future...
 - has_gem:
 	{stopping:
 	- 
-	The Adventurer flips through book. The dust that rises off the page makes them sneeze \(again.\)
+	The Adventurer flips through a book. The dust that rises off the page makes them sneeze \(again.\)
 	"..." #portrait:adv_curious
 	"What's <i>'Chrysopoeia: The Great Work of Alchemy'?</i>" #portrait:adv_neutral
 	"Look at me, and then ask that question one more time. Really slowly." #portrait:gem_neutral
