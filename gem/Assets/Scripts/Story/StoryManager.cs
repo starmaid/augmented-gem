@@ -341,6 +341,8 @@ public class StoryManager : MonoBehaviour
         //displayNameText.text = "???";
         //portraitAnimator.Play("default");
         //layoutAnimator.Play("none");
+        currentLayout = "none";
+        currentPortrait = "default";
 
         currentStory.ChoosePathString(knotName);
         ContinueStory();
