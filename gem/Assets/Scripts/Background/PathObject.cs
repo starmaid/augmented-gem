@@ -25,6 +25,9 @@ public class PathObject : MonoBehaviour
 
     private bool paused;
 
+    private Vector3 newPosition;
+    private Vector3 delta;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,18 +65,23 @@ public class PathObject : MonoBehaviour
     }
 
     // call this from the path follower object
-    public void PathMoveUpdate()
+    public Vector3 PathMoveUpdate()
     {
+        delta = Vector3.zero;
+
         if (paused)
         {
-            return;
+            return delta;
         }
 
         Timer += Time.deltaTime;
 
         if (ThingThatFollows.transform.position != TargetPosition)
         {
-            ThingThatFollows.transform.position = Vector3.Lerp(StartPosition, TargetPosition, Timer / SegmentMoveSpeed);
+            newPosition = Vector3.Lerp(StartPosition, TargetPosition, Timer / SegmentMoveSpeed);
+            delta = newPosition - ThingThatFollows.transform.position;
+            // move to the follower component
+            //ThingThatFollows.transform.position = newPosition;
         } else
         {
             if (TargetNodeIndex < PathNodes.Length - 1)
@@ -86,5 +94,7 @@ public class PathObject : MonoBehaviour
 
             NextNode();
         }
+
+        return delta;
     }
 }

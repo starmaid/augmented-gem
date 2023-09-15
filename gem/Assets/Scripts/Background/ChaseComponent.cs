@@ -9,15 +9,17 @@ public class ChaseComponent : MonoBehaviour
     public bool isChasing;
 
     private GameObject chasedObject;
-    
 
-    private Vector3 v;
+    private Animator _animator;
+
+    private Vector3 trackingDelta;
+    private Vector3 moveDelta;
     private PathFollower pfComponent;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _animator = GetComponent<Animator>();
     }
 
     public void StartChase(GameObject tryChasedObject)
@@ -44,8 +46,26 @@ public class ChaseComponent : MonoBehaviour
     {
         if (isChasing)
         {
-            v = chasedObject.transform.position - gameObject.transform.position;
-            gameObject.transform.position += (v / v.magnitude) * Time.deltaTime * MoveSpeed;
+            trackingDelta = chasedObject.transform.position - gameObject.transform.position;
+            moveDelta = (trackingDelta / trackingDelta.magnitude) * Time.deltaTime * MoveSpeed;
+            gameObject.transform.position += moveDelta;
+
+            // manage animator
+            if (_animator != null)
+            {
+                _animator.SetFloat("moveX", moveDelta.x);
+                _animator.SetFloat("moveY", moveDelta.y);
+                _animator.SetBool("moving", true);
+            }
+        }
+        else
+        {
+            if (_animator != null)
+            {
+                // the chase component and path follower are fighting over this value
+                // just disabling it here, leaving it on in pathFollower
+                //_animator.SetBool("moving", false);
+            }
         }
     }
 }

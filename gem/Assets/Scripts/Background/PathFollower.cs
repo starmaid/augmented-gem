@@ -10,10 +10,18 @@ public class PathFollower : MonoBehaviour
 
     public bool isActivelyFollowing;
 
+    private Vector3 newPosition;
+    private Vector3 deltaPosition;
+
+    private Animator _animator;
+    private AudioSource _myAudioSource;
+
     void Awake()
     {
         path.ThingThatFollows = gameObject;
         path.MoveSpeed = MoveSpeed;
+        _animator = GetComponent<Animator>();
+        _myAudioSource = GetComponent<AudioSource>();
     }
 
     public void StartFollowing()
@@ -32,12 +40,35 @@ public class PathFollower : MonoBehaviour
         
     }
 
+    void PlayWalkSound()
+    {
+        if (_myAudioSource != null)
+        {
+            _myAudioSource.Play();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (isActivelyFollowing)
         {
-            path.PathMoveUpdate();
+            deltaPosition = path.PathMoveUpdate();
+            gameObject.transform.position += deltaPosition;
+
+            // manage animator
+            if (_animator != null)
+            {
+                _animator.SetFloat("moveX", deltaPosition.x);
+                _animator.SetFloat("moveY", deltaPosition.y);
+                _animator.SetBool("moving", true);
+            }
+        } else
+        {
+            if (_animator != null)
+            {
+                _animator.SetBool("moving", false);
+            }
         }
     }
 }
