@@ -2,85 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// ripped from tutorial
-// https://www.youtube.com/watch?v=h-KOTKx_q2o
-// https://forum.unity.com/threads/move-gameobject-along-a-given-path.455195/
-
-
 public class PathFollower : MonoBehaviour
 {
     [SerializeField]
-    public GameObject ThingThatFollows;
+    public PathObject path;
     public float MoveSpeed;
 
-    private float Timer;
-    private float SegmentMoveSpeed;
-    private static Vector3 StartPosition;
-    private static Vector3 TargetPosition;
+    public bool isActivelyFollowing;
 
-    private PathNode[] PathNodes;
-    private int TargetNodeIndex;
+    private Vector3 newPosition;
+    private Vector3 deltaPosition;
 
-    private bool paused;
+    private Animator _animator;
+    private AudioSource _myAudioSource;
+
+    void Awake()
+    {
+        path.ThingThatFollows = gameObject;
+        path.MoveSpeed = MoveSpeed;
+        _animator = GetComponent<Animator>();
+        _myAudioSource = GetComponent<AudioSource>();
+    }
+
+    public void StartFollowing()
+    {
+        isActivelyFollowing = true;
+    }
+
+    public void StopFollowing()
+    {
+        isActivelyFollowing = false;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        PathNodes = GetComponentsInChildren<PathNode>();
-        StartPosition = ThingThatFollows.transform.position;
-
-        // foreach (PathNode node in PathNodes)
-        // {
-        //     Debug.Log(node.name);
-        // }
-
-        NextNode();
-        paused = false;
+        
     }
 
-    void NextNode()
+    void PlayWalkSound()
     {
-        Timer = 0;
-        StartPosition = TargetPosition;
-        TargetPosition = PathNodes[TargetNodeIndex].transform.position;
-        SegmentMoveSpeed = (TargetPosition - StartPosition).magnitude / MoveSpeed;
-    }
-
-    public void PauseMotion()
-    {
-        paused = true;
-    }
-
-    public void ResumeMotion()
-    {
-        paused=false;
+        if (_myAudioSource != null)
+        {
+            _myAudioSource.Play();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (paused)
+        if (isActivelyFollowing)
         {
-            return;
-        }
+            deltaPosition = path.PathMoveUpdate();
+            gameObject.transform.position += deltaPosition;
 
-        Timer += Time.deltaTime;
-
-        if (ThingThatFollows.transform.position != TargetPosition)
-        {
-            ThingThatFollows.transform.position = Vector3.Lerp(StartPosition, TargetPosition, Timer / SegmentMoveSpeed);
+            // manage animator
+            if (_animator != null)
+            {
+                _animator.SetFloat("moveX", deltaPosition.x);
+                _animator.SetFloat("moveY", deltaPosition.y);
+                _animator.SetBool("moving", true);
+            }
         } else
         {
-            if (TargetNodeIndex < PathNodes.Length - 1)
+            if (_animator != null)
             {
-                TargetNodeIndex++;
-            } else
-            {
-                TargetNodeIndex = 0;
+                _animator.SetBool("moving", false);
             }
-
-            NextNode();
         }
     }
 }
