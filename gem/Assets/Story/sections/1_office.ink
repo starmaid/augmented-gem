@@ -1,3 +1,9 @@
+// office
+VAR has_gem = false
+VAR has_dagger = false
+VAR has_key = false
+VAR has_gold_key = false
+
 ===1_begin_cutscene_1===
 //#CUTSCENE: Fade to black.
 You have been dormant for so long. #portrait:none 
