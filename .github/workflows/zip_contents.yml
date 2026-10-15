@@ -23,7 +23,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -36,7 +36,7 @@ jobs:
           echo test, and deploy your project.
       # zip it up and allow for download
       - name: zip the contents of story
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v7
         with:
           name: zipped-output
           path: output.tgz
